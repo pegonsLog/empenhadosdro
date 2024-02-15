@@ -1,0 +1,33 @@
+
+<table mat-table [dataSource]="transactions" class="mat-elevation-z8">
+  <!-- Item Column -->
+  <ng-container matColumnDef="gar">
+    <th mat-header-cell *matHeaderCellDef> GAR </th>
+    <td mat-cell *matCellDef="let transaction"> {{transaction.gar}} </td>
+    <td mat-footer-cell *matFooterCellDef> Total </td>
+  </ng-container>
+
+  <!-- Cost Column -->
+  <ng-container matColumnDef="sem_restricoes">
+    <th mat-header-cell *matHeaderCellDef> S/ restrições </th>
+    <td mat-cell *matCellDef="let transaction">
+      {{transaction.sem_restricoes }}
+      </td>
+    <td mat-footer-cell *matFooterCellDef>
+      {{getTotalCostSem()}}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="com_restricoes">
+    <th mat-header-cell *matHeaderCellDef> C/ restrições </th>
+    <td mat-cell *matCellDef="let transaction">
+      {{transaction.com_restricoes }}
+      </td>
+    <td mat-footer-cell *matFooterCellDef>
+      {{getTotalCostCom()}}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+</table>

@@ -1,0 +1,49 @@
+<div class="container">
+  <form class="register-form">
+    <p>
+      <mat-toolbar>
+        <span>Equipe empenhada</span>
+      </mat-toolbar>
+    </p>
+
+    <mat-form-field class="register-full-width">
+      <mat-label>Mat. do responsável</mat-label>
+      <input type="number" matInput placeholder="Usuário" />
+    </mat-form-field>
+
+    <mat-form-field class="register-full-width">
+      <mat-label>Nome do responsável</mat-label>
+      <input type="number" matInput placeholder="Usuário" />
+    </mat-form-field>
+
+    <mat-form-field class="register-full-width">
+      <mat-label>Cargo</mat-label>
+      <input type="text" matInput placeholder="Cargo" />
+    </mat-form-field>
+
+    <mat-form-field class="register-full-width">
+      <mat-label>Gerência</mat-label>
+      <input type="text" matInput placeholder="Gerência" />
+    </mat-form-field>
+
+    <mat-form-field class="register-full-width">
+      <mat-label>Turno</mat-label>
+      <input type="text" matInput placeholder="Turno" />
+    </mat-form-field>
+
+    <mat-form-field class="register-full-width">
+      <mat-label>Agentes sem restrição</mat-label>
+      <input type="number" matInput />
+    </mat-form-field>
+
+    <mat-form-field class="register-full-width">
+      <mat-label>Agentes com restrição</mat-label>
+      <input type="number" matInput />
+    </mat-form-field>
+
+    <p>
+    <button mat-raised-button color="primary">Salvar</button>
+    <button (click)="report()" mat-raised-button color="accent">Consultar</button>
+  </p>
+  </form>
+</div>

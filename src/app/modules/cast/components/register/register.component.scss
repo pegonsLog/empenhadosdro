@@ -1,0 +1,44 @@
+.register-form {
+  min-width: 100px;
+  max-width: 300px;
+  width: 100%;
+}
+
+.register-full-width {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+mat-toolbar {
+
+  background-color: rgb(38, 163, 221);
+  color: white;
+}
+
+mat-form-field {
+  height: 70px;
+  font-size: small;
+  margin-bottom: -10px;
+}
+
+mat-label {
+  font-size: small;
+}
+
+p {
+  display: flex;
+  justify-content: space-around;
+  button {
+    width: 140px;
+
+  }
+}

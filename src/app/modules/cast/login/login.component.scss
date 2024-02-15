@@ -1,0 +1,19 @@
+.login-form {
+  min-width: 100px;
+  max-width: 300px;
+  width: 100%;
+}
+
+.login-full-width {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
