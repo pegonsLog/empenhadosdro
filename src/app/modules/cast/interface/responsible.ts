@@ -1,5 +1,5 @@
 export interface responsible {
-  registration: number,
+  registration: string,
   nameResponsible: string,
   office: string,
   sector: string,

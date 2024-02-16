@@ -1,33 +1,92 @@
+<div class="container">
+  <!-- GAR Column -->
 
-<table mat-table [dataSource]="transactions" class="mat-elevation-z8">
-  <!-- Item Column -->
-  <ng-container matColumnDef="gar">
-    <th mat-header-cell *matHeaderCellDef> GAR </th>
-    <td mat-cell *matCellDef="let transaction"> {{transaction.gar}} </td>
-    <td mat-footer-cell *matFooterCellDef> Total </td>
-  </ng-container>
+  <table mat-table [dataSource]="transactions" class="mat-elevation-z8">
+    <ng-container matColumnDef="gar">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        style="padding-right: 50px; font-size: 0.85em"
+      >
+        <strong>GERÊNCIA</strong>
+      </th>
 
-  <!-- Cost Column -->
-  <ng-container matColumnDef="sem_restricoes">
-    <th mat-header-cell *matHeaderCellDef> S/ restrições </th>
-    <td mat-cell *matCellDef="let transaction">
-      {{transaction.sem_restricoes }}
+      <td mat-cell *matCellDef="let transaction" style="font-size: 0.85em">
+        <strong>{{ transaction.gar }}</strong>
       </td>
-    <td mat-footer-cell *matFooterCellDef>
-      {{getTotalCostSem()}}
-    </td>
-  </ng-container>
-  <ng-container matColumnDef="com_restricoes">
-    <th mat-header-cell *matHeaderCellDef> C/ restrições </th>
-    <td mat-cell *matCellDef="let transaction">
-      {{transaction.com_restricoes }}
-      </td>
-    <td mat-footer-cell *matFooterCellDef>
-      {{getTotalCostCom()}}
-    </td>
-  </ng-container>
+      <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">TOTAL</td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-</table>
+    <!-- Sem restrições -->
+    <ng-container matColumnDef="semRestricoes">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        style="padding-right: 0px; font-size: 0.85em"
+      >
+        <strong>S/ REST.</strong>
+      </th>
+      <td mat-cell *matCellDef="let transaction" style="font-size: 0.85em">
+        {{ transaction.semRestricoes }}
+      </td>
+      <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
+        {{ getTotalCostSem() }}
+      </td>
+    </ng-container>
+
+    <!-- Com restrições -->
+    <ng-container matColumnDef="comRestricoes">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        style="padding-right: 0px; font-size: 0.85em"
+      >
+        <strong>C/ REST.</strong>
+      </th>
+      <td mat-cell *matCellDef="let transaction" style="font-size: 0.85em">
+        {{ transaction.comRestricoes }}
+      </td>
+      <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
+        {{ getTotalCostCom() }}
+      </td>
+    </ng-container>
+
+    <!-- Total por gerência -->
+    <ng-container matColumnDef="totalGerencia">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        style="padding-right: 15px; font-size: 0.85em"
+      >
+        <strong>SUBTOTAL</strong>
+      </th>
+      <td mat-cell *matCellDef="let transaction" style="font-size: 0.85em">
+        {{ transaction.comRestricoes + transaction.semRestricoes }}
+      </td>
+
+      <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
+        {{ getTotalCostCom() + getTotalCostSem() }}
+      </td>
+    </ng-container>
+
+    <tr
+      style="background-color: rgb(38, 163, 221); color: white"
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+    ></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr
+      style="background-color: rgb(38, 163, 221); color: white"
+      mat-footer-row
+      *matFooterRowDef="displayedColumns"
+    ></tr>
+  </table>
+</div>
+<div class="container">
+  <button (click)="voltarParaInclusao()"
+    mat-raised-button
+    style="background-color: rgb(38, 163, 221); color: white; width: 350px "
+  >
+    Voltar
+  </button>
+</div>

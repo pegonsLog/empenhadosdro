@@ -1,5 +1,5 @@
 export interface cast {
-  registrationResponsible: number;
+  registrationResponsible: string;
   scaleDate: string,
   shift: string,
   withoutRestriction: number,

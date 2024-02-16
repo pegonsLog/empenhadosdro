@@ -16,6 +16,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   exports: [
@@ -35,7 +36,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatMenuModule,
     MatSlideToggleModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule
   ],
 })
 export class AngularMaterialModule {}

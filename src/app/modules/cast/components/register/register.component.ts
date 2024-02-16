@@ -16,4 +16,14 @@ export class RegisterComponent {
     this.router.navigate(["report"])
     throw new Error('Method not implemented.');
   }
+
+  close(){
+
+    const confirmacao = confirm("Deseja realmente fechar o navegador?");
+
+    if (confirmacao) {
+      // Usando o objeto `window` para acessar a API do navegador
+      window.close();
+    }
+  }
 }
