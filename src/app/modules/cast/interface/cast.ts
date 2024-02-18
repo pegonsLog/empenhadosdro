@@ -1,4 +1,4 @@
-export interface cast {
+export interface Cast {
   registrationResponsible: string;
   scaleDate: string,
   shift: string,

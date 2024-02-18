@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularMaterialModule } from '../../angular-material/angular-material';
-import { Router } from '@angular/router';
+import { Router, TitleStrategy } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,17 +13,11 @@ export class RegisterComponent {
   constructor(private router: Router) {}
 
   report() {
-    this.router.navigate(["report"])
+    this.router.navigate(['report']);
     throw new Error('Method not implemented.');
   }
 
-  close(){
-
-    const confirmacao = confirm("Deseja realmente fechar o navegador?");
-
-    if (confirmacao) {
-      // Usando o objeto `window` para acessar a API do navegador
-      window.close();
-    }
+  close() {
+    this.router.navigate(['']);
   }
 }

@@ -1,3 +1,3 @@
-export interface sector {
+export interface Sector {
   nameSector: string,
 }

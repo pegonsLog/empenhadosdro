@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularMaterialModule } from '../angular-material/angular-material';
-import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +10,11 @@ import { Router, RouterOutlet } from '@angular/router';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+
   constructor(private router: Router) {}
 
   register() {
-    this.router.navigate(['register'])
+    this.router.navigate(['register']);
     throw new Error('Algo deu errado!');
   }
 }

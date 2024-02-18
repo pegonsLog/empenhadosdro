@@ -1,4 +1,4 @@
-export interface responsible {
+export interface Responsible {
   registration: string,
   nameResponsible: string,
   office: string,

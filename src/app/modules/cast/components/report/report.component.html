@@ -1,7 +1,9 @@
+
+
 <div class="container">
   <!-- GAR Column -->
 
-  <table mat-table [dataSource]="transactions" class="mat-elevation-z8">
+  <table mat-table class="mat-elevation-z8">
     <ng-container matColumnDef="gar">
       <th
         mat-header-cell
@@ -65,7 +67,7 @@
       </td>
 
       <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
-        {{ getTotalCostCom() + getTotalCostSem() }}
+        <!-- {{ getTotalCostCom() + getTotalCostSem() }} -->
       </td>
     </ng-container>
 
@@ -84,8 +86,8 @@
 </div>
 <div class="container">
   <button (click)="voltarParaInclusao()"
-    mat-raised-button
-    style="background-color: rgb(38, 163, 221); color: white; width: 350px "
+    mat-raised-button color="secondary"
+    style="width: 350px; color: rgb(38, 163, 221);"
   >
     Voltar
   </button>
