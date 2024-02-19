@@ -3,4 +3,5 @@ export interface Responsible {
   nameResponsible: string,
   office: string,
   sector: string,
+  shift: string
 }

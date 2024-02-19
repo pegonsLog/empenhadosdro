@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularMaterialModule } from '../../angular-material/angular-material';
+import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 import { collection, getDocs } from 'firebase/firestore';
-import { CastsService } from '../../../services/casts.service';
-import { Cast } from '../../interface/cast';
+import { CastsService } from '../../../../services/casts.service';
+import { Cast } from '../../../../interfaces/cast';
 import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
@@ -26,12 +26,11 @@ export class ReportComponent {
   constructor(private router: Router, private castsService: CastsService) {
   this.castsService.listCasts().then((casts: Cast[]) => {
     this.casts = casts;
-  
+
   console.log(this.casts)
   })
   }
 
-   
   displayedColumns: string[] = [
     'gar',
     'semRestricoes',
@@ -48,6 +47,5 @@ export class ReportComponent {
 
   voltarParaInclusao() {
     this.router.navigate(['register']);
-    throw new Error('Method not implemented.');
   }
 }

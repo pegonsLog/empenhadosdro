@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AngularMaterialModule } from '../../angular-material/angular-material';
+import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 import { Router, TitleStrategy } from '@angular/router';
+import { SectorsService } from '../../../../services/sectors.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,6 @@ export class RegisterComponent {
 
   report() {
     this.router.navigate(['report']);
-    throw new Error('Method not implemented.');
   }
 
   close() {

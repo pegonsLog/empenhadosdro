@@ -1,0 +1,38 @@
+
+
+<div class="container">
+  <!-- Sector Column -->
+
+  <table mat-table [dataSource]="sectors" class="mat-elevation-z8">
+    <ng-container matColumnDef="sector">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        style="padding-right: 50px; font-size: 0.85em"
+      >
+        <strong>GERÊNCIA</strong>
+      </th>
+
+      <td mat-cell *matCellDef="let sector" style="font-size: 0.85em">
+        <strong>{{ sector.nameSector }}</strong>
+      </td>
+    </ng-container>
+
+
+    <tr
+      style="background-color: rgb(38, 163, 221); color: white"
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+    ></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+  </table>
+</div>
+<div class="container">
+  <button
+    mat-raised-button color="secondary"
+    style="width: 350px; color: rgb(38, 163, 221);"
+  >
+    Voltar
+  </button>
+</div>
