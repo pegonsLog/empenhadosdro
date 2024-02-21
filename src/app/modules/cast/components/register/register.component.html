@@ -8,7 +8,7 @@
 
     <mat-form-field class="register-full-width">
       <mat-label>Mat. do responsável</mat-label>
-      <input type="number" matInput placeholder="Usuário" />
+      <input type="number" matInput placeholder="Matrícula" />
     </mat-form-field>
 
     <mat-form-field class="register-full-width">
@@ -18,17 +18,29 @@
 
     <mat-form-field class="register-full-width">
       <mat-label>Cargo</mat-label>
-      <input type="text" matInput placeholder="Cargo" />
+      <mat-select>
+        @for (office of offices; track office) {
+          <mat-option [value]="office">{{office}}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field class="register-full-width">
       <mat-label>Gerência</mat-label>
-      <input type="text" matInput placeholder="Gerência" />
+      <mat-select>
+        @for (sector of sectors; track sector) {
+          <mat-option [value]="sector">{{sector}}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field class="register-full-width">
       <mat-label>Turno</mat-label>
-      <input type="text" matInput placeholder="Turno" />
+      <mat-select>
+        @for (shift of shifts; track shift) {
+          <mat-option [value]="shift">{{shift}}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field class="register-full-width">

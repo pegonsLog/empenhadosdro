@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 })
 export class ResponsibleFormComponent {
 
+  public sectors = ['GAOPE', 'GARBO', 'GARNE', 'GARNP', 'GARVN', 'GEACE'];
+  public shifts = ['Manhã', 'Tarde', 'Madrugada'];
+  public offices = ['Coordenador', 'Supervisor', 'Gerente'];
   constructor(private router: Router) {}
 
   report() {

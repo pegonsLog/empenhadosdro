@@ -1,13 +1,12 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './modules/login/login.component';
 import { RegisterComponent } from './modules/cast/components/register/register.component';
 import { ReportComponent } from './modules/cast/components/report/report.component';
-import { UserListComponent } from './modules/user/components/user-list/user-list.component';
-import { ResponsibleListComponent } from './modules/responsible/components/responsible-list/responsible-list.component';
-import { SectorListComponent } from './modules/sector/components/sector-list/sector-list.component';
+import { HomeComponent } from './modules/home/home.component';
+import { LoginComponent } from './modules/login/login.component';
 import { ResponsibleFormComponent } from './modules/responsible/components/responsible-form/responsible-form.component';
-import { SectorFormComponent } from './modules/sector/components/sector-form/sector-form.component';
+import { ResponsibleListComponent } from './modules/responsible/components/responsible-list/responsible-list.component';
 import { UserFormComponent } from './modules/user/components/user-form/user-form.component';
+import { UserListComponent } from './modules/user/components/user-list/user-list.component';
 
 export const routes: Routes = [
   {
@@ -39,11 +38,7 @@ export const routes: Routes = [
     component: ResponsibleFormComponent,
   },
   {
-    path: 'sector-list',
-    component: SectorListComponent,
-  },
-  {
-    path: 'sector-form',
-    component: SectorFormComponent,
+    path: 'home',
+    component: HomeComponent,
   },
 ];

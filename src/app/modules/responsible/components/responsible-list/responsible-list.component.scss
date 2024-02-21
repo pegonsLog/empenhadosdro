@@ -1,7 +1,6 @@
 .container {
   display: flex;
   justify-content: center;
-
 }
 
 table {
@@ -14,11 +13,11 @@ tr.mat-mdc-footer-row td {
   font-weight: 500;
 }
 
-strong{
+strong {
   font-weight: 500;
 }
 
-span{
+span {
   display: flex;
   justify-content: center;
   min-width: 500px;
@@ -35,4 +34,13 @@ span{
   margin-top: 10px;
 }
 
-
+#buttonCustom {
+  background: rgb(38, 163, 221);
+  color: white;
+  width: 100%;
+  margin: auto;
+  margin-top: 12px;
+  min-width: 500px;
+  max-width: 500px;
+  width: 100%;
+}

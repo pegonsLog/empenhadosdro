@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { collection, getDocs, getFirestore, query } from 'firebase/firestore';
 import { Cast } from '../interfaces/cast';
-import { environment } from '../shared/environment/environment.development';
 import { Sector } from '../interfaces/sector';
+import { environment } from '../shared/environment/environment.development';
 
 @Injectable({
   providedIn: 'root',

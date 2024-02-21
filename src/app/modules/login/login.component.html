@@ -1,5 +1,10 @@
 <div class="container">
   <form class="login-form">
+    <p>
+      <mat-toolbar>
+        <span>Equipe empenhada DRO</span>
+      </mat-toolbar>
+    </p>
     <mat-form-field class="login-full-width">
       <mat-label>Usuário</mat-label>
       <input type="number" matInput placeholder="Usuário" />
@@ -10,33 +15,8 @@
       <input type="password" matInput placeholder="Senha" />
     </mat-form-field>
     <p>
-      <button  (click)="cast()" mat-raised-button color="primary">Cast-list</button>
-      <button (click)="register()" mat-raised-button color="warning">
-        Cast-Form
-      </button>
-    </p>
-    <p>
-      <button (click)="userList()" mat-raised-button color="primary">
-        User-List
-      </button>
-      <button (click)="userForm()" mat-raised-button color="warning">
-        User-Form
-      </button>
-    </p>
-    <p>
-      <button (click)="sectorList()" mat-raised-button color="primary">
-        Sector-List
-      </button>
-      <button (click)="sectorForm()" mat-raised-button color="warning">
-        Sector-Form
-      </button>
-    </p>
-    <p>
-      <button (click)="responsibleList()" mat-raised-button color="primary">
-        Responsible-list
-      </button>
-      <button (click)="responsibleForm()" mat-raised-button color="warning">
-        Responsible-form
+      <button id="buttonCustom" (click)="home()" mat-button>
+        Entrar
       </button>
     </p>
   </form>

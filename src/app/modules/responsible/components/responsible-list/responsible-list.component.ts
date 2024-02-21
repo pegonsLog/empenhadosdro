@@ -41,7 +41,7 @@ export class ResponsibleListComponent {
     this.responsiblesService
       .listResponsibles()
       .then((responsibles: Responsible[]) => {
-        this.responsibles = responsibles;
+        this.responsibles = responsibles.sort((a, b) => a.nameResponsible.localeCompare(b.nameResponsible));;
 
         console.log(this.responsibles);
       });

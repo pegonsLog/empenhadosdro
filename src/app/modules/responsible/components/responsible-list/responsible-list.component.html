@@ -1,9 +1,9 @@
-<span class="mat-elevation-z8">RESPONSÁVEIS</span>
+<span>RESPONSÁVEIS</span>
 
 <div class="container">
   <!-- Registration Column -->
 
-  <table mat-table [dataSource]="responsibles" class="mat-elevation-z8">
+  <table mat-table [dataSource]="responsibles">
     <ng-container matColumnDef="registration">
       <th
         mat-header-cell
@@ -83,17 +83,8 @@
   </table>
 </div>
 <div style="display: flex; justify-content: center">
-  <button
-    class="mat-elevation-z8"
+  <button id="buttonCustom"
     mat-button
-    color="secondary"
-    style="
-      width: 500px;
-      color: rgb(38, 163, 221);
-      display: flex;
-      justify-content: center;
-      margin-top: 12px;
-    "
   >
     Voltar
   </button>

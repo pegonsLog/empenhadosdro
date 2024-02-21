@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
-import { Router, TitleStrategy } from '@angular/router';
-import { SectorsService } from '../../../../services/sectors.service';
+import { Sector } from '../../../../interfaces/sector';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +11,10 @@ import { SectorsService } from '../../../../services/sectors.service';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
+
+  public sectors = ['GAOPE', 'GARBO', 'GARNE', 'GARNP', 'GARVN', 'GEACE'];
+  public shifts = ['Manhã', 'Tarde', 'Madrugada'];
+  public offices = ['Coordenador', 'Supervisor', 'Gerente'];
   constructor(private router: Router) {}
 
   report() {

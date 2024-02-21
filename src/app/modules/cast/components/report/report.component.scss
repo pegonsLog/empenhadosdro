@@ -23,3 +23,14 @@ mat-toolbar {
 strong{
   font-weight: 500;
 }
+
+#buttonCustom {
+  background: rgb(38, 163, 221);
+  color: white;
+  width: 100%;
+  margin: auto;
+  min-width: 200px;
+  max-width: 350px;
+  width: 100%;
+  border-bottom: 1px solid white;
+}

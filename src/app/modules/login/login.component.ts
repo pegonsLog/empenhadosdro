@@ -12,28 +12,8 @@ import { AngularMaterialModule } from '../../shared/angular-material/angular-mat
 export class LoginComponent {
   constructor(private router: Router) {}
 
-  register() {
-    this.router.navigate(['register']);
+  home() {
+    this.router.navigate(['home']);
   }
-  cast() {
-    this.router.navigate(['report']);
-  }
-  responsibleList() {
-    this.router.navigate(['responsible-list']);
-  }
-  responsibleForm() {
-    this.router.navigate(['responsible-form']);
-  }
-  userList() {
-    this.router.navigate(['user-list']);
-  }
-  userForm() {
-    this.router.navigate(['user-form']);
-  }
-  sectorList() {
-    this.router.navigate(['sector-list']);
-  }
-  sectorForm() {
-    this.router.navigate(['sector-form']);
-  }
+
 }

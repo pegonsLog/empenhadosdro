@@ -1,0 +1,42 @@
+<div class="container">
+  <form class="login-form">
+    <p>
+      <mat-toolbar>
+        <span>Olá, Pedro</span>
+      </mat-toolbar>
+    </p>
+    <mat-form-field class="login-full-width">
+      <mat-label>Informe a data</mat-label>
+      <input type="text" matInput placeholder="Data" />
+    </mat-form-field>
+
+    <mat-form-field class="login-full-width">
+      <mat-label>Informe o turno</mat-label>
+      <mat-select>
+        <mat-option value="manha">Manhã</mat-option>
+        <mat-option value="tarde">Tarde</mat-option>
+        <mat-option value="madrugada">Madrugada</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p>
+      <button id="buttonCustom" (click)="cast()" mat-button>
+        Equipe empenhada
+      </button>
+    </p>
+    <p>
+      <button id="buttonCustom" (click)="userList()" mat-button>
+        Usuários
+      </button>
+    </p>
+    <p>
+      <button id="buttonCustom" (click)="sectorList()" mat-button>
+        Gerências
+      </button>
+    </p>
+    <p>
+      <button id="buttonCustom" (click)="responsibleList()" mat-button>
+        Responsáveis
+      </button>
+    </p>
+  </form>
+</div>
