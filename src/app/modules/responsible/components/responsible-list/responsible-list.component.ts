@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
 import { Responsible } from '../../../../interfaces/responsible';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-responsible-list',
@@ -37,7 +38,7 @@ export class ResponsibleListComponent {
     'shift',
   ];
 
-  constructor(private responsiblesService: ResponsiblesService) {
+  constructor(private responsiblesService: ResponsiblesService, private router: Router) {
     this.responsiblesService
       .listResponsibles()
       .then((responsibles: Responsible[]) => {
@@ -45,5 +46,9 @@ export class ResponsibleListComponent {
 
         console.log(this.responsibles);
       });
+  }
+
+  goToAdd() {
+    this.router.navigate(['responsible-form']);
   }
 }

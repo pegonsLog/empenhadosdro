@@ -3,6 +3,16 @@
   justify-content: center;
 }
 
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  min-width: 500px;
+  max-width: 500px;
+  margin: auto;
+  padding-top: 15px;
+
+}
+
 table {
   min-width: 500px;
   max-width: 500px;
@@ -37,10 +47,8 @@ span {
 #buttonCustom {
   background: rgb(38, 163, 221);
   color: white;
-  width: 100%;
-  margin: auto;
   margin-top: 12px;
-  min-width: 500px;
-  max-width: 500px;
-  width: 100%;
+  border-bottom: 1px solid white;
+  width: 49%;
+  height: 30px;
 }

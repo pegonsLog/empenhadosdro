@@ -1,12 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
-import { UsersService } from '../../../../services/users.service';
+import { Router } from '@angular/router';
 import { User } from '../../../../interfaces/user';
+import { UsersService } from '../../../../services/users.service';
+import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [AngularMaterialModule],
+  imports: [AngularMaterialModule, CommonModule],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
 })
@@ -31,11 +33,18 @@ export class UserListComponent {
     'role',
   ];
 
-  constructor(private usersService: UsersService) {
+  constructor(private usersService: UsersService, private router: Router) {
     this.usersService.listCasts().then((users: User[]) => {
       this.users = users;
 
       console.log(this.users);
     });
+  }
+
+  backToHome() {
+    this.router.navigate(['home']);
+  }
+  goToAdd() {
+    this.router.navigate(['user-form']);
   }
 }

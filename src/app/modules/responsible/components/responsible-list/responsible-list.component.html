@@ -82,7 +82,8 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </div>
-<div style="display: flex; justify-content: center">
+<div class="buttons">
+  <button (click)="goToAdd()" id="buttonCustom" mat-button>Adicionar</button>
   <button id="buttonCustom"
     mat-button
   >

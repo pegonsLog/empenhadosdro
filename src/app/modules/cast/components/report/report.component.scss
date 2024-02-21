@@ -4,6 +4,16 @@
   padding-top: 15px;
 }
 
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  min-width: 200px;
+  max-width: 350px;
+  margin: auto;
+  padding-top: 15px;
+
+}
+
 table {
   min-width: 200px;
   max-width: 350px;
@@ -27,10 +37,7 @@ strong{
 #buttonCustom {
   background: rgb(38, 163, 221);
   color: white;
-  width: 100%;
-  margin: auto;
-  min-width: 200px;
-  max-width: 350px;
-  width: 100%;
   border-bottom: 1px solid white;
+  width: 171px;
+  height: 30px;
 }

@@ -60,7 +60,11 @@ export class ReportComponent {
       .reduce((acc, value) => acc + value, 0);
   }
 
-  voltarParaHome() {
+  goToAdd() {
+    this.router.navigate(['register']);
+  }
+
+  backToHome() {
     this.router.navigate(['home']);
   }
 }
