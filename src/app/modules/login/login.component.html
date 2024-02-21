@@ -9,11 +9,35 @@
       <mat-label>Senha</mat-label>
       <input type="password" matInput placeholder="Senha" />
     </mat-form-field>
-
-    <button (click)="register()" mat-raised-button color="primary">Autentique-se</button>
-    <button (click)="user()" mat-raised-button color="warning">User</button>
-    <button (click)="sector()" mat-raised-button color="accent">Sector</button>
-    <button (click)="cast()" mat-raised-button color="warning">Cast</button>
-    <button (click)="responsible()" mat-raised-button color="accent">responsible</button>
+    <p>
+      <button  (click)="cast()" mat-raised-button color="primary">Cast-list</button>
+      <button (click)="register()" mat-raised-button color="warning">
+        Cast-Form
+      </button>
+    </p>
+    <p>
+      <button (click)="userList()" mat-raised-button color="primary">
+        User-List
+      </button>
+      <button (click)="userForm()" mat-raised-button color="warning">
+        User-Form
+      </button>
+    </p>
+    <p>
+      <button (click)="sectorList()" mat-raised-button color="primary">
+        Sector-List
+      </button>
+      <button (click)="sectorForm()" mat-raised-button color="warning">
+        Sector-Form
+      </button>
+    </p>
+    <p>
+      <button (click)="responsibleList()" mat-raised-button color="primary">
+        Responsible-list
+      </button>
+      <button (click)="responsibleForm()" mat-raised-button color="warning">
+        Responsible-form
+      </button>
+    </p>
   </form>
 </div>

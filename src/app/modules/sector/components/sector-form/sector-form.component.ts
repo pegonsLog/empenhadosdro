@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sector-form',
@@ -9,5 +10,13 @@ import { AngularMaterialModule } from '../../../../shared/angular-material/angul
   styleUrl: './sector-form.component.scss'
 })
 export class SectorFormComponent {
+  constructor(private router: Router) {}
 
+  sectorList() {
+    this.router.navigate(['sector-list']);
+  }
+
+  close() {
+    this.router.navigate(['']);
+  }
 }

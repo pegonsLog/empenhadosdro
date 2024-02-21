@@ -1,7 +1,6 @@
 .container {
   display: flex;
   justify-content: center;
-  padding-top: 15px;
 }
 
 table {
@@ -22,4 +21,21 @@ mat-toolbar {
 
 strong{
   font-weight: 500;
+}
+
+span{
+  display: flex;
+  justify-content: center;
+  min-width: 200px;
+  max-width: 350px;
+  width: 100%;
+  margin: auto;
+  background-color: rgb(38, 163, 221);
+  color: white;
+  font-size: 1em;
+  font-weight: 500;
+  height: 50px;
+  align-items: center;
+  border-bottom: 1px solid white;
+  margin-top: 10px;
 }

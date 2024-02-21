@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-form',
@@ -10,4 +11,13 @@ import { AngularMaterialModule } from '../../../../shared/angular-material/angul
 })
 export class UserFormComponent {
 
+  constructor(private router: Router) {}
+
+  userList() {
+    this.router.navigate(['user-list']);
+  }
+
+  close() {
+    this.router.navigate(['']);
+  }
 }

@@ -18,13 +18,22 @@ export class LoginComponent {
   cast() {
     this.router.navigate(['report']);
   }
-  responsible() {
-    this.router.navigate(['responsibles-list']);
+  responsibleList() {
+    this.router.navigate(['responsible-list']);
   }
-  user() {
-    this.router.navigate(['users-list']);
+  responsibleForm() {
+    this.router.navigate(['responsible-form']);
   }
-  sector() {
-    this.router.navigate(['sectors-list']);
+  userList() {
+    this.router.navigate(['user-list']);
+  }
+  userForm() {
+    this.router.navigate(['user-form']);
+  }
+  sectorList() {
+    this.router.navigate(['sector-list']);
+  }
+  sectorForm() {
+    this.router.navigate(['sector-form']);
   }
 }

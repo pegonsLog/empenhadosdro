@@ -1,5 +1,4 @@
-
-
+<span class="mat-elevation-z8">GERÊNCIAS</span>
 <div class="container">
   <!-- Sector Column -->
 
@@ -20,7 +19,7 @@
 
 
     <tr
-      style="background-color: rgb(38, 163, 221); color: white"
+      style="background-color: rgb(38, 163, 221); color: white; height: 30px;"
       mat-header-row
       *matHeaderRowDef="displayedColumns"
     ></tr>
@@ -28,10 +27,18 @@
 
   </table>
 </div>
-<div class="container">
+<div style="display: flex; justify-content: center">
   <button
-    mat-raised-button color="secondary"
-    style="width: 350px; color: rgb(38, 163, 221);"
+    class="mat-elevation-z8"
+    mat-button
+    color="secondary"
+    style="
+      width: 350px;
+      color: rgb(38, 163, 221);
+      display: flex;
+      justify-content: center;
+      margin-top: 12px;
+    "
   >
     Voltar
   </button>
