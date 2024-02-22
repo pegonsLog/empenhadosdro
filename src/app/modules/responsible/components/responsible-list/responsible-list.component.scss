@@ -9,8 +9,6 @@
   min-width: 500px;
   max-width: 500px;
   margin: auto;
-  padding-top: 15px;
-
 }
 
 table {
@@ -47,8 +45,20 @@ span {
 #buttonCustom {
   background: rgb(38, 163, 221);
   color: white;
-  margin-top: 12px;
+  margin-top: 10px;
   border-bottom: 1px solid white;
   width: 49%;
   height: 30px;
+}
+
+
+#loading-spinner {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 500px;
+  max-width: 500px;
+  width: 350px;
+  background: rgba(0, 0, 0, 0.15);
 }

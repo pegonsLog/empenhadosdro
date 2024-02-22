@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { collection, getDocs, getFirestore, query } from 'firebase/firestore';
 import { Cast } from '../interfaces/cast';
-import { Sector } from '../interfaces/sector';
 import { environment } from '../shared/environment/environment.development';
 
 @Injectable({
@@ -14,7 +13,6 @@ export class CastsService {
   private app = initializeApp(this.firebaseConfig);
   private db = getFirestore(this.app);
   casts: Cast[] = [];
-  sectors: Sector[] = [];
 
   async listCasts() {
     const q = query(collection(this.db, 'casts'));

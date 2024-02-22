@@ -16,7 +16,7 @@
 table {
   min-width: 200px;
   max-width: 350px;
-  width: 100%;
+  width: 350px;
 }
 
 tr.mat-mdc-footer-row td {
@@ -43,7 +43,6 @@ span{
   margin-top: 10px;
 }
 
-
 #buttonCustom {
   background: rgb(38, 163, 221);
   color: white;
@@ -57,5 +56,8 @@ span{
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 200px;
+  max-width: 350px;
+  width: 350px;
   background: rgba(0, 0, 0, 0.15);
 }

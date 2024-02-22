@@ -1,23 +1,26 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../../../interfaces/user';
 import { UsersService } from '../../../../services/users.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [AngularMaterialModule, CommonModule],
+  imports: [AngularMaterialModule, CommonModule, NgIf],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
 })
 export class UserListComponent {
+  public existData: boolean = false;
   users: User[] = [
     {
       user: '',
       password: '',
       role: '',
+      nameUser: ''
     },
   ];
 
@@ -25,6 +28,7 @@ export class UserListComponent {
     user: '',
     password: '',
     role: '',
+    nameUser: ''
   };
 
   displayedColumns: string[] = [
@@ -35,11 +39,10 @@ export class UserListComponent {
 
   constructor(private usersService: UsersService, private router: Router) {
     this.usersService.listCasts().then((users: User[]) => {
-      this.users = users;
+      if(users) {this.existData = true,
+      this.users = users;}
+    })}
 
-      console.log(this.users);
-    });
-  }
 
   backToHome() {
     this.router.navigate(['home']);

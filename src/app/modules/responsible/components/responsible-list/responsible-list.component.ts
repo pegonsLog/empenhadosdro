@@ -3,15 +3,17 @@ import { ResponsiblesService } from '../../../../services/responsibles.service';
 import { Responsible } from '../../../../interfaces/responsible';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-responsible-list',
   standalone: true,
-  imports: [AngularMaterialModule],
+  imports: [AngularMaterialModule, CommonModule],
   templateUrl: './responsible-list.component.html',
   styleUrl: './responsible-list.component.scss',
 })
 export class ResponsibleListComponent {
+  public existData: boolean = false;
   responsibles: Responsible[] = [
     {
       registration: '',
@@ -38,17 +40,27 @@ export class ResponsibleListComponent {
     'shift',
   ];
 
-  constructor(private responsiblesService: ResponsiblesService, private router: Router) {
+  constructor(
+    private responsiblesService: ResponsiblesService,
+    private router: Router
+  ) {
     this.responsiblesService
       .listResponsibles()
       .then((responsibles: Responsible[]) => {
-        this.responsibles = responsibles.sort((a, b) => a.nameResponsible.localeCompare(b.nameResponsible));;
-
-        console.log(this.responsibles);
+        if (responsibles) {
+          this.responsibles = responsibles.sort((a, b) =>
+            a.nameResponsible.localeCompare(b.nameResponsible)
+          );
+          (this.existData = true), (this.responsibles = responsibles);
+        }
       });
   }
 
   goToAdd() {
     this.router.navigate(['responsible-form']);
+  }
+
+  backToHome() {
+    this.router.navigate(['home']);
   }
 }

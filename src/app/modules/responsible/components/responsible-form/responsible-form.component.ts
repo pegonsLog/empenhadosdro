@@ -23,4 +23,8 @@ export class ResponsibleFormComponent {
   close() {
     this.router.navigate(['']);
   }
+
+  backToHome() {
+    this.router.navigate(['home']);
+  }
 }

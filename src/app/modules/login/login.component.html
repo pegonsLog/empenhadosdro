@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="login-form">
+  <form [formGroup]="loginForm" class="login-form">
     <p>
       <mat-toolbar>
         <span>Equipe empenhada DRO</span>
@@ -7,15 +7,15 @@
     </p>
     <mat-form-field class="login-full-width">
       <mat-label>Usuário</mat-label>
-      <input type="number" matInput placeholder="Usuário" />
+      <input type="text" matInput placeholder="Usuário" formControlName="user" />
     </mat-form-field>
 
     <mat-form-field class="login-full-width">
       <mat-label>Senha</mat-label>
-      <input type="password" matInput placeholder="Senha" />
+      <input type="password" matInput placeholder="Senha" formControlName="password"/>
     </mat-form-field>
     <p>
-      <button id="buttonCustom" (click)="home()" mat-button>
+      <button id="buttonCustom" (click)="login()" mat-button >
         Entrar
       </button>
     </p>

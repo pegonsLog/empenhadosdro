@@ -1,7 +1,6 @@
 .container {
   display: flex;
   justify-content: center;
-  padding-top: 15px;
 }
 
 .buttons {
@@ -10,14 +9,13 @@
   min-width: 200px;
   max-width: 350px;
   margin: auto;
-  padding-top: 15px;
-
+  padding-top: 10px;
 }
 
 table {
   min-width: 200px;
   max-width: 350px;
-  width: 100%;
+  width: 350px;
 }
 
 tr.mat-mdc-footer-row td {
@@ -27,11 +25,27 @@ tr.mat-mdc-footer-row td {
 mat-toolbar {
   min-width: 200px;
   max-width: 370px;
-  width: 100%;
 }
 
 strong{
   font-weight: 500;
+}
+
+span {
+  display: flex;
+  justify-content: center;
+  min-width: 200px;
+  max-width: 350px;
+  width: 100%;
+  margin: auto;
+  background-color: rgb(38, 163, 221);
+  color: white;
+  font-size: 1em;
+  font-weight: 500;
+  height: 50px;
+  align-items: center;
+  border-bottom: 1px solid white;
+  margin-top: 10px;
 }
 
 #buttonCustom {
@@ -40,4 +54,15 @@ strong{
   border-bottom: 1px solid white;
   width: 171px;
   height: 30px;
+}
+
+#loading-spinner {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+  max-width: 350px;
+  width: 350px;
+  background: rgba(0, 0, 0, 0.15);
 }

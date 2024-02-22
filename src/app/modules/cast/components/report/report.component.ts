@@ -1,5 +1,5 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cast } from '../../../../interfaces/cast';
 import { CastsService } from '../../../../services/casts.service';
@@ -13,7 +13,8 @@ import { AngularMaterialModule } from '../../../../shared/angular-material/angul
   styleUrl: './report.component.scss',
 })
 export class ReportComponent {
-  cast: Cast = {
+  public existData: boolean = false;
+  public cast: Cast = {
     registrationResponsible: '',
     scaleDate: '',
     sector: '',
@@ -22,7 +23,7 @@ export class ReportComponent {
     withRestriction: 0,
   };
 
-  casts: Cast[] = [
+  public casts: Cast[] = [
     {
       registrationResponsible: '',
       scaleDate: '',
@@ -42,7 +43,10 @@ export class ReportComponent {
 
   constructor(private router: Router, private castsService: CastsService) {
     this.castsService.listCasts().then((casts: Cast[]) => {
-      this.casts = casts.sort((a, b) => a.sector.localeCompare(b.sector));
+      if (casts) {
+        this.casts = casts.sort((a, b) => a.sector.localeCompare(b.sector));
+        (this.existData = true), (this.casts = casts);
+      }
     });
   }
 

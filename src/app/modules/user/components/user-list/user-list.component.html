@@ -1,7 +1,7 @@
 <span>USUÁRIOS</span>
 
-@if("users; else loading"){
-  <div class="container">
+<div class="container">
+    <div *ngIf="existData; else loading">
     <!-- Username Column -->
 
     <table mat-table [dataSource]="users">
@@ -55,11 +55,11 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
-  <div class="buttons">
-    <button (click)="goToAdd()" id="buttonCustom" mat-button>Adicionar</button>
-    <button (click)="backToHome()" id="buttonCustom" mat-button>Voltar</button>
-  </div>
-}
+</div>
+<div class="buttons">
+  <button (click)="goToAdd()" id="buttonCustom" mat-button>Adicionar</button>
+  <button (click)="backToHome()" id="buttonCustom" mat-button>Voltar</button>
+</div>
 <ng-template #loading>
   <div id="loading-spinner">
     <mat-spinner></mat-spinner>

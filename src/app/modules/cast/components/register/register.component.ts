@@ -1,7 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
-import { Sector } from '../../../../interfaces/sector';
 
 @Component({
   selector: 'app-register',

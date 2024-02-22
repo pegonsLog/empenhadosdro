@@ -24,4 +24,8 @@ export class UserFormComponent {
   close() {
     this.router.navigate(['']);
   }
+
+  backToHome() {
+    this.router.navigate(['home']);
+  }
 }
