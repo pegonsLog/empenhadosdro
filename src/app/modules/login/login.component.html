@@ -1,5 +1,5 @@
 <div class="container">
-  <form [formGroup]="loginForm" class="login-form">
+  <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
     <p>
       <mat-toolbar>
         <span>Equipe empenhada DRO</span>
@@ -15,7 +15,7 @@
       <input type="password" matInput placeholder="Senha" formControlName="password"/>
     </mat-form-field>
     <p>
-      <button id="buttonCustom" (click)="login()" mat-button >
+      <button id="buttonCustom" type="submit" mat-button >
         Entrar
       </button>
     </p>

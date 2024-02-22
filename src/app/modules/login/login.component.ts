@@ -20,7 +20,6 @@ import { LoginService } from '../../services/login.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-
   public loginForm = new FormGroup({
     user: new FormControl(''),
     password: new FormControl(''),
@@ -31,23 +30,29 @@ export class LoginComponent {
     password: ['', Validators.required],
   });
 
-
   public user: User = {
     user: '',
-    password:  '',
+    password: '',
     role: '',
-    nameUser: ''
+    nameUser: '',
   };
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private loginService: LoginService) {}
+  username: string = '';
+  password: string = '';
 
-  login() {
-// const user = this.loginForm.getRawValue().user!;
-  this.loginService.loginUser(this.loginForm.getRawValue().user!).then( );
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private loginService: LoginService
+  ) {}
 
+  onSubmit() {
+    
+  
+    this.loginService
+      .loginUser(this.loginForm.getRawValue().user!)
+      .then((user: User) => (this.user = user));
 
-
-    // this.router.navigate(['home']);
-  // }
-}
+    this.router.navigate(['home'], { state: { name: this.user.nameUser } });
+  }
 }

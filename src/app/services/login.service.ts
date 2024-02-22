@@ -2,16 +2,13 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import {
   collection,
-  doc,
-  getDoc,
   getDocs,
   getFirestore,
   query,
-  where,
+  where
 } from 'firebase/firestore';
 import { User } from '../interfaces/user';
 import { environment } from '../shared/environment/environment.development';
-import { ConnectableObservable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -34,10 +31,11 @@ export class LoginService {
     const querySnapshot = await getDocs(q);
 
    querySnapshot.forEach((doc) => {
-      if(doc.data()){
-        console.log(doc.data());
+      if(doc){
+        this.user = doc.data() as User;
       }}
     )
+    return this.user;
   }
 
 

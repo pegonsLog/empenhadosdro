@@ -11,7 +11,11 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
 
-  constructor(private router: Router) {}
+  public nameUser: string = '';
+
+  constructor(private router: Router) {
+    this.nameUser = this.router.getCurrentNavigation()?.extras.state?.['name'];
+  }
 
   register() {
     this.router.navigate(['register']);
