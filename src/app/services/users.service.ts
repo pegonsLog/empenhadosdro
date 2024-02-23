@@ -12,7 +12,8 @@ export class UsersService {
 
   private app = initializeApp(this.firebaseConfig);
   private db = getFirestore(this.app);
-  users: User[] = [];
+  public users: User[] = [];
+  private exists: boolean = false
 
   async listCasts() {
     const q = query(collection(this.db, 'users'));

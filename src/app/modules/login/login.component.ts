@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 import {
@@ -20,15 +20,7 @@ import { LoginService } from '../../services/login.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  public loginForm = new FormGroup({
-    user: new FormControl(''),
-    password: new FormControl(''),
-  });
-
-  public userForm = this.formBuilder.group({
-    user: ['', Validators.required],
-    password: ['', Validators.required],
-  });
+  public loginForm;
 
   public user: User = {
     user: '',
@@ -37,22 +29,31 @@ export class LoginComponent {
     nameUser: '',
   };
 
-  username: string = '';
-  password: string = '';
-
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private loginService: LoginService
-  ) {}
+  ) {
+    this.loginForm = this.formBuilder.group({
+      user: ['564', Validators.required],
+      password: ['123456', Validators.required],
+    });
+  }
 
-  onSubmit() {
-    
-  
-    this.loginService
-      .loginUser(this.loginForm.getRawValue().user!)
+  async onSubmit() {
+    await this.loginService
+      .loginUser(
+        this.loginForm.getRawValue().user!,
+        this.loginForm.getRawValue().password!
+      )
       .then((user: User) => (this.user = user));
 
-    this.router.navigate(['home'], { state: { name: this.user.nameUser } });
+    if (this.user.user === this.loginForm.getRawValue().user && this.user.password === this.loginForm.getRawValue().password) {
+      {
+        this.router.navigate(['home'], {
+          queryParams: { userName: this.user.nameUser, role: this.user.role },
+        });
+      }
+    }else{alert('Usuário não cadastrado!')}
   }
 }

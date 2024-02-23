@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AngularMaterialModule],
+  imports: [AngularMaterialModule, CommonModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-
   public nameUser: string = '';
+  public role: string = '';
 
-  constructor(private router: Router) {
-    this.nameUser = this.router.getCurrentNavigation()?.extras.state?.['name'];
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    this.nameUser = this.activatedRoute.snapshot.queryParams['userName'];
+    this.role = this.activatedRoute.snapshot.queryParams['role'];
   }
 
   register() {

@@ -25,18 +25,15 @@ export class LoginService {
     role: '',
   };
 
-  async loginUser(user: string) {
-    const q = query(collection(this.db, "users"), where("user", "==", user));
+  async loginUser(user: string, password: string) {
+    const q = query(collection(this.db, "users"), where("user", "==", user) && where("password", "==", password));
 
     const querySnapshot = await getDocs(q);
 
-   querySnapshot.forEach((doc) => {
-      if(doc){
+   querySnapshot.forEach((doc) => {if(doc){
         this.user = doc.data() as User;
       }}
-    )
-    return this.user;
+    );
+  return this.user
   }
-
-
 }

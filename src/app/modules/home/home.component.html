@@ -23,15 +23,17 @@
         Equipe empenhada
       </button>
     </p>
-    <p>
-      <button id="buttonCustom" (click)="responsibleList()" mat-button>
-        Responsáveis
-      </button>
-    </p>
-    <p>
-      <button id="buttonCustom" (click)="userList()" mat-button>
-        Usuários
-      </button>
-    </p>
+    @if(role === 'adm'){
+      <p>
+        <button id="buttonCustom" (click)="responsibleList()" mat-button>
+          Responsáveis
+        </button>
+      </p>
+      <p>
+        <button id="buttonCustom" (click)="userList()" mat-button>
+          Usuários
+        </button>
+      </p>
+    }
   </form>
 </div>
