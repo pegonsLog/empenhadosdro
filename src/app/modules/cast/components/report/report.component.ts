@@ -1,6 +1,6 @@
-import { CommonModule, NgFor } from '@angular/common';
-import { Component, effect, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule, Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cast } from '../../../../interfaces/cast';
 import { CastsService } from '../../../../services/casts.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
@@ -16,6 +16,8 @@ export class ReportComponent {
   public existData: boolean = false;
   public cast: Cast = {
     registrationResponsible: '',
+    nameResponsibleCast: '',
+      officeResponsibleCast: '',
     scaleDate: '',
     sector: '',
     shift: '',
@@ -26,6 +28,8 @@ export class ReportComponent {
   public casts: Cast[] = [
     {
       registrationResponsible: '',
+      nameResponsibleCast: '',
+      officeResponsibleCast: '',
       scaleDate: '',
       sector: '',
       shift: '',
@@ -41,13 +45,30 @@ export class ReportComponent {
     'totalGerencia',
   ];
 
-  constructor(private router: Router, private castsService: CastsService) {
-    this.castsService.listCasts().then((casts: Cast[]) => {
-      if (casts) {
-        this.casts = casts.sort((a, b) => a.sector.localeCompare(b.sector));
-        (this.existData = true), (this.casts = casts);
-      }
-    });
+  public dateReport: string = '';
+  public shift: string = '';
+  public role: string = '';
+  public nameUser: string = '';
+
+  constructor(
+    private router: Router,
+    private castsService: CastsService,
+    private activatedRoute: ActivatedRoute,
+    private location: Location
+  ) {
+    this.shift = this.activatedRoute.snapshot.queryParams['shift'];
+    this.dateReport = this.activatedRoute.snapshot.queryParams['dateReport'];
+    this.role = this.activatedRoute.snapshot.queryParams['role'];
+    this.nameUser = this.activatedRoute.snapshot.queryParams['nameUser'];
+
+    this.castsService
+      .listCasts(this.dateReport, this.shift)
+      .then((casts: Cast[]) => {
+        if (casts) {
+          this.casts = casts.sort((a, b) => a.sector.localeCompare(b.sector));
+          (this.existData = true), (this.casts = casts);
+        }
+      });
   }
 
   listCasts() {}
@@ -69,6 +90,15 @@ export class ReportComponent {
   }
 
   backToHome() {
-    this.router.navigate(['home']);
+    this.clear();
+    this.router.navigate(['home'], {
+      queryParams: { role: this.role, userName: this.nameUser },
+    });
+  }
+
+  clear() {
+    while (this.casts.length) {
+      this.casts.pop();
+    }
   }
 }

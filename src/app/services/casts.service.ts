@@ -14,13 +14,18 @@ export class CastsService {
   private db = getFirestore(this.app);
   casts: Cast[] = [];
 
-  async listCasts() {
+  async listCasts(castDate: string, shift: string) {
     const q = query(collection(this.db, 'casts'));
 
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
-      this.casts.push(doc.data() as Cast);
+
+      const cast = doc.data() as Cast;
+
+      if(cast.scaleDate === castDate && cast.shift === shift){
+        this.casts.push(doc.data() as Cast);
+      }
     });
     return this.casts;
   }

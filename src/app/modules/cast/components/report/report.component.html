@@ -1,16 +1,16 @@
-<span>EQUIPE EMPENHADA</span>
+<span>EQUIPE EMPENHADA - {{dateReport}} - {{shift}}</span>
 <div class="container">
   <div *ngIf="existData; else loading">
     <!-- GAR Column -->
 
-    <table mat-table [dataSource]="casts">
+    <table mat-table [dataSource]="casts" >
       <ng-container matColumnDef="gar">
         <th
           mat-header-cell
           *matHeaderCellDef
           style="padding-right: 50px; font-size: 0.85em"
         >
-          <strong>GERÊNCIA</strong>
+          <strong>GAR</strong>
         </th>
 
         <td mat-cell *matCellDef="let cast" style="font-size: 0.85em">

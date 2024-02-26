@@ -1,28 +1,59 @@
 <div class="container">
-  <form class="login-form">
+<span class="home-form">
     <p>
-      <mat-toolbar>
+      <mat-toolbar class="montserrat">
         <span>Olá, {{nameUser}}</span>
       </mat-toolbar>
     </p>
-    <mat-form-field class="login-full-width">
-      <mat-label>Informe a data</mat-label>
-      <input type="text" matInput placeholder="Data" />
-    </mat-form-field>
+    <form [formGroup]="listCastReportForm">
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-description >
+          Consultar equipe do dia
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-    <mat-form-field class="login-full-width">
-      <mat-label>Informe o turno</mat-label>
-      <mat-select>
-        <mat-option value="manha">Manhã</mat-option>
-        <mat-option value="tarde">Tarde</mat-option>
-        <mat-option value="madrugada">Madrugada</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <p>
-      <button id="buttonCustom" (click)="cast()" mat-button>
-        Equipe empenhada
-      </button>
-    </p>
+      <mat-form-field class="home-full-width">
+        <mat-label>Informe a data</mat-label>
+        <input type="text" matInput placeholder="Data" formControlName="castDate"  mask="{{maskDate}}"/>
+      </mat-form-field>
+
+      <mat-form-field class="home-full-width">
+        <mat-label>Selecione o turno</mat-label>
+        <mat-select formControlName="shift" [value]="">
+          <mat-option value="Manhã">Manhã</mat-option>
+          <mat-option value="Tarde">Tarde</mat-option>
+          <mat-option value="Madrugada">Madrugada</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p>
+        <button id="button-white" mat-button (click)="castReport()">
+          Equipe empenhada
+        </button>
+      </p>
+    </mat-expansion-panel>
+  </form>
+  <form [formGroup]="listCastRegisterForm">
+    <mat-expansion-panel hideToggle class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-description >
+          Adicionar equipe do dia
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field class="home-full-width">
+        <mat-label>Informe a matrícula</mat-label>
+        <input type="text" matInput placeholder="Matrícula" formControlName="registrationResponsible"/>
+      </mat-form-field>
+
+       <p>
+        <button id="button-white" type="submit" mat-button (click)="castRegister()">
+          Ok
+        </button>
+      </p>
+    </mat-expansion-panel>
+  </form>
+
     @if(role === 'adm'){
       <p>
         <button id="buttonCustom" (click)="responsibleList()" mat-button>
@@ -35,5 +66,5 @@
         </button>
       </p>
     }
-  </form>
+  </span>
 </div>

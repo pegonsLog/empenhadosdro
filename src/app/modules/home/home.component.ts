@@ -1,30 +1,94 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule, NgIf } from '@angular/common';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { Cast } from '../../interfaces/cast';
+import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AngularMaterialModule, CommonModule],
+  imports: [
+    AngularMaterialModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxMaskDirective,
+  ],
+  providers: [provideNgxMask()],
+
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   public nameUser: string = '';
   public role: string = '';
+  public maskDate = 'd0/M0/0000';
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  public listCastReportForm: FormGroup;
+  public listCastRegisterForm: FormGroup;
+
+  public casts: Cast[] = [
+    {
+      registrationResponsible: '',
+      nameResponsibleCast: '',
+      officeResponsibleCast: '',
+      scaleDate: '',
+      sector: '',
+      shift: '',
+      withoutRestriction: 0,
+      withRestriction: 0,
+    },
+  ];
+
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private formBuilder: FormBuilder
+  ) {
     this.nameUser = this.activatedRoute.snapshot.queryParams['userName'];
     this.role = this.activatedRoute.snapshot.queryParams['role'];
+
+    this.listCastReportForm = this.formBuilder.group({
+      castDate: [new Date().toLocaleDateString('pt-BR'), Validators.required],
+      shift: ['', Validators.required],
+    });
+
+    this.listCastRegisterForm = this.formBuilder.group({
+      registrationResponsible: ['', Validators.required],
+    });
   }
 
-  register() {
-    this.router.navigate(['register']);
+  async castReport() {
+    const castDateReport = this.listCastReportForm.getRawValue().castDate!;
+    const shiftReport = this.listCastReportForm.getRawValue().shift!;
+    if (this.listCastReportForm.valid) {
+      this.router.navigate(['report'], {
+        queryParams: {
+          dateReport: castDateReport,
+          shift: shiftReport,
+          role: this.role,
+          nameUser: this.nameUser,
+        },
+      });
+    }
   }
-  cast() {
-    this.router.navigate(['report']);
+
+  castRegister() {
+    this.router.navigate(['register'], {
+      queryParams: {
+        registrationResponsible: this.listCastRegisterForm.getRawValue().registrationResponsible!,
+      },
+    });
   }
+
   responsibleList() {
     this.router.navigate(['responsible-list']);
   }

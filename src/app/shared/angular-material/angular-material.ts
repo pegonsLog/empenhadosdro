@@ -16,7 +16,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
 
 @NgModule({
   exports: [
@@ -37,7 +40,9 @@ import {MatDividerModule} from '@angular/material/divider';
     MatSlideToggleModule,
     MatOptionModule,
     MatSelectModule,
-    MatDividerModule
+    MatDividerModule,
+    MatExpansionModule,
+    MatDatepickerModule
   ],
 })
 export class AngularMaterialModule {}

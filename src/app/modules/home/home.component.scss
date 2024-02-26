@@ -1,10 +1,10 @@
-.login-form {
+.home-form {
   min-width: 100px;
   max-width: 350px;
   width: 100%;
 }
 
-.login-full-width {
+.home-full-width {
   width: 100%;
 }
 
@@ -18,7 +18,7 @@ input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-#buttonCustom{
+#buttonCustom {
   background: rgb(38, 163, 221);
   color: white;
   width: 100%;
@@ -29,7 +29,40 @@ mat-toolbar {
   color: white;
 }
 
-p{
+p {
   display: flex;
   justify-content: center;
 }
+
+mat-expansion-panel {
+  margin-bottom: 12px;
+  background-color: rgb(38, 163, 221);
+
+}
+mat-expansion-panel-header {
+  height: 36px;
+  box-shadow: rgb(255, 0, 34);
+}
+
+#button-white{
+  background: rgb(110, 179, 122);
+  color: white;
+  width: 100%;
+  font-weight: 450;
+  height: 40px;
+}
+
+.montserrat{
+  font-family: Montserrat;
+}
+
+.mat-expansion-panel-header-description {
+  color: white;
+display: flex;
+justify-content: center;
+font-size: 0.9rem;
+margin-right: 0px;
+margin-left: 5px;
+letter-spacing: 1px;
+}
+
