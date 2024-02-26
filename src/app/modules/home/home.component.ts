@@ -11,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Cast } from '../../interfaces/cast';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
+import { ResponsiblesService } from '../../services/responsibles.service';
+import { Responsible } from '../../interfaces/responsible';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +37,14 @@ export class HomeComponent {
   public listCastReportForm: FormGroup;
   public listCastRegisterForm: FormGroup;
 
+  responsible: Responsible = {
+    registration: '',
+    nameResponsible: '',
+    office: '',
+    sector: '',
+    shift: ''
+  }
+
   public casts: Cast[] = [
     {
       registrationResponsible: '',
@@ -51,7 +61,8 @@ export class HomeComponent {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private responsibleService: ResponsiblesService
   ) {
     this.nameUser = this.activatedRoute.snapshot.queryParams['userName'];
     this.role = this.activatedRoute.snapshot.queryParams['role'];
@@ -82,12 +93,21 @@ export class HomeComponent {
   }
 
   castRegister() {
+    this.responsibleService.responsibleRegisterCast(
+      this.listCastRegisterForm.getRawValue().registrationResponsible!
+    ).then((responsible: Responsible) => {
+
     this.router.navigate(['register'], {
       queryParams: {
-        registrationResponsible: this.listCastRegisterForm.getRawValue().registrationResponsible!,
+        registration: responsible.registration,
+        nameResponsible: responsible.nameResponsible,
+        office: responsible.office,
+        sector: responsible.sector,
+        shift: responsible.shift
       },
     });
-  }
+  })
+}
 
   responsibleList() {
     this.router.navigate(['responsible-list']);

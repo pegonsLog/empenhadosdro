@@ -33,13 +33,19 @@ export class RegisterComponent {
 
   constructor(private router: Router, private fb: FormBuilder, private responsiblesService: ResponsiblesService, private activatedRoute: ActivatedRoute) {
 
+    const registration = this.activatedRoute.snapshot.queryParams['registration'];
+    const nameResponsible = this.activatedRoute.snapshot.queryParams['nameResponsible'];
+    const office = this.activatedRoute.snapshot.queryParams['office'];
+    const sector = this.activatedRoute.snapshot.queryParams['sector'];
+    const shift = this.activatedRoute.snapshot.queryParams['shift'];
+
     this.formCastRegister = fb.group({
-      castDate: ['', Validators.required],
-      registrationResponsible: ['', Validators.required],
-      nameResponsible: ['', Validators.required],
-      officeResponsible: ['', Validators.required],
-      sectorResponsible: ['', Validators.required],
-      shiftResponsible: ['', Validators.required],
+      castDate: [new Date().toLocaleDateString('pt-BR'), Validators.required],
+      registrationResponsible: [registration, Validators.required],
+      nameResponsible: [nameResponsible, Validators.required],
+      officeResponsible: [office, Validators.required],
+      sectorResponsible: [sector, Validators.required],
+      shiftResponsible: [shift, Validators.required],
       withoutRestriction: ['', Validators.required],
       withRestriction: ['', Validators.required],
     })
@@ -55,7 +61,6 @@ export class RegisterComponent {
       }
     });
 
-    this.registrationResponsible = this.activatedRoute.snapshot.queryParams['resgistrationResponsible'];
 
   }
 
@@ -64,6 +69,6 @@ export class RegisterComponent {
   }
 
   close() {
-    this.router.navigate(['']);
+    // this.router.navigate(['']);
   }
 }
