@@ -5,8 +5,6 @@ import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import { ResponsibleFormComponent } from './modules/responsible/components/responsible-form/responsible-form.component';
 import { ResponsibleListComponent } from './modules/responsible/components/responsible-list/responsible-list.component';
-import { UserFormComponent } from './modules/user/components/user-form/user-form.component';
-import { UserListComponent } from './modules/user/components/user-list/user-list.component';
 
 export const routes: Routes = [
   {
@@ -20,14 +18,6 @@ export const routes: Routes = [
   {
     path: 'report',
     component: ReportComponent,
-  },
-  {
-    path: 'user-list',
-    component: UserListComponent,
-  },
-  {
-    path: 'user-form',
-    component: UserFormComponent,
   },
   {
     path: 'responsible-list',

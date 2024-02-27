@@ -9,6 +9,7 @@ import {
 } from 'firebase/firestore';
 import { User } from '../interfaces/user';
 import { environment } from '../shared/environment/environment.development';
+import { Responsible } from '../interfaces/responsible';
 
 @Injectable({
   providedIn: 'root',
@@ -18,22 +19,25 @@ export class LoginService {
 
   private app = initializeApp(this.firebaseConfig);
   private db = getFirestore(this.app);
-  user: User = {
-    user: '',
-    nameUser: '',
+  responsible: Responsible = {
+    registration: '',
+    nameResponsible: '',
+    office: '',
+    sector: '',
+    shift: '',
     password: '',
-    role: '',
+    role: ''
   };
 
-  async loginUser(user: string, password: string) {
-    const q = query(collection(this.db, "users"), where("user", "==", user) && where("password", "==", password));
+  async loginResponsible(user: string, password: string) {
+    const q = query(collection(this.db, "responsibles"), where("user", "==", user) && where("password", "==", password));
 
     const querySnapshot = await getDocs(q);
 
    querySnapshot.forEach((doc) => {if(doc){
-        this.user = doc.data() as User;
+        this.responsible = doc.data() as Responsible;
       }}
     );
-  return this.user
+  return this.responsible
   }
 }

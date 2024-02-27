@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Cast } from '../../../../interfaces/cast';
 import { CastsService } from '../../../../services/casts.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
+import { Responsible } from '../../../../interfaces/responsible';
 
 @Component({
   selector: 'app-report',
@@ -14,10 +15,21 @@ import { AngularMaterialModule } from '../../../../shared/angular-material/angul
 })
 export class ReportComponent {
   public existData: boolean = false;
+
+  public responsible: Responsible = {
+    registration: '',
+    nameResponsible: '',
+    office: '',
+    sector: '',
+    shift: '',
+    password: '',
+    role: '',
+  };
+
   public cast: Cast = {
     registrationResponsible: '',
     nameResponsibleCast: '',
-      officeResponsibleCast: '',
+    officeResponsibleCast: '',
     scaleDate: '',
     sector: '',
     shift: '',
@@ -47,19 +59,21 @@ export class ReportComponent {
 
   public dateReport: string = '';
   public shift: string = '';
-  public role: string = '';
-  public nameUser: string = '';
+
 
   constructor(
     private router: Router,
     private castsService: CastsService,
-    private activatedRoute: ActivatedRoute,
-    private location: Location
+    private activatedRoute: ActivatedRoute
   ) {
+
+    this.responsible.registration = this.activatedRoute.snapshot.queryParams['registration'];
+    this.responsible.nameResponsible = this.activatedRoute.snapshot.queryParams['nameResponsible'];
+    this.responsible.office = this.activatedRoute.snapshot.queryParams['office'];
+    this.responsible.sector = this.activatedRoute.snapshot.queryParams['sector'];
+    this.responsible.role = this.activatedRoute.snapshot.queryParams['role'];
     this.shift = this.activatedRoute.snapshot.queryParams['shift'];
     this.dateReport = this.activatedRoute.snapshot.queryParams['dateReport'];
-    this.role = this.activatedRoute.snapshot.queryParams['role'];
-    this.nameUser = this.activatedRoute.snapshot.queryParams['nameUser'];
 
     this.castsService
       .listCasts(this.dateReport, this.shift)
@@ -86,13 +100,23 @@ export class ReportComponent {
   }
 
   goToAdd() {
-    this.router.navigate(['register']);
+    this.router.navigate(['register'], {
+      queryParams: {
+        registration: this.responsible.registration,
+        nameResponsible: this.responsible.nameResponsible,
+        office: this.responsible.office,
+        sector: this.responsible.sector,
+        shift: this.shift,
+        role: this.responsible.role,
+        dateReport: this.dateReport
+      },
+    });
   }
 
   backToHome() {
     this.clear();
     this.router.navigate(['home'], {
-      queryParams: { role: this.role, userName: this.nameUser },
+      queryParams: { role: this.responsible.role, nameResponsible: this.responsible.nameResponsible },
     });
   }
 

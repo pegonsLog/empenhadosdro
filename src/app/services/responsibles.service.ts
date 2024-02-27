@@ -18,7 +18,9 @@ export class ResponsiblesService {
     nameResponsible: '',
     office: '',
     sector: '',
-    shift: ''
+    shift: '',
+    password: '',
+    role: ''
   }
 
   constructor() {}
@@ -40,7 +42,18 @@ export class ResponsiblesService {
     const querySnapshot = await getDocs(q);
 
    querySnapshot.forEach((doc) => {if(doc){
-        this.responsible = doc.data() as Responsible;      }}
+        this.responsible = doc.data() as Responsible}}
+    );
+  return this.responsible
+  }
+
+  async responsibleReportCast(dateReport: string, shift: string) {
+    const q = query(collection(this.db, "responsibles"), where("dateReport", "==", dateReport) && where("shift", "==", shift));
+
+    const querySnapshot = await getDocs(q);
+
+   querySnapshot.forEach((doc) => {if(doc){
+        this.responsible = doc.data() as Responsible}}
     );
   return this.responsible
   }

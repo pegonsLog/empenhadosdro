@@ -1,5 +1,5 @@
-<div class="container">
-  <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
+<div id="container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <p>
       <mat-toolbar>
         <span>Equipe empenhada DRO</span>
@@ -7,7 +7,7 @@
     </p>
     <mat-form-field class="login-full-width">
       <mat-label>Usuário</mat-label>
-      <input type="text" matInput placeholder="Usuário" formControlName="user" />
+      <input type="text" matInput placeholder="Usuário" formControlName="registration" />
     </mat-form-field>
 
     <mat-form-field class="login-full-width">

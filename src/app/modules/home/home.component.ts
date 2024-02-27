@@ -8,11 +8,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { provideNgxMask } from 'ngx-mask';
 import { Cast } from '../../interfaces/cast';
-import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
-import { ResponsiblesService } from '../../services/responsibles.service';
 import { Responsible } from '../../interfaces/responsible';
+import { ResponsiblesService } from '../../services/responsibles.service';
+import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
+import { CastsService } from '../../services/casts.service';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,6 @@ import { Responsible } from '../../interfaces/responsible';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxMaskDirective,
   ],
   providers: [provideNgxMask()],
 
@@ -30,9 +30,6 @@ import { Responsible } from '../../interfaces/responsible';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  public nameUser: string = '';
-  public role: string = '';
-  public maskDate = 'd0/M0/0000';
 
   public listCastReportForm: FormGroup;
   public listCastRegisterForm: FormGroup;
@@ -42,8 +39,10 @@ export class HomeComponent {
     nameResponsible: '',
     office: '',
     sector: '',
-    shift: ''
-  }
+    shift: '',
+    password: '',
+    role: '',
+  };
 
   public casts: Cast[] = [
     {
@@ -62,10 +61,14 @@ export class HomeComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private responsibleService: ResponsiblesService
+    private responsibleService: ResponsiblesService,
+    private castsService: CastsService,
   ) {
-    this.nameUser = this.activatedRoute.snapshot.queryParams['userName'];
-    this.role = this.activatedRoute.snapshot.queryParams['role'];
+    this.responsible.registration =
+      this.activatedRoute.snapshot.queryParams['registration'];
+    this.responsible.nameResponsible =
+      this.activatedRoute.snapshot.queryParams['nameResponsible'];
+    this.responsible.role = this.activatedRoute.snapshot.queryParams['role'];
 
     this.listCastReportForm = this.formBuilder.group({
       castDate: [new Date().toLocaleDateString('pt-BR'), Validators.required],
@@ -77,54 +80,55 @@ export class HomeComponent {
     });
   }
 
-  async castReport() {
+  public castReport() {
     const castDateReport = this.listCastReportForm.getRawValue().castDate!;
     const shiftReport = this.listCastReportForm.getRawValue().shift!;
-    if (this.listCastReportForm.valid) {
+    this.responsibleService
+    .responsibleReportCast(castDateReport, shiftReport)
+    .then((responsible: Responsible) => {
+      if(this.listCastReportForm.valid){
       this.router.navigate(['report'], {
         queryParams: {
-          dateReport: castDateReport,
+          registration: responsible.registration,
+          nameResponsible: responsible.nameResponsible,
+          office: responsible.office,
+          sector: responsible.sector,
+          role: responsible.role,
           shift: shiftReport,
-          role: this.role,
-          nameUser: this.nameUser,
+          dateReport: castDateReport
         },
-      });
-    }
+      });}
+    });
   }
 
-  castRegister() {
-    this.responsibleService.responsibleRegisterCast(
-      this.listCastRegisterForm.getRawValue().registrationResponsible!
-    ).then((responsible: Responsible) => {
-
-    this.router.navigate(['register'], {
-      queryParams: {
-        registration: responsible.registration,
-        nameResponsible: responsible.nameResponsible,
-        office: responsible.office,
-        sector: responsible.sector,
-        shift: responsible.shift
-      },
-    });
-  })
-}
+  public castRegister() {
+    this.responsibleService
+      .responsibleRegisterCast(
+        this.listCastRegisterForm.getRawValue().registrationResponsible!
+      )
+      .then((responsible: Responsible) => {
+        if(this.listCastRegisterForm.valid){
+        this.router.navigate(['register'], {
+          queryParams: {
+            registration: responsible.registration,
+            nameResponsible: responsible.nameResponsible,
+            office: responsible.office,
+            sector: responsible.sector,
+            role: responsible.role,
+            shift: responsible.shift,
+            dateReport: this.listCastReportForm.getRawValue().castDate!
+          },
+        });}
+      });
+  }
 
   responsibleList() {
-    this.router.navigate(['responsible-list']);
-  }
-  responsibleForm() {
-    this.router.navigate(['responsible-form']);
-  }
-  userList() {
-    this.router.navigate(['user-list']);
-  }
-  userForm() {
-    this.router.navigate(['user-form']);
-  }
-  sectorList() {
-    this.router.navigate(['sector-list']);
-  }
-  sectorForm() {
-    this.router.navigate(['sector-form']);
+    this.router.navigate(['responsible-list'], {
+      queryParams: {
+        nameResponsible: this.responsible.nameResponsible,
+        role: this.responsible.role
+
+      },
+    });
   }
 }

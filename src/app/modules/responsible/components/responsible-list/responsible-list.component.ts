@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
 import { Responsible } from '../../../../interfaces/responsible';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -21,6 +21,8 @@ export class ResponsibleListComponent {
       office: '',
       sector: '',
       shift: '',
+      password: '',
+      role: ''
     },
   ];
 
@@ -30,6 +32,8 @@ export class ResponsibleListComponent {
     office: '',
     sector: '',
     shift: '',
+    password: '',
+    role: ''
   };
 
   displayedColumns: string[] = [
@@ -42,8 +46,12 @@ export class ResponsibleListComponent {
 
   constructor(
     private responsiblesService: ResponsiblesService,
-    private router: Router
+    private router: Router, private activatedRoute: ActivatedRoute
   ) {
+
+    this.responsible.nameResponsible = this.activatedRoute.snapshot.queryParams['nameResponsible'];
+    this.responsible.role = this.activatedRoute.snapshot.queryParams['role'];
+
     this.responsiblesService
       .listResponsibles()
       .then((responsibles: Responsible[]) => {
@@ -57,10 +65,21 @@ export class ResponsibleListComponent {
   }
 
   goToAdd() {
-    this.router.navigate(['responsible-form']);
+    this.router.navigate(['responsible-form'], {
+      queryParams: { role: this.responsible.role, nameResponsible: this.responsible.nameResponsible },
+    });
   }
 
   backToHome() {
-    this.router.navigate(['home']);
+    this.clear();
+    this.router.navigate(['home'], {
+      queryParams: { role: this.responsible.role, nameResponsible: this.responsible.nameResponsible },
+    });
+  }
+
+  clear() {
+    while (this.responsibles.length) {
+      this.responsibles.pop();
+    }
   }
 }

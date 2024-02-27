@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
-  FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
+  Validators
 } from '@angular/forms';
-import { User } from '../../interfaces/user';
+import { Router } from '@angular/router';
+import { Responsible } from '../../interfaces/responsible';
 import { LoginService } from '../../services/login.service';
+import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 
 @Component({
   selector: 'app-login',
@@ -22,11 +20,14 @@ import { LoginService } from '../../services/login.service';
 export class LoginComponent {
   public loginForm;
 
-  public user: User = {
-    user: '',
+  public responsible: Responsible = {
+    registration: '',
+    nameResponsible: '',
+    office: '',
+    sector: '',
+    shift: '',
     password: '',
-    role: '',
-    nameUser: '',
+    role: ''
   };
 
   constructor(
@@ -35,23 +36,23 @@ export class LoginComponent {
     private loginService: LoginService
   ) {
     this.loginForm = this.formBuilder.group({
-      user: ['564', Validators.required],
+      registration: ['564', Validators.required],
       password: ['123456', Validators.required],
     });
   }
 
   async onSubmit() {
     await this.loginService
-      .loginUser(
-        this.loginForm.getRawValue().user!,
+      .loginResponsible(
+        this.loginForm.getRawValue().registration!,
         this.loginForm.getRawValue().password!
       )
-      .then((user: User) => (this.user = user));
+      .then((responsible: Responsible) => (this.responsible = responsible));
 
-    if (this.user.user === this.loginForm.getRawValue().user && this.user.password === this.loginForm.getRawValue().password) {
+    if (this.responsible.registration === this.loginForm.getRawValue().registration && this.responsible.password === this.loginForm.getRawValue().password) {
       {
         this.router.navigate(['home'], {
-          queryParams: { userName: this.user.nameUser, role: this.user.role },
+          queryParams: {registration: this.responsible.registration, nameResponsible: this.responsible.nameResponsible, role: this.responsible.role },
         });
       }
     }else{alert('Usuário não cadastrado!')}

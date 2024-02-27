@@ -2,7 +2,7 @@
 <span class="home-form">
     <p>
       <mat-toolbar class="montserrat">
-        <span>Olá, {{nameUser}}</span>
+        <span>Olá, {{responsible.nameResponsible}}</span>
       </mat-toolbar>
     </p>
     <form [formGroup]="listCastReportForm">
@@ -15,7 +15,7 @@
 
       <mat-form-field class="home-full-width">
         <mat-label>Informe a data</mat-label>
-        <input type="number" matInput placeholder="Data" formControlName="castDate"  mask="{{maskDate}}"/>
+        <input type="text" matInput placeholder="Data" formControlName="castDate"/>
       </mat-form-field>
 
       <mat-form-field class="home-full-width">
@@ -43,7 +43,7 @@
 
       <mat-form-field class="home-full-width">
         <mat-label>Informe a matrícula</mat-label>
-        <input type="number" matInput placeholder="Matrícula" formControlName="registrationResponsible"/>
+        <input type="text" matInput placeholder="Matrícula" formControlName="registrationResponsible"/>
       </mat-form-field>
 
        <p>
@@ -54,17 +54,12 @@
     </mat-expansion-panel>
   </form>
 
-    @if(role === 'adm'){
+    @if(responsible.role === 'adm'){
       <p>
         <button id="buttonCustom" (click)="responsibleList()" mat-button>
           Responsáveis
         </button>
       </p>
-      <p>
-        <button id="buttonCustom" (click)="userList()" mat-button>
-          Usuários
-        </button>
-      </p>
-    }
+     }
   </span>
 </div>

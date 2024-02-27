@@ -1,3 +1,22 @@
+@media screen and (mix-width: 0px) and (max-width: 800px) {
+  div.container, span, table {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 800px) and (max-width: 1000px) {
+  div.container, span, table {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 1000px) and (max-width: 2000px) {
+  div.container, span, table {
+    width: 40%;
+    margin: 0 auto;
+  }
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -13,8 +32,7 @@
 }
 
 table {
-  min-width: 200px;
-  max-width: 350px;
+
   width: 350px;
 }
 
@@ -22,10 +40,6 @@ tr.mat-mdc-footer-row td {
   font-weight: 500;
 }
 
-mat-toolbar {
-  min-width: 200px;
-  max-width: 370px;
-}
 
 strong{
   font-weight: 500;

@@ -1,6 +1,23 @@
+@media screen and (mix-width: 0px) and (max-width: 800px) {
+  div.container {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 800px) and (max-width: 1000px) {
+  div.container {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 1000px) and (max-width: 2000px) {
+  div.container {
+    width: 30%;
+    margin: 0 auto;
+  }
+}
+
 .responsible-form {
-  min-width: 100px;
-  max-width: 350px;
   width: 100%;
 }
 
@@ -37,11 +54,8 @@ mat-label {
 p {
 display: flex;
 justify-content: space-between;
-  button {
-    width: 110px;
-
-  }
 }
+
 span {
   margin: auto;
 }
