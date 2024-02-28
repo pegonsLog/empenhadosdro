@@ -1,14 +1,14 @@
 <span>EQUIPE EMPENHADA - {{dateReport}} - {{shift}}</span>
-<div class="container">
+<div id="container">
   <div *ngIf="existData; else loading">
     <!-- GAR Column -->
 
-    <table mat-table [dataSource]="casts" >
+    <table mat-table [dataSource]="casts" style="margin: 0px 10px 0px 10px; width: 100%; padding: auto;">
       <ng-container matColumnDef="gar">
         <th
           mat-header-cell
           *matHeaderCellDef
-          style="padding-right: 50px; font-size: 0.85em"
+          style="width: 25%; font-size: 0.85em;"
         >
           <strong>GAR</strong>
         </th>
@@ -26,7 +26,7 @@
         <th
           mat-header-cell
           *matHeaderCellDef
-          style="padding-right: 0px; font-size: 0.85em"
+          style="width: 25%; font-size: 0.85em"
         >
           <strong>S/ REST.</strong>
         </th>
@@ -43,7 +43,7 @@
         <th
           mat-header-cell
           *matHeaderCellDef
-          style="padding-right: 0px; font-size: 0.85em"
+          style="width: 25%; font-size: 0.85em"
         >
           <strong>C/ REST.</strong>
         </th>
@@ -60,7 +60,7 @@
         <th
           mat-header-cell
           *matHeaderCellDef
-          style="padding-right: 15px; font-size: 0.85em"
+          style="width: 25%; font-size: 0.85em"
         >
           <strong>SUBTOTAL</strong>
         </th>
@@ -87,7 +87,7 @@
     </table>
   </div>
 </div>
-<div class="buttons">
+<div class="buttons" style="padding: 0px 10px 0px 7px;">
   <button (click)="goToAdd()" id="buttonCustom" mat-button>Adicionar</button>
   <button (click)="backToHome()" id="buttonCustom" mat-button>Voltar</button>
 </div>

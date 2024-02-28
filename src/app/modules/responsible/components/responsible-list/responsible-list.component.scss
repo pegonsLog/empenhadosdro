@@ -1,37 +1,35 @@
-@media screen and (mix-width: 0px) and (max-width: 800px) {
-  #container,
-  span, .buttons {
-    width: 100%;
-    margin: 0 auto;
+@media screen and (mix-width: 0px) and (max-width: 600px) {
+ * #container, span {
+  width: 90%;
   }
 }
-@media (min-width: 800px) and (max-width: 1000px) {
-  #container,
-  span, .buttons {
-    width: 80%;
+
+@media (min-width: 600px) and (max-width: 1000px) {
+ * #container, strong, td, #buttons-custom {
+    width: 70%;
     margin: 0 auto;
+    font-size: 1em !important;
   }
 }
+
 @media (min-width: 1000px) and (max-width: 2000px) {
-  #container,
-  span, .buttons {
-    width: 40%;
+  * #container, strong, td {
+    width: 40% !important;
     margin: 0 auto;
+    font-size: 1em !important;
   }
 }
 
 .container {
   display: flex;
   justify-content: center;
+
 }
 
 .buttons {
   display: flex;
   justify-content: space-between;
-}
-
-table {
-  width: 100%;
+  font-size: xx-small;
 }
 
 tr.mat-mdc-footer-row td {
@@ -45,7 +43,6 @@ strong {
 span {
   display: flex;
   justify-content: center;
-  margin: auto;
   background-color: rgb(38, 163, 221);
   color: white;
   font-size: 1em;
@@ -54,15 +51,17 @@ span {
   align-items: center;
   border-bottom: 1px solid white;
   margin-top: 10px;
+  font-size: xx-small;
 }
 
-#buttonCustom {
+#button-custom {
   background: rgb(38, 163, 221);
   color: white;
   margin-top: 10px;
   border-bottom: 1px solid white;
   height: 30px;
   width: 49%;
+  font-size: xx-small;
 }
 
 #loading-spinner {
@@ -70,6 +69,6 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   background: rgba(0, 0, 0, 0.15);
+  margin: 0px 10px 0px 8px;
 }
