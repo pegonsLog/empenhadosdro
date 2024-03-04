@@ -1,45 +1,62 @@
-@media screen and (mix-width: 0px) and (max-width: 600px) {
-  #container,
-  span,
-  .buttons, table {
-    width: 90%;
-  }
-}
+@media screen and (mix-width: 0px) and (max-width: 400px) {
 
-@media screen and (min-width: 600px) and (max-width: 1000px) {
-  #container,
-  strong,
-  td, table,
-  #buttons-custom {
-    width: 70%;
+  #loading-spinner {
+    min-width: 90% !important;
+    max-width: 90% !important;
     margin: 0 auto;
-    font-size: 1em !important;
-  }
-}
-
-@media screen and (min-width: 1000px) and (max-width: 2000px) {
-  #container,
-  strong, table,
-  td {
-    width: 40% !important;
+    padding: 10px;
+  } .header-span, .buttons-div, .container-table, th, td, strong {
+    min-width: 90% !important;
+    max-width: 90%  !important;
     margin: 0 auto;
-    font-size: 1em !important;
+    padding: 10px;
+    font-size: xx-small !important;
+  }
+}
+@media screen and (mix-width: 401px) and (max-width: 600px) {
+
+  #loading-spinner {
+    min-width: 80% !important;
+    max-width: 80% !important;
+    margin: 0 auto;
+  } .header-span, .buttons-div, .container-table, th, td, strong {
+    min-width: 80% !important;
+    max-width: 80%  !important;
+    margin: 0 auto;
+    font-size: xx-small !important;
   }
 }
 
-#container {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  width: 50%;
+@media screen and (min-width: 601px) and (max-width: 1000px) {
+
+  #loading-spinner {
+    min-width: 70% ;
+    max-width: 70%;
+    margin: 0 auto;
+  } .header-span, .buttons-div, .container-table{
+    min-width: 70%;
+    max-width: 70%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 2000px) {
+
+  #loading-spinner {
+    min-width: 60%;
+    max-width: 60%;
+    margin: 0 auto;
+  } .header-span, .buttons-div, .container-table{
+    min-width: 60%;
+    max-width: 60%;
+    margin: 0 auto;
+  }
 }
 
 .buttons {
   display: flex;
   justify-content: space-between;
   margin: auto;
-  font-size: xx-small;
-  width: 100%;
 }
 
 tr.mat-mdc-footer-row td {
@@ -55,24 +72,20 @@ span {
   justify-content: center;
   background-color: rgb(38, 163, 221);
   color: white;
-  font-size: 1em;
   font-weight: 500;
   height: 50px;
   align-items: center;
   border-bottom: 1px solid white;
-  font-size: xx-small;
-  width: 50%;
   margin: 0 auto;
 }
 
-#button-custom {
+#buttonCustom {
   background: rgb(38, 163, 221);
   color: white;
   margin-top: 10px;
   border-bottom: 1px solid white;
   height: 30px;
-  width: 49.5%;
-  font-size: xx-small;
+  width: 49%;
 }
 
 #loading-spinner {
@@ -81,7 +94,8 @@ span {
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.15);
-  margin: 0px 10px 0px 8px;
-  width: 50%;
+  min-width: 100%;
+  margin: 0 auto;
 }
+
 

@@ -1,25 +1,16 @@
 <div class="header-span">
   <span>EQUIPE EMPENHADA - {{ dateReport }} - {{ shift }}</span>
 </div>
+
 <div class="container-table">
   <div *ngIf="existData; else loading">
-    <!-- GAR Column -->
-
     <table mat-table [dataSource]="casts">
       <ng-container matColumnDef="gar">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          style="font-size: 0.85em"
-        >
+        <th mat-header-cell *matHeaderCellDef style="font-size: 0.85em">
           <strong>GAR</strong>
         </th>
 
-        <td
-          mat-cell
-          *matCellDef="let cast"
-          style="font-size: 0.85em"
-        >
+        <td mat-cell *matCellDef="let cast" style="font-size: 0.85em">
           <strong>{{ cast.sector }}</strong>
         </td>
         <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
@@ -29,18 +20,10 @@
 
       <!-- Sem restrições -->
       <ng-container matColumnDef="semRestricoes">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          style="font-size: 0.85em"
-        >
+        <th mat-header-cell *matHeaderCellDef style="font-size: 0.85em">
           <strong>S/ REST.</strong>
         </th>
-        <td
-          mat-cell
-          *matCellDef="let cast"
-          style="font-size: 0.85em"
-        >
+        <td mat-cell *matCellDef="let cast" style="font-size: 0.85em">
           {{ cast.withoutRestriction }}
         </td>
         <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
@@ -50,18 +33,10 @@
 
       <!-- Com restrições -->
       <ng-container matColumnDef="comRestricoes">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          style="font-size: 0.85em"
-        >
+        <th mat-header-cell *matHeaderCellDef style="font-size: 0.85em">
           <strong>C/ REST.</strong>
         </th>
-        <td
-          mat-cell
-          *matCellDef="let cast"
-          style="font-size: 0.85em"
-        >
+        <td mat-cell *matCellDef="let cast" style="font-size: 0.85em">
           {{ cast.withRestriction }}
         </td>
         <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
@@ -71,18 +46,10 @@
 
       <!-- Total por gerência -->
       <ng-container matColumnDef="totalGerencia">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          style="font-size: 0.85em"
-        >
+        <th mat-header-cell *matHeaderCellDef style="font-size: 0.85em">
           <strong>SUBTOTAL</strong>
         </th>
-        <td
-          mat-cell
-          *matCellDef="let cast"
-          style="font-size: 0.85em"
-        >
+        <td mat-cell *matCellDef="let cast" style="font-size: 0.85em">
           {{ cast.withRestriction + cast.withoutRestriction }}
         </td>
 
