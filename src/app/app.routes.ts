@@ -8,7 +8,10 @@ import { ResponsibleListComponent } from './modules/responsible/components/respo
 
 export const routes: Routes = [
   {
-    path: '',
+    path: '', redirectTo: 'login', pathMatch: 'full'
+  },
+  {
+    path: 'login',
     component: LoginComponent,
   },
   {

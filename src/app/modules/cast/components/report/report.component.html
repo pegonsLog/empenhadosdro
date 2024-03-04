@@ -1,19 +1,25 @@
-<span>EQUIPE EMPENHADA - {{dateReport}} - {{shift}}</span>
-<div id="container">
+<div class="header-span">
+  <span>EQUIPE EMPENHADA - {{ dateReport }} - {{ shift }}</span>
+</div>
+<div class="container-table">
   <div *ngIf="existData; else loading">
     <!-- GAR Column -->
 
-    <table mat-table [dataSource]="casts" style="margin: 0px 10px 0px 10px; width: 100%; padding: auto;">
+    <table mat-table [dataSource]="casts">
       <ng-container matColumnDef="gar">
         <th
           mat-header-cell
           *matHeaderCellDef
-          style="width: 25%; font-size: 0.85em;"
+          style="font-size: 0.85em"
         >
           <strong>GAR</strong>
         </th>
 
-        <td mat-cell *matCellDef="let cast" style="font-size: 0.85em">
+        <td
+          mat-cell
+          *matCellDef="let cast"
+          style="font-size: 0.85em"
+        >
           <strong>{{ cast.sector }}</strong>
         </td>
         <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
@@ -26,11 +32,15 @@
         <th
           mat-header-cell
           *matHeaderCellDef
-          style="width: 25%; font-size: 0.85em"
+          style="font-size: 0.85em"
         >
           <strong>S/ REST.</strong>
         </th>
-        <td mat-cell *matCellDef="let cast" style="font-size: 0.85em">
+        <td
+          mat-cell
+          *matCellDef="let cast"
+          style="font-size: 0.85em"
+        >
           {{ cast.withoutRestriction }}
         </td>
         <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
@@ -43,11 +53,15 @@
         <th
           mat-header-cell
           *matHeaderCellDef
-          style="width: 25%; font-size: 0.85em"
+          style="font-size: 0.85em"
         >
           <strong>C/ REST.</strong>
         </th>
-        <td mat-cell *matCellDef="let cast" style="font-size: 0.85em">
+        <td
+          mat-cell
+          *matCellDef="let cast"
+          style="font-size: 0.85em"
+        >
           {{ cast.withRestriction }}
         </td>
         <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
@@ -60,11 +74,15 @@
         <th
           mat-header-cell
           *matHeaderCellDef
-          style="width: 25%; font-size: 0.85em"
+          style="font-size: 0.85em"
         >
           <strong>SUBTOTAL</strong>
         </th>
-        <td mat-cell *matCellDef="let cast" style="font-size: 0.85em">
+        <td
+          mat-cell
+          *matCellDef="let cast"
+          style="font-size: 0.85em"
+        >
           {{ cast.withRestriction + cast.withoutRestriction }}
         </td>
 
@@ -87,9 +105,11 @@
     </table>
   </div>
 </div>
-<div class="buttons" style="padding: 0px 10px 0px 7px;">
-  <button (click)="goToAdd()" id="buttonCustom" mat-button>Adicionar</button>
-  <button (click)="backToHome()" id="buttonCustom" mat-button>Voltar</button>
+<div class="buttons-div">
+  <div class="buttons">
+    <button (click)="goToAdd()" id="buttonCustom" mat-button>Adicionar</button>
+    <button (click)="backToHome()" id="buttonCustom" mat-button>Voltar</button>
+  </div>
 </div>
 <ng-template #loading>
   <div id="loading-spinner">

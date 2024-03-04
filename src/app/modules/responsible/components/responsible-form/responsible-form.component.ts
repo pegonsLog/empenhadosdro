@@ -3,15 +3,23 @@ import { AngularMaterialModule } from '../../../../shared/angular-material/angul
 import { ActivatedRoute, Router } from '@angular/router';
 import { Responsible } from '../../../../interfaces/responsible';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-responsible-form',
   standalone: true,
-  imports: [AngularMaterialModule],
+  imports: [AngularMaterialModule, FormsModule, ReactiveFormsModule],
   templateUrl: './responsible-form.component.html',
   styleUrl: './responsible-form.component.scss',
 })
 export class ResponsibleFormComponent {
+  public formResponsible: FormGroup;
   public existData: boolean = false;
   responsibles: Responsible[] = [
     {
@@ -38,11 +46,13 @@ export class ResponsibleFormComponent {
   public sectors = ['GAOPE', 'GARBO', 'GARNE', 'GARNP', 'GARVN', 'GEACE'];
   public shifts = ['Manhã', 'Tarde', 'Madrugada'];
   public offices = ['Coordenador', 'Supervisor', 'Gerente'];
+  public roles = ['adm', 'user', 'query'];
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private responsiblesService: ResponsiblesService
+    private responsiblesService: ResponsiblesService,
+    private fb: FormBuilder
   ) {
     this.responsible.nameResponsible =
       this.activatedRoute.snapshot.queryParams['nameResponsible'];
@@ -58,10 +68,31 @@ export class ResponsibleFormComponent {
           (this.existData = true), (this.responsibles = responsibles);
         }
       });
+
+    this.formResponsible = fb.group({
+      registration: [this.responsible.registration, Validators.required],
+      name: [this.responsible.nameResponsible, Validators.required],
+      office: [this.responsible.office, Validators.required],
+      sector: [this.responsible.sector, Validators.required],
+      shift: [this.responsible.shift, Validators.required],
+      password: [this.responsible.password, Validators.required],
+      role: [this.responsible.role, Validators.required],
+    });
   }
 
-  addResponsible() {
-    this.router.navigate(['']);
+  public newResponsible() {
+    const responsible: Responsible = {
+      registration: this.formResponsible.getRawValue().registration,
+      nameResponsible: this.formResponsible.getRawValue().name,
+      office: this.formResponsible.getRawValue().office,
+      sector: this.formResponsible.getRawValue().sector,
+      shift: this.formResponsible.getRawValue().shift,
+      password: this.formResponsible.getRawValue().password,
+      role: this.formResponsible.getRawValue().role,
+    };
+
+    // this.responsiblesService.addResponsible(responsible).then(() => '');
+  console.log( this.formResponsible.getRawValue().registrationResponsible,)
   }
 
   backToHome() {

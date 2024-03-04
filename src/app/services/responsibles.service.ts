@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { environment } from '../shared/environment/environment.development';
 import { Responsible } from '../interfaces/responsible';
-import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { addDoc, collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -56,6 +56,22 @@ export class ResponsiblesService {
         this.responsible = doc.data() as Responsible}}
     );
   return this.responsible
+  }
+
+  async addResponsible(responsible: Responsible) {
+
+    const docRef = await addDoc(collection(this.db, 'responsibles'), {
+      registrationResponsible: responsible.nameResponsible,
+      nameResponsible: responsible.nameResponsible,
+      office: responsible.office,
+      sector: responsible.sector,
+      shift: responsible.shift,
+      password: responsible.password,
+      role: responsible.role
+    });
+
+      console.log(docRef.id)
+
   }
 
 }

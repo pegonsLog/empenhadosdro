@@ -62,7 +62,6 @@ export class HomeComponent {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private responsibleService: ResponsiblesService,
-    private castsService: CastsService,
   ) {
     this.responsible.registration =
       this.activatedRoute.snapshot.queryParams['registration'];
@@ -71,8 +70,8 @@ export class HomeComponent {
     this.responsible.role = this.activatedRoute.snapshot.queryParams['role'];
 
     this.listCastReportForm = this.formBuilder.group({
-      castDate: [new Date().toLocaleDateString('pt-BR'), Validators.required],
-      shift: ['', Validators.required],
+      castDate: [/*new Date().toLocaleDateString('pt-BR')*/ '26/02/2024', Validators.required],
+      shift: ['Manhã', Validators.required],
     });
 
     this.listCastRegisterForm = this.formBuilder.group({

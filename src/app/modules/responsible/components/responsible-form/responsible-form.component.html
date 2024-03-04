@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="responsible-form">
+  <form [formGroup]="formResponsible" class="responsible-form">
     <p>
       <mat-toolbar>
         <span>Responsáveis</span>
@@ -8,17 +8,17 @@
 
     <mat-form-field class="responsible-full-width">
       <mat-label>Mat. do responsável</mat-label>
-      <input type="text" matInput placeholder="Matrícula" />
+      <input type="text" matInput placeholder="Matrícula" formControlName="registration"/>
     </mat-form-field>
 
     <mat-form-field class="responsible-full-width">
       <mat-label>Nome do responsável</mat-label>
-      <input type="text" matInput placeholder="Nome do responsável" />
+      <input type="text" matInput placeholder="Nome do responsável" formControlName="name"/>
     </mat-form-field>
 
     <mat-form-field class="responsible-full-width">
       <mat-label>Cargo</mat-label>
-      <mat-select>
+      <mat-select formControlName="office">
         @for (office of offices; track office) {
           <mat-option [value]="office">{{office}}</mat-option>
         }
@@ -27,7 +27,7 @@
 
     <mat-form-field class="responsible-full-width">
       <mat-label>Gerência</mat-label>
-      <mat-select>
+      <mat-select formControlName="sector">
         @for (sector of sectors; track sector) {
           <mat-option [value]="sector">{{sector}}</mat-option>
         }
@@ -36,17 +36,30 @@
 
     <mat-form-field class="responsible-full-width">
       <mat-label>Turno</mat-label>
-      <mat-select>
+      <mat-select formControlName="shift">
         @for (shift of shifts; track shift) {
           <mat-option [value]="shift">{{shift}}</mat-option>
         }
       </mat-select>
     </mat-form-field>
 
-    <p>
-    <button (click)="addResponsible()" mat-button style="background-color: rgb(38, 163, 221); color: white; width: 49%;">Salvar</button>
-    <button (click)="backToHome()" mat-button style="background-color: rgb(38, 163, 221); color: white; width: 49%;">Voltar</button>
+      <mat-form-field class="responsible-full-width">
+        <mat-label>Senha do responsável</mat-label>
+        <input type="text" matInput placeholder="Senha" formControlName="password"/>
+      </mat-form-field>
 
+      <mat-form-field class="responsible-full-width">
+        <mat-label>Perfil</mat-label>
+        <mat-select formControlName="shift">
+          @for (role of roles; track role) {
+            <mat-option [value]="role">{{role}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+    <p>
+    <button (click)="newResponsible()" mat-button style="background-color: rgb(38, 163, 221); color: white; width: 49%;">Salvar</button>
+    <button (click)="backToHome()" mat-button style="background-color: rgb(38, 163, 221); color: white; width: 49%;">Voltar</button>
   </p>
   </form>
 </div>
