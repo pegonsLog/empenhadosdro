@@ -43,9 +43,9 @@ export class ResponsibleFormComponent {
     role: '',
   };
 
-  public sectors = ['GAOPE', 'GARBO', 'GARNE', 'GARNP', 'GARVN', 'GEACE'];
+  public sectors = ['GAOPE', 'GARBO', 'GARNE', 'GARNP', 'GARVN', 'GEACE', 'DRO'];
   public shifts = ['Manhã', 'Tarde', 'Madrugada'];
-  public offices = ['Coordenador', 'Supervisor', 'Gerente'];
+  public offices = ['Coordenador', 'Gerente', 'Administrativo', 'Supervisor', 'Técnico', 'Fiscal'];
   public roles = ['adm', 'user', 'query'];
 
   constructor(
@@ -91,8 +91,7 @@ export class ResponsibleFormComponent {
       role: this.formResponsible.getRawValue().role,
     };
 
-    // this.responsiblesService.addResponsible(responsible).then(() => '');
-  console.log( this.formResponsible.getRawValue().registrationResponsible,)
+    this.responsiblesService.addResponsible(responsible).then(() => console.log(responsible));
   }
 
   backToHome() {

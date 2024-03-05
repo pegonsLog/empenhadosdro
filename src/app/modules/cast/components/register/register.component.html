@@ -1,10 +1,8 @@
 <div class="container">
   <form class="register-form" [formGroup]="formCastRegister">
-    <p>
-      <mat-toolbar>
-        <span>Equipe empenhada - DRO</span>
-      </mat-toolbar>
-    </p>
+    <mat-toolbar>
+      <span>Equipe empenhada - DRO</span>
+    </mat-toolbar>
 
     <mat-form-field class="register-full-width">
       <mat-label>Data</mat-label>
@@ -80,22 +78,10 @@
       <mat-label>Agentes com restrição</mat-label>
       <input type="number" matInput formControlName="withRestriction" />
     </mat-form-field>
-
-    <p>
-      <button
-        (click)="newCast()"
-        mat-button
-        style="background-color: rgb(38, 163, 221); color: white; width: 49%"
-      >
-        Salvar
-      </button>
-      <button
-        (click)="report()"
-        mat-button
-        style="background-color: rgb(38, 163, 221); color: white; width: 49%"
-      >
-        Sair
-      </button>
-    </p>
   </form>
+</div>
+
+<div class="buttons">
+  <button id="buttonCustom" (click)="newCast()" mat-button>Salvar</button>
+  <button id="buttonCustom" (click)="report()" mat-button>Sair</button>
 </div>

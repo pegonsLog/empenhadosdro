@@ -1,4 +1,4 @@
-<div class="header-span">
+<div id="header-span">
   <span>EQUIPE EMPENHADA - {{ dateReport }} - {{ shift }}</span>
 </div>
 
@@ -6,54 +6,54 @@
   <div *ngIf="existData; else loading">
     <table mat-table [dataSource]="casts">
       <ng-container matColumnDef="gar">
-        <th mat-header-cell *matHeaderCellDef style="font-size: 0.85em">
+        <th mat-header-cell *matHeaderCellDef>
           <strong>GAR</strong>
         </th>
 
-        <td mat-cell *matCellDef="let cast" style="font-size: 0.85em">
+        <td mat-cell *matCellDef="let cast">
           <strong>{{ cast.sector }}</strong>
         </td>
-        <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
+        <td mat-footer-cell *matFooterCellDef>
           TOTAL
         </td>
       </ng-container>
 
       <!-- Sem restrições -->
       <ng-container matColumnDef="semRestricoes">
-        <th mat-header-cell *matHeaderCellDef style="font-size: 0.85em">
+        <th mat-header-cell *matHeaderCellDef>
           <strong>S/ REST.</strong>
         </th>
-        <td mat-cell *matCellDef="let cast" style="font-size: 0.85em">
+        <td mat-cell *matCellDef="let cast">
           {{ cast.withoutRestriction }}
         </td>
-        <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
+        <td mat-footer-cell *matFooterCellDef>
           {{ getTotalCostSem() }}
         </td>
       </ng-container>
 
       <!-- Com restrições -->
       <ng-container matColumnDef="comRestricoes">
-        <th mat-header-cell *matHeaderCellDef style="font-size: 0.85em">
+        <th mat-header-cell *matHeaderCellDef>
           <strong>C/ REST.</strong>
         </th>
-        <td mat-cell *matCellDef="let cast" style="font-size: 0.85em">
+        <td mat-cell *matCellDef="let cast">
           {{ cast.withRestriction }}
         </td>
-        <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
+        <td mat-footer-cell *matFooterCellDef>
           {{ getTotalCostCom() }}
         </td>
       </ng-container>
 
       <!-- Total por gerência -->
       <ng-container matColumnDef="totalGerencia">
-        <th mat-header-cell *matHeaderCellDef style="font-size: 0.85em">
+        <th mat-header-cell *matHeaderCellDef>
           <strong>SUBTOTAL</strong>
         </th>
-        <td mat-cell *matCellDef="let cast" style="font-size: 0.85em">
+        <td mat-cell *matCellDef="let cast">
           {{ cast.withRestriction + cast.withoutRestriction }}
         </td>
 
-        <td mat-footer-cell *matFooterCellDef style="font-size: 0.85em">
+        <td mat-footer-cell *matFooterCellDef>
           {{ getTotalCostCom() + getTotalCostSem() }}
         </td>
       </ng-container>

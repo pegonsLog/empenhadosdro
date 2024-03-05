@@ -1,10 +1,8 @@
 <div class="container">
   <form class="responsible-form" [formGroup]="formResponsible">
-    <p>
       <mat-toolbar>
-        <span>Responsáveis</span>
+        <span>INCLUSÃO DE RESPONSÁVEIS</span>
       </mat-toolbar>
-    </p>
 
     <mat-form-field class="responsible-full-width">
       <mat-label>Mat. do responsável</mat-label>
@@ -71,22 +69,12 @@
         }
       </mat-select>
     </mat-form-field>
-
-    <p>
-      <button
-        (click)="newResponsible()"
-        mat-button
-        style="background-color: rgb(38, 163, 221); color: white; width: 49%"
-      >
-        Salvar
-      </button>
-      <button
-        (click)="backToHome()"
-        mat-button
-        style="background-color: rgb(38, 163, 221); color: white; width: 49%"
-      >
-        Voltar
-      </button>
-    </p>
   </form>
+</div>
+
+<div class="buttons">
+  <button id="buttonCustom" (click)="newResponsible()" mat-button>
+    Salvar
+  </button>
+  <button id="buttonCustom" (click)="backToHome()" mat-button>Voltar</button>
 </div>
