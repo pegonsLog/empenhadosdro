@@ -1,35 +1,35 @@
-@media screen and (mix-width: 0px) and (max-width: 400px) {
+@media screen and (min-width: 0px) and (max-width: 400px) {
   .container,
   .register-form,
   .register-full-width,
   mat-form-field {
-    width: 90% !important;
+   min-width: 90% !important;
   }
-  #buttonCustom {
-    width: 49% !important;
+  .buttonCustom {
+    min-width: 49% !important;
   }
   .buttons {
     display: flex;
     justify-content: space-between;
-    max-width: 90% !important;
+    min-width: 90% !important;
     margin: 0 auto;
   }
 }
 
-@media screen and (mix-width: 401px) and (max-width: 600px) {
+@media screen and (min-width: 401px) and (max-width: 600px) {
   .container,
   .register-form,
   .register-full-width,
   mat-form-field {
-    width: 80% !important;
+    min-width: 80% !important;
   }
-  #buttonCustom {
-    width: 49% !important;
+  .buttonCustom {
+    min-width: 49% !important;
   }
   .buttons {
     display: flex;
     justify-content: space-between;
-    max-width: 80% !important;
+    min-width: 80% !important;
     margin: 0 auto;
   }
 }
@@ -41,8 +41,8 @@
   mat-form-field {
     min-width: 70% !important;
   }
-  #buttonCustom {
-    width: 49% !important;
+  .buttonCustom {
+    min-width: 49% !important;
   }
 }
 .buttons {
@@ -59,19 +59,21 @@
   mat-form-field {
     min-width: 40% !important;
   }
-  #buttonCustom {
+  .buttonCustom {
     width: 49% !important;
   }
   .buttons {
     display: flex;
     justify-content: space-between;
-    margin: 0 auto;
     max-width: 40% !important;
+    margin: 0 auto;
   }
 }
 
 .container {
-  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 input[type="number"]::-webkit-inner-spin-button {
@@ -82,6 +84,8 @@ mat-form-field {
   display: block;
   height: 75px;
   font-size: small;
+  margin-bottom: -10px;
+  width: 100%;
 }
 
 mat-label {
@@ -91,15 +95,15 @@ mat-label {
 mat-toolbar {
   background-color: rgb(38, 163, 221);
   color: white;
+  border-bottom: 1px solid white;
 }
 
 span {
   font-size: 0.7em;
   margin: auto;
-  border-bottom: 1px solid white;
 }
 
-#buttonCustom {
+.buttonCustom {
   background: rgb(38, 163, 221);
   color: white;
   border-bottom: 1px solid white;

@@ -1,27 +1,21 @@
-@media screen and (mix-width: 0px) and (max-width: 400px) {
+@media screen and (min-width: 0px) and (max-width: 400px) {
 
   #loading-spinner {
     min-width: 90% !important;
-    max-width: 90% !important;
     margin: 0 auto;
-    padding: 10px;
   } .header-span, .buttons-div, .container-table, th, td, strong {
     min-width: 90% !important;
-    max-width: 90%  !important;
     margin: 0 auto;
-    padding: 10px;
     font-size: xx-small !important;
   }
 }
-@media screen and (mix-width: 401px) and (max-width: 600px) {
+@media screen and (min-width: 401px) and (max-width: 600px) {
 
   #loading-spinner {
     min-width: 80% !important;
-    max-width: 80% !important;
     margin: 0 auto;
   } .header-span, .buttons-div, .container-table, th, td, strong {
     min-width: 80% !important;
-    max-width: 80%  !important;
     margin: 0 auto;
     font-size: xx-small !important;
   }
@@ -31,11 +25,9 @@
 
   #loading-spinner {
     min-width: 70% ;
-    max-width: 70%;
     margin: 0 auto;
   } .header-span, .buttons-div, .container-table{
     min-width: 70%;
-    max-width: 70%;
     margin: 0 auto;
   }
 }
@@ -44,11 +36,9 @@
 
   #loading-spinner {
     min-width: 60%;
-    max-width: 60%;
     margin: 0 auto;
   } .header-span, .buttons-div, .container-table{
     min-width: 60%;
-    max-width: 60%;
     margin: 0 auto;
   }
 }
