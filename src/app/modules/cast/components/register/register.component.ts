@@ -42,6 +42,7 @@ export class RegisterComponent {
     shift: '',
     password: '',
     role: '',
+    id: ''
   };
 
   public cast: Cast = {
@@ -77,6 +78,7 @@ export class RegisterComponent {
       shift: '',
       password: '',
       role: '',
+      id: ''
     },
   ];
 

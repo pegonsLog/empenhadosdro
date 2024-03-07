@@ -24,6 +24,7 @@ export class ReportComponent {
     shift: '',
     password: '',
     role: '',
+    id: ''
   };
 
   public cast: Cast = {
@@ -112,6 +113,22 @@ export class ReportComponent {
         dateReport: this.dateReport,
       },
     });
+  }
+
+  goToUpdate() {
+
+    console.log(this.casts);
+    // this.router.navigate(['register'], {
+    //   queryParams: {
+    //     registration: this.responsible.registration,
+    //     nameResponsible: this.responsible.nameResponsible,
+    //     office: this.responsible.office,
+    //     sector: this.responsible.sector,
+    //     shift: this.shift,
+    //     role: this.responsible.role,
+    //     dateReport: this.dateReport,
+    //   },
+    // });
   }
 
   backToHome() {

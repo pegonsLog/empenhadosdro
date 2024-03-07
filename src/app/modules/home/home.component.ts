@@ -42,6 +42,7 @@ export class HomeComponent {
     shift: '',
     password: '',
     role: '',
+    id: ''
   };
 
   public casts: Cast[] = [

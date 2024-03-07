@@ -30,6 +30,7 @@ export class ResponsibleFormComponent {
       shift: '',
       password: '',
       role: '',
+      id: ''
     },
   ];
 
@@ -41,11 +42,12 @@ export class ResponsibleFormComponent {
     shift: '',
     password: '',
     role: '',
+    id: ''
   };
 
   public sectors = ['GAOPE', 'GARBO', 'GARNE', 'GARNP', 'GARVN', 'GEACE', 'DRO'];
-  public shifts = ['Manhã', 'Tarde', 'Madrugada'];
-  public offices = ['Coordenador', 'Gerente', 'Administrativo', 'Supervisor', 'Técnico', 'Fiscal'];
+  public shifts = ['Manhã', 'Tarde', 'Mad.'];
+  public offices = ['Coord.', 'Ger.', 'Adm.', 'Superv.', 'Téc.', 'Fisc.', 'Dir'];
   public roles = ['adm', 'user', 'query'];
 
   constructor(
@@ -54,9 +56,9 @@ export class ResponsibleFormComponent {
     private responsiblesService: ResponsiblesService,
     private fb: FormBuilder
   ) {
-    this.responsible.nameResponsible =
-      this.activatedRoute.snapshot.queryParams['nameResponsible'];
+    this.responsible.nameResponsible = this.activatedRoute.snapshot.queryParams['nameResponsible'];
     this.responsible.role = this.activatedRoute.snapshot.queryParams['role'];
+    this.responsible.id = this.activatedRoute.snapshot.queryParams['idType'];
 
     this.responsiblesService
       .listResponsibles()
@@ -70,6 +72,7 @@ export class ResponsibleFormComponent {
       });
 
     this.formResponsible = fb.group({
+      id: [this.responsible.id, Validators.required],
       registration: [this.responsible.registration, Validators.required],
       name: [this.responsible.nameResponsible, Validators.required],
       office: [this.responsible.office, Validators.required],
@@ -89,6 +92,7 @@ export class ResponsibleFormComponent {
       shift: this.formResponsible.getRawValue().shift,
       password: this.formResponsible.getRawValue().password,
       role: this.formResponsible.getRawValue().role,
+      id: ''
     };
 
     this.responsiblesService.addResponsible(responsible).then(() => console.log(responsible));

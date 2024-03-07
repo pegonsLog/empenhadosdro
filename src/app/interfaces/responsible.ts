@@ -5,5 +5,6 @@ export interface Responsible {
   sector: string,
   shift: string,
   password: string,
-  role: string
+  role: string,
+  id: string
 }

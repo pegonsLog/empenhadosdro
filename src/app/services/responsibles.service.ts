@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { environment } from '../shared/environment/environment.development';
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import { Responsible } from '../interfaces/responsible';
-import { addDoc, collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { environment } from '../shared/environment/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -20,8 +20,11 @@ export class ResponsiblesService {
     sector: '',
     shift: '',
     password: '',
-    role: ''
+    role: '',
+    id: ''
   }
+
+  private id: string = '';
 
   constructor() {}
 
@@ -31,7 +34,10 @@ export class ResponsiblesService {
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
-      this.responsibles.push(doc.data() as Responsible);
+      const responsible = doc.data() as Responsible;
+      responsible.id = doc.id;
+
+      this.responsibles.push(responsible);
     });
     return this.responsibles;
   }
@@ -44,7 +50,7 @@ export class ResponsiblesService {
    querySnapshot.forEach((doc) => {if(doc){
         this.responsible = doc.data() as Responsible}}
     );
-  return this.responsible
+  return this.responsible;
   }
 
   async responsibleReportCast(dateReport: string, shift: string) {
@@ -67,10 +73,31 @@ export class ResponsiblesService {
       sector: responsible.sector,
       shift: responsible.shift,
       password: responsible.password,
-      role: responsible.role
+      role: responsible.role,
     });
 
       console.log(docRef.id)
+
+  }
+
+  async updateResponsible(id: string) {
+
+      const docRef = doc(this.db, 'responsibles', id);
+      const docSnap = await getDoc(docRef);
+      const responsible = docSnap.data() as Responsible;
+
+      if(docSnap.exists()){
+        this.responsible.id = responsible.id,
+        this.responsible.registration = responsible.registration,
+        this.responsible.nameResponsible = responsible.nameResponsible,
+        this.responsible.office = responsible.office,
+        this.responsible.sector = responsible.sector,
+        this.responsible.shift = responsible.shift,
+        this.responsible.password = responsible.password,
+        this.responsible.role = responsible.role
+      }
+
+      return this.responsible;
 
   }
 

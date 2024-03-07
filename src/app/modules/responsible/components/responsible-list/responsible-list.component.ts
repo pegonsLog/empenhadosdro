@@ -22,7 +22,8 @@ export class ResponsibleListComponent {
       sector: '',
       shift: '',
       password: '',
-      role: ''
+      role: '',
+      id: '',
     },
   ];
 
@@ -33,24 +34,27 @@ export class ResponsibleListComponent {
     sector: '',
     shift: '',
     password: '',
-    role: ''
+    role: '',
+    id: '',
   };
 
   displayedColumns: string[] = [
+    'id',
     'registration',
     'responsible-name',
     'office',
     'sector',
     'shift',
-    'actions'
+    'actions',
   ];
 
   constructor(
     private responsiblesService: ResponsiblesService,
-    private router: Router, private activatedRoute: ActivatedRoute
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
-
-    this.responsible.nameResponsible = this.activatedRoute.snapshot.queryParams['nameResponsible'];
+    this.responsible.nameResponsible =
+      this.activatedRoute.snapshot.queryParams['nameResponsible'];
     this.responsible.role = this.activatedRoute.snapshot.queryParams['role'];
 
     this.responsiblesService
@@ -67,14 +71,43 @@ export class ResponsibleListComponent {
 
   goToAdd() {
     this.router.navigate(['responsible-form'], {
-      queryParams: { role: this.responsible.role, nameResponsible: this.responsible.nameResponsible },
+      queryParams: {
+        role: this.responsible.role,
+        nameResponsible: this.responsible.nameResponsible,
+        idType: this.responsible.id
+      },
+    });
+  }
+
+  goToUpdate(id: string) {
+    console.log(id);
+
+    this.responsiblesService.updateResponsible(id).then((data: Responsible) => {
+      this.responsible = data;
+    });
+
+    this.router.navigate(['responsible-form'], {
+      queryParams: {
+        id: this.responsible.id,
+        resgistration: this.responsible.registration,
+        name: this.responsible.nameResponsible,
+        office: this.responsible.office,
+        sector: this.responsible.sector,
+        shift: this.responsible.shift,
+        password: this.responsible.password,
+        role: this.responsible.role,
+        idType: this.responsible.id
+      },
     });
   }
 
   backToHome() {
     this.clear();
     this.router.navigate(['home'], {
-      queryParams: { role: this.responsible.role, nameResponsible: this.responsible.nameResponsible },
+      queryParams: {
+        role: this.responsible.role,
+        nameResponsible: this.responsible.nameResponsible,
+      },
     });
   }
 

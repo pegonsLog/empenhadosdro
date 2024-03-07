@@ -1,20 +1,32 @@
 @media screen and (min-width: 0px) and (max-width: 400px) {
-
   #loading-spinner {
     min-width: 90% !important;
     margin: 0 auto;
-  } .header-span, .buttons-div, .container-table, th, td, strong, mat-toolbar {
+  }
+  .header-span,
+  .buttons-div,
+  .container-table,
+  th,
+  td,
+  strong,
+  mat-toolbar {
     min-width: 90% !important;
     margin: 0 auto;
     font-size: xx-small !important;
   }
 }
 @media screen and (min-width: 401px) and (max-width: 600px) {
-
   #loading-spinner {
     min-width: 80% !important;
     margin: 0 auto;
-  } .header-span, .buttons-div, .container-table, th, td, strong, mat-toolbar {
+  }
+  .header-span,
+  .buttons-div,
+  .container-table,
+  th,
+  td,
+  strong,
+  mat-toolbar {
     min-width: 80% !important;
     margin: 0 auto;
     font-size: xx-small !important;
@@ -22,22 +34,34 @@
 }
 
 @media screen and (min-width: 601px) and (max-width: 1000px) {
-
   #loading-spinner {
-    min-width: 70% ;
+    min-width: 70%;
     margin: 0 auto;
-  } .header-span, .buttons-div, .container-table, th, td, strong, mat-toolbar {
+  }
+  .header-span,
+  .buttons-div,
+  .container-table,
+  th,
+  td,
+  strong,
+  mat-toolbar {
     max-width: 70%;
     margin: 0 auto;
   }
 }
 
 @media screen and (min-width: 1001px) and (max-width: 2000px) {
-
   #loading-spinner {
     min-width: 60%;
     margin: 0 auto;
-  } .header-span, .buttons-div, .container-table, th, td, strong, mat-toolbar {
+  }
+  .header-span,
+  .buttons-div,
+  .container-table,
+  th,
+  td,
+  strong,
+  mat-toolbar {
     max-width: 60%;
     margin: 0 auto;
   }
@@ -59,8 +83,7 @@ strong {
 
 span {
   font-size: 1.2em;
- align-items: center;
- margin-right: 15px;
+  align-items: center;
 }
 
 #buttonCustom {
@@ -88,7 +111,10 @@ mat-toolbar {
   background-color: rgb(38, 163, 221);
   color: white;
   border-bottom: 1px solid white;
-  font-family: 'montserrat';
+  font-family: "montserrat";
   font-size: 1em;
 }
 
+.span-width{
+  width: 30px;
+}

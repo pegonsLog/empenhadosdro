@@ -6,70 +6,76 @@
   <div *ngIf="existData; else loading">
     <table mat-table [dataSource]="casts">
       <ng-container matColumnDef="gar">
-        <th mat-header-cell *matHeaderCellDef>
+        <th style="padding-right: 10px" mat-header-cell *matHeaderCellDef>
           <strong>GAR</strong>
         </th>
 
-        <td mat-cell *matCellDef="let cast">
+        <td style="padding-right: 10px" mat-cell *matCellDef="let cast">
           <strong>{{ cast.sector }}</strong>
         </td>
-        <td mat-footer-cell *matFooterCellDef>
+        <td style="padding-right: 10px" mat-footer-cell *matFooterCellDef>
           TOTAL
         </td>
       </ng-container>
 
       <!-- Sem restrições -->
       <ng-container matColumnDef="semRestricoes">
-        <th mat-header-cell *matHeaderCellDef>
-          <strong>S/ REST.</strong>
+        <th style="padding-right: 5px;" mat-header-cell *matHeaderCellDef>
+          <strong>S/REST.</strong>
         </th>
-        <td mat-cell *matCellDef="let cast">
+        <td style="padding-right: 5px;" mat-cell *matCellDef="let cast">
           {{ cast.withoutRestriction }}
         </td>
-        <td mat-footer-cell *matFooterCellDef>
+        <td style="padding-right: 5px;" mat-footer-cell *matFooterCellDef>
           {{ getTotalCostSem() }}
         </td>
       </ng-container>
 
       <!-- Com restrições -->
       <ng-container matColumnDef="comRestricoes">
-        <th mat-header-cell *matHeaderCellDef>
+        <th style="padding-right: 5px" mat-header-cell *matHeaderCellDef>
           <strong>C/ REST.</strong>
         </th>
-        <td mat-cell *matCellDef="let cast">
+        <td style="margin-right: 5px" mat-cell *matCellDef="let cast">
           {{ cast.withRestriction }}
         </td>
-        <td mat-footer-cell *matFooterCellDef>
+        <td style="padding-right: 5px" mat-footer-cell *matFooterCellDef>
           {{ getTotalCostCom() }}
         </td>
       </ng-container>
 
       <!-- Total por gerência -->
       <ng-container matColumnDef="totalGerencia">
-        <th mat-header-cell *matHeaderCellDef>
+        <th style="padding-right: 5px" mat-header-cell *matHeaderCellDef>
           <strong>SUBTOTAL</strong>
         </th>
-        <td mat-cell *matCellDef="let cast">
+        <td style="padding-right: 5px" mat-cell *matCellDef="let cast">
           {{ cast.withRestriction + cast.withoutRestriction }}
         </td>
 
-        <td mat-footer-cell *matFooterCellDef>
+        <td style="padding-right: 5px" mat-footer-cell *matFooterCellDef>
           {{ getTotalCostCom() + getTotalCostSem() }}
         </td>
       </ng-container>
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>
+        <th style="padding-left: 30px;" mat-header-cell *matHeaderCellDef>
           <strong>AÇÕES</strong>
         </th>
-        <td mat-cell *matCellDef="let cast">
+        <td style="padding-left: 20px;" mat-cell *matCellDef="let cast">
+          <div style="display: flex; justify-content: center;">
+          <button (click)="goToUpdate()" style="padding: 0px; border: none; background: none; text-align: center;">
           <span class="material-symbols-outlined">
             edit
             </span>
+          </button>
+          <button style="padding: 0px; border: none; background: none; text-align: center;">
             <span class="material-symbols-outlined">
               delete
-              </span>
+            </span>
+          </button>
+          </div>
         </td>
-        <td mat-footer-cell *matFooterCellDef>
+        <td style="padding-right: 5px" mat-footer-cell *matFooterCellDef>
 -
         </td>
       </ng-container>

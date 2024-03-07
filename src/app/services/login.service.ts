@@ -26,7 +26,8 @@ export class LoginService {
     sector: '',
     shift: '',
     password: '',
-    role: ''
+    role: '',
+    id: ''
   };
 
   async loginResponsible(user: string, password: string) {

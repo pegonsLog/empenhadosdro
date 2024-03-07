@@ -27,7 +27,8 @@ export class LoginComponent {
     sector: '',
     shift: '',
     password: '',
-    role: ''
+    role: '',
+    id: ''
   };
 
   constructor(
