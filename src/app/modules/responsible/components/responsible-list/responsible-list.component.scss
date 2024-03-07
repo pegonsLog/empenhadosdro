@@ -3,7 +3,7 @@
   #loading-spinner {
     min-width: 90% !important;
     margin: 0 auto;
-  } .header-span, .buttons-div, .container-table, th, td, strong {
+  } .header-span, .buttons-div, .container-table, th, td, strong, mat-toolbar {
     min-width: 90% !important;
     margin: 0 auto;
     font-size: xx-small !important;
@@ -14,7 +14,7 @@
   #loading-spinner {
     min-width: 80% !important;
     margin: 0 auto;
-  } .header-span, .buttons-div, .container-table, th, td, strong {
+  } .header-span, .buttons-div, .container-table, th, td, strong, mat-toolbar {
     min-width: 80% !important;
     margin: 0 auto;
     font-size: xx-small !important;
@@ -26,8 +26,8 @@
   #loading-spinner {
     min-width: 70% ;
     margin: 0 auto;
-  } .header-span, .buttons-div, .container-table{
-    min-width: 70%;
+  } .header-span, .buttons-div, .container-table, th, td, strong, mat-toolbar {
+    max-width: 70%;
     margin: 0 auto;
   }
 }
@@ -37,8 +37,8 @@
   #loading-spinner {
     min-width: 60%;
     margin: 0 auto;
-  } .header-span, .buttons-div, .container-table{
-    min-width: 60%;
+  } .header-span, .buttons-div, .container-table, th, td, strong, mat-toolbar {
+    max-width: 60%;
     margin: 0 auto;
   }
 }
@@ -58,15 +58,9 @@ strong {
 }
 
 span {
-  display: flex;
-  justify-content: center;
-  background-color: rgb(38, 163, 221);
-  color: white;
-  font-weight: 500;
-  height: 50px;
-  align-items: center;
-  border-bottom: 1px solid white;
-  margin: 0 auto;
+  font-size: 1.2em;
+ align-items: center;
+ margin-right: 15px;
 }
 
 #buttonCustom {
@@ -88,4 +82,13 @@ span {
   margin: 0 auto;
 }
 
+mat-toolbar {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(38, 163, 221);
+  color: white;
+  border-bottom: 1px solid white;
+  font-family: 'montserrat';
+  font-size: 1em;
+}
 

@@ -1,4 +1,4 @@
-@media screen and (mix-width: 0px) and (max-width: 400px) {
+@media screen and (min-width: 0px) and (max-width: 400px) {
   #loading-spinner {
     min-width: 90% !important;
     max-width: 90% !important;
@@ -10,16 +10,15 @@
   .container-table {
     min-width: 90% !important;
     max-width: 90% !important;
-    margin: 0, auto;
+    margin: 0 auto;
     padding: 15px;
-    margin: 0, auto;
   }
   td,
   th {
     font-size: xx-small !important;
   }
 }
-@media screen and (mix-width: 401px) and (max-width: 600px) {
+@media screen and (min-width: 401px) and (max-width: 600px) {
   #loading-spinner {
     min-width: 80% !important;
     max-width: 80% !important;
@@ -34,7 +33,7 @@
   }
   td,
   th {
-    font-size: 1em;
+    font-size: xx-small !important;
   }
 }
 
@@ -91,16 +90,9 @@ strong {
 }
 
 span {
-  display: flex;
-  justify-content: center;
-  background-color: rgb(38, 163, 221);
-  color: white;
-  font-size: 1em;
-  font-weight: 500;
-  height: 50px;
+   font-size: 1.2em;
   align-items: center;
-  border-bottom: 1px solid white;
-  margin: 0 auto;
+  margin-right: 15px;
 }
 
 #buttonCustom {
@@ -122,7 +114,12 @@ span {
   margin: 0 auto;
 }
 
-td,
-th {
-  font-size: xx-small;
+mat-toolbar {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(38, 163, 221);
+  color: white;
+  border-bottom: 1px solid white;
+  font-family: 'montserrat';
+  font-size: 1em;
 }

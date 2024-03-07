@@ -42,6 +42,7 @@ export class ResponsibleListComponent {
     'office',
     'sector',
     'shift',
+    'actions'
   ];
 
   constructor(

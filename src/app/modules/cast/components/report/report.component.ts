@@ -1,10 +1,10 @@
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cast } from '../../../../interfaces/cast';
+import { Responsible } from '../../../../interfaces/responsible';
 import { CastsService } from '../../../../services/casts.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
-import { Responsible } from '../../../../interfaces/responsible';
 
 @Component({
   selector: 'app-report',
@@ -55,22 +55,25 @@ export class ReportComponent {
     'semRestricoes',
     'comRestricoes',
     'totalGerencia',
+    'actions',
   ];
 
   public dateReport: string = '';
   public shift: string = '';
-
 
   constructor(
     private router: Router,
     private castsService: CastsService,
     private activatedRoute: ActivatedRoute
   ) {
-
-    this.responsible.registration = this.activatedRoute.snapshot.queryParams['registration'];
-    this.responsible.nameResponsible = this.activatedRoute.snapshot.queryParams['nameResponsible'];
-    this.responsible.office = this.activatedRoute.snapshot.queryParams['office'];
-    this.responsible.sector = this.activatedRoute.snapshot.queryParams['sector'];
+    this.responsible.registration =
+      this.activatedRoute.snapshot.queryParams['registration'];
+    this.responsible.nameResponsible =
+      this.activatedRoute.snapshot.queryParams['nameResponsible'];
+    this.responsible.office =
+      this.activatedRoute.snapshot.queryParams['office'];
+    this.responsible.sector =
+      this.activatedRoute.snapshot.queryParams['sector'];
     this.responsible.role = this.activatedRoute.snapshot.queryParams['role'];
     this.shift = this.activatedRoute.snapshot.queryParams['shift'];
     this.dateReport = this.activatedRoute.snapshot.queryParams['dateReport'];
@@ -84,8 +87,6 @@ export class ReportComponent {
         }
       });
   }
-
-  listCasts() {}
 
   getTotalCostCom() {
     return this.casts
@@ -108,7 +109,7 @@ export class ReportComponent {
         sector: this.responsible.sector,
         shift: this.shift,
         role: this.responsible.role,
-        dateReport: this.dateReport
+        dateReport: this.dateReport,
       },
     });
   }
@@ -116,7 +117,10 @@ export class ReportComponent {
   backToHome() {
     this.clear();
     this.router.navigate(['home'], {
-      queryParams: { role: this.responsible.role, nameResponsible: this.responsible.nameResponsible },
+      queryParams: {
+        role: this.responsible.role,
+        nameResponsible: this.responsible.nameResponsible,
+      },
     });
   }
 
