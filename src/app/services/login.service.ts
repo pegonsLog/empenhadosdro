@@ -7,9 +7,8 @@ import {
   query,
   where
 } from 'firebase/firestore';
-import { User } from '../interfaces/user';
-import { environment } from '../shared/environment/environment.development';
 import { Responsible } from '../interfaces/responsible';
+import { environment } from '../shared/environment/environment.development';
 
 @Injectable({
   providedIn: 'root',

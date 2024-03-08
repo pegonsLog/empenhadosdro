@@ -16,36 +16,36 @@ export class ResponsibleListComponent {
   public existData: boolean = false;
   responsibles: Responsible[] = [
     {
+      id: '',
       registration: '',
       nameResponsible: '',
       office: '',
       sector: '',
       shift: '',
       password: '',
-      role: '',
-      id: '',
+      role: ''
     },
   ];
 
   responsible: Responsible = {
+    id: '',
     registration: '',
     nameResponsible: '',
     office: '',
     sector: '',
     shift: '',
     password: '',
-    role: '',
-    id: '',
+    role: ''
   };
 
   displayedColumns: string[] = [
-    'id',
     'registration',
     'responsible-name',
     'office',
     'sector',
     'shift',
     'actions',
+    'id'
   ];
 
   constructor(
@@ -80,25 +80,27 @@ export class ResponsibleListComponent {
   }
 
   goToUpdate(id: string) {
-    console.log(id);
 
     this.responsiblesService.updateResponsible(id).then((data: Responsible) => {
       this.responsible = data;
+      console.log(this.responsible)
     });
 
-    this.router.navigate(['responsible-form'], {
-      queryParams: {
-        id: this.responsible.id,
-        resgistration: this.responsible.registration,
-        name: this.responsible.nameResponsible,
-        office: this.responsible.office,
-        sector: this.responsible.sector,
-        shift: this.responsible.shift,
-        password: this.responsible.password,
-        role: this.responsible.role,
-        idType: this.responsible.id
-      },
-    });
+
+
+    // this.router.navigate(['responsible-form'], {
+    //   queryParams: {
+    //     id: this.responsible.id,
+    //     resgistration: this.responsible.registration,
+    //     name: this.responsible.nameResponsible,
+    //     office: this.responsible.office,
+    //     sector: this.responsible.sector,
+    //     shift: this.responsible.shift,
+    //     password: this.responsible.password,
+    //     role: this.responsible.role,
+    //     idType: this.responsible.id
+    //   },
+    // });
   }
 
   backToHome() {

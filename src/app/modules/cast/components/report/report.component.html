@@ -5,6 +5,18 @@
 <div class="container-table">
   <div *ngIf="existData; else loading">
     <table mat-table [dataSource]="casts">
+      <ng-container matColumnDef="id">
+        <th style="padding-right: 10px" mat-header-cell *matHeaderCellDef hidden="true">
+          <strong>Id</strong>
+        </th>
+
+        <td style="padding-right: 10px" mat-cell *matCellDef="let cast" hidden="true">
+          <strong>{{ cast.id }}</strong>
+        </td>
+        <td style="padding-right: 10px" mat-footer-cell *matFooterCellDef hidden="true">
+     ID
+        </td>
+      </ng-container>
       <ng-container matColumnDef="gar">
         <th style="padding-right: 10px" mat-header-cell *matHeaderCellDef>
           <strong>GAR</strong>
@@ -63,7 +75,7 @@
         </th>
         <td style="padding-left: 20px;" mat-cell *matCellDef="let cast">
           <div style="display: flex; justify-content: center;">
-          <button (click)="goToUpdate()" style="padding: 0px; border: none; background: none; text-align: center;">
+          <button (click)="goToUpdate(cast.id)" style="padding: 0px; border: none; background: none; text-align: center;">
           <span class="material-symbols-outlined">
             edit
             </span>

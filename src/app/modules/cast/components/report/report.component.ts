@@ -17,17 +17,18 @@ export class ReportComponent {
   public existData: boolean = false;
 
   public responsible: Responsible = {
+    id: '',
     registration: '',
     nameResponsible: '',
     office: '',
     sector: '',
     shift: '',
     password: '',
-    role: '',
-    id: ''
+    role: ''
   };
 
   public cast: Cast = {
+    id: '',
     registrationResponsible: '',
     nameResponsibleCast: '',
     officeResponsibleCast: '',
@@ -40,6 +41,7 @@ export class ReportComponent {
 
   public casts: Cast[] = [
     {
+      id: '',
       registrationResponsible: '',
       nameResponsibleCast: '',
       officeResponsibleCast: '',
@@ -52,6 +54,7 @@ export class ReportComponent {
   ];
 
   displayedColumns: string[] = [
+    'id',
     'gar',
     'semRestricoes',
     'comRestricoes',
@@ -115,9 +118,14 @@ export class ReportComponent {
     });
   }
 
-  goToUpdate() {
+  goToUpdate(id: string) {
 
-    console.log(this.casts);
+
+    this.castsService.updateCast(id).then((data: Cast) => {
+      this.cast = data;
+      console.log(data)
+    });
+
     // this.router.navigate(['register'], {
     //   queryParams: {
     //     registration: this.responsible.registration,
@@ -129,6 +137,7 @@ export class ReportComponent {
     //     dateReport: this.dateReport,
     //   },
     // });
+
   }
 
   backToHome() {

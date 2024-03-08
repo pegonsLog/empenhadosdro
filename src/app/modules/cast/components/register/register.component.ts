@@ -35,6 +35,7 @@ export class RegisterComponent {
   public dateReport: string = '';
 
   public responsible: Responsible = {
+    id: '',
     registration: '',
     nameResponsible: '',
     office: '',
@@ -42,10 +43,10 @@ export class RegisterComponent {
     shift: '',
     password: '',
     role: '',
-    id: ''
   };
 
   public cast: Cast = {
+    id: '',
     registrationResponsible: '',
     nameResponsibleCast: '',
     officeResponsibleCast: '',
@@ -58,6 +59,7 @@ export class RegisterComponent {
 
   public casts: Cast[] = [
     {
+      id: '',
       registrationResponsible: '',
       nameResponsibleCast: '',
       officeResponsibleCast: '',
@@ -71,6 +73,7 @@ export class RegisterComponent {
 
   responsibles: Responsible[] = [
     {
+      id: '',
       registration: '',
       nameResponsible: '',
       office: '',
@@ -78,7 +81,6 @@ export class RegisterComponent {
       shift: '',
       password: '',
       role: '',
-      id: ''
     },
   ];
 
@@ -159,14 +161,12 @@ export class RegisterComponent {
       officeResponsibleCast: this.formCastRegister.getRawValue().officeResponsible,
       sector: this.formCastRegister.getRawValue().sectorResponsible,
       shift: this.formCastRegister.getRawValue().shiftResponsible,
-      withoutRestriction:
-        this.formCastRegister.getRawValue().withoutRestriction,
+      withoutRestriction: this.formCastRegister.getRawValue().withoutRestriction,
       withRestriction: this.formCastRegister.getRawValue().withRestriction,
+      id: ''
     };
 
-    this.castsService
-      .addCast(cast)
-      .then(() => '');
+    this.castsService.addCast(cast).then(() => '');
   }
 
   public clear() {

@@ -4,6 +4,7 @@ import {
   addDoc,
   collection,
   doc,
+  getDoc,
   getDocs,
   getFirestore,
   query,
@@ -20,6 +21,17 @@ export class CastsService {
   private app = initializeApp(this.firebaseConfig);
   private db = getFirestore(this.app);
   casts: Cast[] = [];
+  public cast: Cast = {
+    id: '',
+    registrationResponsible: '',
+    nameResponsibleCast: '',
+    officeResponsibleCast: '',
+    scaleDate: '',
+    sector: '',
+    shift: '',
+    withoutRestriction: 0,
+    withRestriction: 0,
+  };
 
   async listCasts(castDate: string, shift: string) {
     const q = query(collection(this.db, 'casts'));
@@ -28,9 +40,10 @@ export class CastsService {
 
     querySnapshot.forEach((doc) => {
       const cast = doc.data() as Cast;
-
+      cast.id = doc.id;
       if (cast.scaleDate === castDate && cast.shift === shift) {
-        this.casts.push(doc.data() as Cast);
+
+        this.casts.push(cast);
       }
     });
     return this.casts;
@@ -47,7 +60,29 @@ export class CastsService {
       withoutRestriction: cast.withoutRestriction,
     });
 
-      console.log(docRef.id)
-
   }
+
+
+  async updateCast(id: string) {
+
+    const docRef = doc(this.db, 'casts', id);
+    const docSnap = await getDoc(docRef);
+    const cast = docSnap.data() as Cast;
+
+    if(docSnap.exists()){
+      this.cast.id = docRef.id,
+      this.cast.scaleDate = cast.scaleDate,
+      this.cast.registrationResponsible = cast.registrationResponsible,
+      this.cast.nameResponsibleCast = cast.nameResponsibleCast,
+      this.cast.officeResponsibleCast = cast.officeResponsibleCast,
+      this.cast.sector = cast.sector,
+      this.cast.shift = cast.shift,
+      this.cast.withoutRestriction = cast.withoutRestriction,
+      this.cast.withRestriction = cast.withRestriction
+
+    }
+
+    return this.cast;
+
+}
 }

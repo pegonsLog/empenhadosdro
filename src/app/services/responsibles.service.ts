@@ -76,8 +76,6 @@ export class ResponsiblesService {
       role: responsible.role,
     });
 
-      console.log(docRef.id)
-
   }
 
   async updateResponsible(id: string) {
@@ -87,7 +85,7 @@ export class ResponsiblesService {
       const responsible = docSnap.data() as Responsible;
 
       if(docSnap.exists()){
-        this.responsible.id = responsible.id,
+        this.responsible.id = docRef.id,
         this.responsible.registration = responsible.registration,
         this.responsible.nameResponsible = responsible.nameResponsible,
         this.responsible.office = responsible.office,

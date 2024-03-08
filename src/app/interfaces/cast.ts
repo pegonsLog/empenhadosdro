@@ -1,4 +1,5 @@
 export interface Cast {
+  id: string,
   registrationResponsible: string;
   nameResponsibleCast: string;
   officeResponsibleCast: string;
