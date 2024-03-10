@@ -48,7 +48,7 @@ export class HomeComponent {
   public casts: Cast[] = [
     {
       id: '',
-      registrationResponsible: '',
+      registration: '',
       nameResponsibleCast: '',
       officeResponsibleCast: '',
       scaleDate: '',

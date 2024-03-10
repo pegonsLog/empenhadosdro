@@ -47,7 +47,7 @@ export class RegisterComponent {
 
   public cast: Cast = {
     id: '',
-    registrationResponsible: '',
+    registration: '',
     nameResponsibleCast: '',
     officeResponsibleCast: '',
     scaleDate: '',
@@ -60,7 +60,7 @@ export class RegisterComponent {
   public casts: Cast[] = [
     {
       id: '',
-      registrationResponsible: '',
+      registration: '',
       nameResponsibleCast: '',
       officeResponsibleCast: '',
       scaleDate: '',
@@ -102,6 +102,8 @@ export class RegisterComponent {
     this.responsible.shift = this.activatedRoute.snapshot.queryParams['shift'];
     this.responsible.role = this.activatedRoute.snapshot.queryParams['role'];
     this.dateReport = this.activatedRoute.snapshot.queryParams['dateReport'];
+
+    const typeForm = this.activatedRoute.snapshot.queryParams['typeForm']
 
     this.formCastRegister = fb.group({
       castDate: ['', Validators.required],
@@ -156,7 +158,7 @@ export class RegisterComponent {
   public newCast() {
     const cast: Cast = {
       scaleDate: this.formCastRegister.getRawValue().castDate,
-      registrationResponsible: this.formCastRegister.getRawValue().registrationResponsible,
+      registration: this.formCastRegister.getRawValue().registrationResponsible,
       nameResponsibleCast: this.formCastRegister.getRawValue().nameResponsible,
       officeResponsibleCast: this.formCastRegister.getRawValue().officeResponsible,
       sector: this.formCastRegister.getRawValue().sectorResponsible,

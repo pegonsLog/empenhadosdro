@@ -23,7 +23,7 @@ export class CastsService {
   casts: Cast[] = [];
   public cast: Cast = {
     id: '',
-    registrationResponsible: '',
+    registration: '',
     nameResponsibleCast: '',
     officeResponsibleCast: '',
     scaleDate: '',
@@ -51,13 +51,13 @@ export class CastsService {
   async addCast(cast: Cast) {
 
     const docRef = await addDoc(collection(this.db, 'casts'), {
-      registrationResponsible: cast.nameResponsibleCast,
+      registration: cast.registration,
       nameResponsible: cast.nameResponsibleCast,
       scaleDate: cast.scaleDate,
       sector: cast.sector,
       shift: cast.shift,
       withRestriction: cast.withRestriction,
-      withoutRestriction: cast.withoutRestriction,
+      withoutRestriction: cast.withoutRestriction
     });
 
   }
@@ -72,7 +72,7 @@ export class CastsService {
     if(docSnap.exists()){
       this.cast.id = docRef.id,
       this.cast.scaleDate = cast.scaleDate,
-      this.cast.registrationResponsible = cast.registrationResponsible,
+      this.cast.registration = cast.registration,
       this.cast.nameResponsibleCast = cast.nameResponsibleCast,
       this.cast.officeResponsibleCast = cast.officeResponsibleCast,
       this.cast.sector = cast.sector,

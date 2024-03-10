@@ -15,6 +15,7 @@ import { AngularMaterialModule } from '../../../../shared/angular-material/angul
 })
 export class ReportComponent {
   public existData: boolean = false;
+  public typeForm: string = '';
 
   public responsible: Responsible = {
     id: '',
@@ -29,7 +30,7 @@ export class ReportComponent {
 
   public cast: Cast = {
     id: '',
-    registrationResponsible: '',
+    registration: '',
     nameResponsibleCast: '',
     officeResponsibleCast: '',
     scaleDate: '',
@@ -42,7 +43,7 @@ export class ReportComponent {
   public casts: Cast[] = [
     {
       id: '',
-      registrationResponsible: '',
+      registration: '',
       nameResponsibleCast: '',
       officeResponsibleCast: '',
       scaleDate: '',
@@ -105,6 +106,7 @@ export class ReportComponent {
   }
 
   goToAdd() {
+    this.typeForm = 'add';
     this.router.navigate(['register'], {
       queryParams: {
         registration: this.responsible.registration,
@@ -114,6 +116,7 @@ export class ReportComponent {
         shift: this.shift,
         role: this.responsible.role,
         dateReport: this.dateReport,
+        typeForm: this.typeForm
       },
     });
   }

@@ -33,6 +33,7 @@
       </p>
     </mat-expansion-panel>
   </form>
+  @if(responsible.role === 'adm' || responsible.role === 'user'){
   <form [formGroup]="listCastRegisterForm">
     <mat-expansion-panel hideToggle class="mat-elevation-z0">
       <mat-expansion-panel-header>
@@ -53,7 +54,7 @@
       </p>
     </mat-expansion-panel>
   </form>
-
+  }
     @if(responsible.role === 'adm'){
       <p>
         <button id="buttonCustom" (click)="responsibleList()" mat-button>

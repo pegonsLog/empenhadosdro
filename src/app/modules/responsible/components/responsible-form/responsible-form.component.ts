@@ -46,7 +46,7 @@ export class ResponsibleFormComponent {
   };
 
   public sectors = ['GAOPE', 'GARBO', 'GARNE', 'GARNP', 'GARVN', 'GEACE', 'DRO'];
-  public shifts = ['Manhã', 'Tarde', 'Mad.'];
+  public shifts = ['Manhã', 'Tarde', 'Admin', 'Mad.'];
   public offices = ['Coord.', 'Ger.', 'Adm.', 'Superv.', 'Téc.', 'Fisc.', 'Dir'];
   public roles = ['adm', 'user', 'query'];
 
@@ -56,9 +56,6 @@ export class ResponsibleFormComponent {
     private responsiblesService: ResponsiblesService,
     private fb: FormBuilder
   ) {
-    this.responsible.nameResponsible = this.activatedRoute.snapshot.queryParams['nameResponsible'];
-    this.responsible.role = this.activatedRoute.snapshot.queryParams['role'];
-    this.responsible.id = this.activatedRoute.snapshot.queryParams['idType'];
 
     this.responsiblesService
       .listResponsibles()
@@ -95,7 +92,9 @@ export class ResponsibleFormComponent {
       id: ''
     };
 
-    this.responsiblesService.addResponsible(responsible).then(() => console.log(responsible));
+    this.responsiblesService.addResponsible(responsible).then(() => {
+      this.formResponsible.reset(), this.backToHome()
+    });
   }
 
   backToHome() {

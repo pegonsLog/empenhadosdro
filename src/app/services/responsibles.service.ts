@@ -42,8 +42,8 @@ export class ResponsiblesService {
     return this.responsibles;
   }
 
-  async responsibleRegisterCast(registrationResponsible: string) {
-    const q = query(collection(this.db, "responsibles"), where("registration", "==", registrationResponsible));
+  async responsibleRegisterCast(registration: string) {
+    const q = query(collection(this.db, "responsibles"), where("registration", "==", registration));
 
     const querySnapshot = await getDocs(q);
 
@@ -67,7 +67,7 @@ export class ResponsiblesService {
   async addResponsible(responsible: Responsible) {
 
     const docRef = await addDoc(collection(this.db, 'responsibles'), {
-      registrationResponsible: responsible.nameResponsible,
+      registration: responsible.registration,
       nameResponsible: responsible.nameResponsible,
       office: responsible.office,
       sector: responsible.sector,

@@ -29,8 +29,8 @@ export class LoginService {
     id: ''
   };
 
-  async loginResponsible(user: string, password: string) {
-    const q = query(collection(this.db, "responsibles"), where("user", "==", user) && where("password", "==", password));
+  async loginResponsible(registration: string, password: string) {
+    const q = query(collection(this.db, "responsibles"), where("registration", "==", registration) && where("password", "==", password));
 
     const querySnapshot = await getDocs(q);
 

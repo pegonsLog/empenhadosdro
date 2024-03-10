@@ -1,6 +1,6 @@
 export interface Cast {
   id: string,
-  registrationResponsible: string;
+  registration: string;
   nameResponsibleCast: string;
   officeResponsibleCast: string;
   scaleDate: string,
