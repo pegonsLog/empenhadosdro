@@ -5,6 +5,7 @@ import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import { ResponsibleFormComponent } from './modules/responsible/components/responsible-form/responsible-form.component';
 import { ResponsibleListComponent } from './modules/responsible/components/responsible-list/responsible-list.component';
+import { UpdateComponent } from './modules/cast/components/update/update.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,10 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'update-cast',
+    component: UpdateComponent,
   },
   {
     path: 'report',

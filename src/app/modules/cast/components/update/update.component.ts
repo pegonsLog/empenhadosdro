@@ -1,34 +1,27 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Cast } from '../../../../interfaces/cast';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Responsible } from '../../../../interfaces/responsible';
+import { ResponsiblesService } from '../../../../services/responsibles.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CastsService } from '../../../../services/casts.service';
 import { LocalStorageService } from '../../../../services/local.storage.service';
-import { ResponsiblesService } from '../../../../services/responsibles.service';
+import { CommonModule } from '@angular/common';
+import { NgxMaskDirective } from 'ngx-mask';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-update',
   standalone: true,
-  imports: [
-    AngularMaterialModule,
+  imports: [AngularMaterialModule,
     NgxMaskDirective,
     FormsModule,
     ReactiveFormsModule,
-  ],
-  providers: [provideNgxMask()],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.scss',
+    CommonModule],
+  templateUrl: './update.component.html',
+  styleUrl: './update.component.scss'
 })
-export class RegisterComponent {
+export class UpdateComponent {
   public formCastRegister: FormGroup;
   public maskDate = 'd0/M0/0000';
   public existData: boolean = false;
@@ -102,39 +95,41 @@ export class RegisterComponent {
     this.responsible.shift = this.localStorageService.getItem('shift');
     this.responsible.role = this.localStorageService.getItem('role');
 
-    this.formCastRegister = this.fb.group({
-      castDate: ['', Validators.required],
-      registrationResponsible: [
-        this.responsible.registration,
-        Validators.required,
-      ],
-      nameResponsible: [this.responsible.nameResponsible, Validators.required],
-      officeResponsible: [this.responsible.office, Validators.required],
-      sectorResponsible: [this.responsible.sector, Validators.required],
-      shiftResponsible: [this.responsible.shift, Validators.required],
-      withoutRestriction: [0, Validators.required],
-      withRestriction: [0, Validators.required],
-    });
+    const id = this.activatedRoute.snapshot.queryParams['id'];
 
-    this.responsiblesService
-      .listResponsibles()
-      .then((responsibles: Responsible[]) => {
-        if (responsibles) {
-          this.responsibles = responsibles.sort((a, b) =>
-            a.nameResponsible.localeCompare(b.nameResponsible)
-          );
-          (this.existData = true), (this.responsibles = responsibles);
-        }
+    this.castsService.updateCast(id).then((cast: Cast)=> console.log(cast))
+
+
+      this.formCastRegister = this.fb.group({
+        castDate: [this.cast.scaleDate, Validators.required],
+        registrationResponsible: [this.cast.registration, Validators.required],
+        nameResponsible: [this.cast.nameResponsibleCast, Validators.required],
+        officeResponsible: [this.cast.officeResponsibleCast, Validators.required],
+        sectorResponsible: [this.cast.sector, Validators.required],
+        shiftResponsible: [this.cast.shift, Validators.required],
+        withoutRestriction: [this.cast.withRestriction, Validators.required],
+        withRestriction: [this.cast.withoutRestriction, Validators.required],
       });
 
-    this.castsService
-      .listCasts(this.dateReport, this.responsible.shift)
-      .then((casts: Cast[]) => {
-        if (casts) {
-          this.casts = casts.sort((a, b) => a.sector.localeCompare(b.sector));
-          (this.existData = true), (this.casts = casts);
-        }
-      });
+    // this.responsiblesService
+    //   .listResponsibles()
+    //   .then((responsibles: Responsible[]) => {
+    //     if (responsibles) {
+    //       this.responsibles = responsibles.sort((a, b) =>
+    //         a.nameResponsible.localeCompare(b.nameResponsible)
+    //       );
+    //       (this.existData = true), (this.responsibles = responsibles);
+    //     }
+    //   });
+
+    // this.castsService
+    //   .listCasts(this.dateReport, this.responsible.shift)
+    //   .then((casts: Cast[]) => {
+    //     if (casts) {
+    //       this.casts = casts.sort((a, b) => a.sector.localeCompare(b.sector));
+    //       (this.existData = true), (this.casts = casts);
+    //     }
+    //   });
   }
 
   public report() {
@@ -142,7 +137,7 @@ export class RegisterComponent {
     this.router.navigate(['home']);
   }
 
-  public newCast() {
+  public updateCast() {
     const cast: Cast = {
       scaleDate: this.formCastRegister.getRawValue().castDate,
       registration: this.formCastRegister.getRawValue().registrationResponsible,

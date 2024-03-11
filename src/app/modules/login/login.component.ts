@@ -3,12 +3,13 @@ import {
   FormBuilder,
   FormsModule,
   ReactiveFormsModule,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Responsible } from '../../interfaces/responsible';
 import { LoginService } from '../../services/login.service';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
+import { LocalStorageService } from '../../services/local.storage.service';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,10 @@ import { AngularMaterialModule } from '../../shared/angular-material/angular-mat
 export class LoginComponent {
   public loginForm;
 
+  private registration: string = 'registration';
+  private nameResponsible: string = 'nameResponsible';
+  private role: string = 'role';
+
   public responsible: Responsible = {
     registration: '',
     nameResponsible: '',
@@ -28,13 +33,14 @@ export class LoginComponent {
     shift: '',
     password: '',
     role: '',
-    id: ''
+    id: '',
   };
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private localStorageService: LocalStorageService
   ) {
     this.loginForm = this.formBuilder.group({
       registration: ['564', Validators.required],
@@ -50,12 +56,23 @@ export class LoginComponent {
       )
       .then((responsible: Responsible) => (this.responsible = responsible));
 
-    if (this.responsible.registration === this.loginForm.getRawValue().registration && this.responsible.password === this.loginForm.getRawValue().password) {
+    if (
+      this.responsible.registration ===
+        this.loginForm.getRawValue().registration &&
+      this.responsible.password === this.loginForm.getRawValue().password
+    ) {
+      this.localStorageService.setItem('registration', this.responsible.registration);
+      this.localStorageService.setItem('nameResponsible', this.responsible.nameResponsible);
+      this.localStorageService.setItem('office', this.responsible.office);
+      this.localStorageService.setItem('sector', this.responsible.sector);
+      this.localStorageService.setItem('shift', this.responsible.shift);
+      this.localStorageService.setItem('role', this.responsible.role);
+
       {
-        this.router.navigate(['home'], {
-          queryParams: {registration: this.responsible.registration, nameResponsible: this.responsible.nameResponsible, role: this.responsible.role },
-        });
+        this.router.navigate(['home']);
       }
-    }else{alert('Usuário não cadastrado!')}
+    } else {
+      alert('Usuário não cadastrado!');
+    }
   }
 }

@@ -7,8 +7,7 @@ import {
   getDoc,
   getDocs,
   getFirestore,
-  query,
-  setDoc
+  query
 } from 'firebase/firestore';
 import { Cast } from '../interfaces/cast';
 import { environment } from '../shared/environment/environment.development';

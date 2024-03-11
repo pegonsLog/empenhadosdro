@@ -44,7 +44,7 @@
 
       <mat-form-field class="home-full-width">
         <mat-label>Informe a matrícula</mat-label>
-        <input type="text" matInput placeholder="Matrícula" formControlName="registrationResponsible"/>
+        <input type="text" matInput placeholder="Matrícula" formControlName="registrationResponsible" readonly="true"/>
       </mat-form-field>
 
        <p>
@@ -62,5 +62,10 @@
         </button>
       </p>
      }
+     <p>
+      <button id="buttonCustom" (click)="close()" mat-button>
+        Sair
+      </button>
+    </p>
   </span>
 </div>

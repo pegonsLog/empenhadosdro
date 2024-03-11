@@ -1,0 +1,111 @@
+@media screen and (min-width: 0px) and (max-width: 400px) {
+  .container,
+  .register-form,
+  .register-full-width,
+  mat-form-field {
+   min-width: 90% !important;
+  }
+  .buttonCustom {
+    min-width: 49% !important;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    min-width: 90% !important;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 401px) and (max-width: 600px) {
+  .container,
+  .register-form,
+  .register-full-width,
+  mat-form-field {
+    min-width: 80% !important;
+  }
+  .buttonCustom {
+    min-width: 49% !important;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    min-width: 80% !important;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1000px) {
+  .container,
+  .register-form,
+  .register-full-width,
+  mat-form-field {
+    min-width: 70% !important;
+  }
+  .buttonCustom {
+    min-width: 49% !important;
+  }
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  max-width: 70% !important;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 1001px) and (max-width: 2000px) {
+  .container,
+  .register-form,
+  .register-full-width,
+  mat-form-field {
+    min-width: 40% !important;
+  }
+  .buttonCustom {
+    width: 49% !important;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    max-width: 40% !important;
+    margin: 0 auto;
+  }
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+mat-form-field {
+  display: block;
+  height: 75px;
+  font-size: small;
+  margin-bottom: -10px;
+  width: 100%;
+}
+
+mat-label {
+  font-size: small;
+}
+
+mat-toolbar {
+  background-color: rgb(38, 163, 221);
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+span {
+  font-size: 0.7em;
+  margin: auto;
+}
+
+.buttonCustom {
+  background: rgb(38, 163, 221);
+  color: white;
+  border-bottom: 1px solid white;
+  height: 30px;
+}

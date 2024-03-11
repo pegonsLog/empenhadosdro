@@ -70,20 +70,12 @@ export class ResponsibleListComponent {
   }
 
   goToAdd() {
-    this.router.navigate(['responsible-form'], {
-      queryParams: {
-        role: this.responsible.role,
-        nameResponsible: this.responsible.nameResponsible,
-        idType: this.responsible.id
-      },
-    });
-  }
+    this.router.navigate(['responsible-form'])}
 
   goToUpdate(id: string) {
 
     this.responsiblesService.updateResponsible(id).then((data: Responsible) => {
       this.responsible = data;
-      console.log(this.responsible)
     });
 
 

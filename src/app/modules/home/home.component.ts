@@ -11,9 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { provideNgxMask } from 'ngx-mask';
 import { Cast } from '../../interfaces/cast';
 import { Responsible } from '../../interfaces/responsible';
+import { LocalStorageService } from '../../services/local.storage.service';
 import { ResponsiblesService } from '../../services/responsibles.service';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
-import { CastsService } from '../../services/casts.service';
 
 @Component({
   selector: 'app-home',
@@ -64,12 +64,14 @@ export class HomeComponent {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private responsibleService: ResponsiblesService,
+    private localStorageService: LocalStorageService
   ) {
-    this.responsible.registration =
-      this.activatedRoute.snapshot.queryParams['registration'];
-    this.responsible.nameResponsible =
-      this.activatedRoute.snapshot.queryParams['nameResponsible'];
-    this.responsible.role = this.activatedRoute.snapshot.queryParams['role'];
+    this.responsible.registration = this.localStorageService.getItem('registration');
+    this.responsible.nameResponsible = this.localStorageService.getItem('nameResponsible');
+    this.responsible.office = this.localStorageService.getItem('office');
+    this.responsible.sector = this.localStorageService.getItem('sector');
+    this.responsible.shift = this.localStorageService.getItem('shift');
+    this.responsible.role = this.localStorageService.getItem('role');
 
     this.listCastReportForm = this.formBuilder.group({
       castDate: [/*new Date().toLocaleDateString('pt-BR')*/ '26/02/2024', Validators.required],
@@ -77,7 +79,7 @@ export class HomeComponent {
     });
 
     this.listCastRegisterForm = this.formBuilder.group({
-      registrationResponsible: ['', Validators.required],
+      registrationResponsible: [this.responsible.registration, Validators.required]
     });
   }
 
@@ -86,19 +88,10 @@ export class HomeComponent {
     const shiftReport = this.listCastReportForm.getRawValue().shift!;
     this.responsibleService
     .responsibleReportCast(castDateReport, shiftReport)
-    .then((responsible: Responsible) => {
+    .then(() => {
       if(this.listCastReportForm.valid){
-      this.router.navigate(['report'], {
-        queryParams: {
-          registration: responsible.registration,
-          nameResponsible: responsible.nameResponsible,
-          office: responsible.office,
-          sector: responsible.sector,
-          role: responsible.role,
-          shift: shiftReport,
-          dateReport: castDateReport
-        },
-      });}
+        this.localStorageService.setItem('castDateReport', castDateReport);
+      this.router.navigate(['report'])}
     });
   }
 
@@ -109,17 +102,7 @@ export class HomeComponent {
       )
       .then((responsible: Responsible) => {
         if(this.listCastRegisterForm.valid){
-        this.router.navigate(['register'], {
-          queryParams: {
-            registration: responsible.registration,
-            nameResponsible: responsible.nameResponsible,
-            office: responsible.office,
-            sector: responsible.sector,
-            role: responsible.role,
-            shift: responsible.shift,
-            dateReport: this.listCastReportForm.getRawValue().castDate!
-          },
-        });}
+        this.router.navigate(['register'])}
       });
   }
 
@@ -131,5 +114,16 @@ export class HomeComponent {
 
       },
     });
+  }
+
+  public close(){
+    this.localStorageService.removeItem('registration');
+    this.localStorageService.removeItem('nameResponsible');
+    this.localStorageService.removeItem('office');
+    this.localStorageService.removeItem('sector');
+    this.localStorageService.removeItem('shift');
+    this.localStorageService.removeItem('role');
+    this.localStorageService.removeItem('dateReport');
+    this.router.navigate(['']);
   }
 }

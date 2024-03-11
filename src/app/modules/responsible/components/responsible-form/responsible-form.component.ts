@@ -99,13 +99,7 @@ export class ResponsibleFormComponent {
 
   backToHome() {
     this.clear();
-    this.router.navigate(['responsible-list'], {
-      queryParams: {
-        role: this.responsible.role,
-        nameResponsible: this.responsible.nameResponsible,
-      },
-    });
-  }
+    this.router.navigate(['home'])}
 
   clear() {
     while (this.responsibles.length) {
