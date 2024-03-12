@@ -49,8 +49,8 @@ export class HomeComponent {
     {
       id: '',
       registration: '',
-      nameResponsibleCast: '',
-      officeResponsibleCast: '',
+      nameResponsible: '',
+      officeResponsible: '',
       scaleDate: '',
       sector: '',
       shift: '',

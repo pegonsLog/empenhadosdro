@@ -1,13 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormBuilder, FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgxMaskDirective } from 'ngx-mask';
 import { Cast } from '../../../../interfaces/cast';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Responsible } from '../../../../interfaces/responsible';
-import { ResponsiblesService } from '../../../../services/responsibles.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { CastsService } from '../../../../services/casts.service';
 import { LocalStorageService } from '../../../../services/local.storage.service';
-import { CommonModule } from '@angular/common';
-import { NgxMaskDirective } from 'ngx-mask';
+import { ResponsiblesService } from '../../../../services/responsibles.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 
 @Component({
@@ -16,13 +16,12 @@ import { AngularMaterialModule } from '../../../../shared/angular-material/angul
   imports: [AngularMaterialModule,
     NgxMaskDirective,
     FormsModule,
-    ReactiveFormsModule,
     CommonModule],
   templateUrl: './update.component.html',
   styleUrl: './update.component.scss'
 })
 export class UpdateComponent {
-  public formCastRegister: FormGroup;
+  // public formCastRegister: FormGroup;
   public maskDate = 'd0/M0/0000';
   public existData: boolean = false;
   public registrationResponsible: string = '';
@@ -42,8 +41,8 @@ export class UpdateComponent {
   public cast: Cast = {
     id: '',
     registration: '',
-    nameResponsibleCast: '',
-    officeResponsibleCast: '',
+    nameResponsible: '',
+    officeResponsible: '',
     scaleDate: '',
     sector: '',
     shift: '',
@@ -55,8 +54,8 @@ export class UpdateComponent {
     {
       id: '',
       registration: '',
-      nameResponsibleCast: '',
-      officeResponsibleCast: '',
+      nameResponsible: '',
+      officeResponsible: '',
       scaleDate: '',
       sector: '',
       shift: '',
@@ -97,19 +96,18 @@ export class UpdateComponent {
 
     const id = this.activatedRoute.snapshot.queryParams['id'];
 
-    this.castsService.updateCast(id).then((cast: Cast)=> console.log(cast))
+    this.castsService.updateCast(id).then((cast: Cast) => this.cast = cast);
 
-
-      this.formCastRegister = this.fb.group({
-        castDate: [this.cast.scaleDate, Validators.required],
-        registrationResponsible: [this.cast.registration, Validators.required],
-        nameResponsible: [this.cast.nameResponsibleCast, Validators.required],
-        officeResponsible: [this.cast.officeResponsibleCast, Validators.required],
-        sectorResponsible: [this.cast.sector, Validators.required],
-        shiftResponsible: [this.cast.shift, Validators.required],
-        withoutRestriction: [this.cast.withRestriction, Validators.required],
-        withRestriction: [this.cast.withoutRestriction, Validators.required],
-      });
+      // this.formCastRegister = this.fb.group({
+      //   castDate: [this.cast.scaleDate, Validators.required],
+      //   registrationResponsible: [this.cast.registration, Validators.required],
+      //   nameResponsible: [this.cast.nameResponsibleCast, Validators.required],
+      //   officeResponsible: [this.cast.officeResponsibleCast, Validators.required],
+      //   sectorResponsible: [this.cast.sector, Validators.required],
+      //   shiftResponsible: [this.cast.shift, Validators.required],
+      //   withoutRestriction: [this.cast.withRestriction, Validators.required],
+      //   withRestriction: [this.cast.withoutRestriction, Validators.required],
+      // });
 
     // this.responsiblesService
     //   .listResponsibles()
@@ -139,17 +137,16 @@ export class UpdateComponent {
 
   public updateCast() {
     const cast: Cast = {
-      scaleDate: this.formCastRegister.getRawValue().castDate,
-      registration: this.formCastRegister.getRawValue().registrationResponsible,
-      nameResponsibleCast: this.formCastRegister.getRawValue().nameResponsible,
-      officeResponsibleCast:
-        this.formCastRegister.getRawValue().officeResponsible,
-      sector: this.formCastRegister.getRawValue().sectorResponsible,
-      shift: this.formCastRegister.getRawValue().shiftResponsible,
-      withoutRestriction:
-        this.formCastRegister.getRawValue().withoutRestriction,
-      withRestriction: this.formCastRegister.getRawValue().withRestriction,
-      id: '',
+      scaleDate: this.cast.scaleDate,
+      registration: this.cast.registration,
+      nameResponsible: this.cast.nameResponsible,
+      officeResponsible:
+        this.cast.officeResponsible,
+      sector: this.cast.sector,
+      shift: this.cast.shift,
+      withoutRestriction: this.cast.withoutRestriction,
+      withRestriction: this.cast.withRestriction,
+      id: this.cast.id,
     };
 
     this.castsService.addCast(cast).then(() => '');

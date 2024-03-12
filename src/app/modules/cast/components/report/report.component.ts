@@ -32,8 +32,8 @@ export class ReportComponent {
   public cast: Cast = {
     id: '',
     registration: '',
-    nameResponsibleCast: '',
-    officeResponsibleCast: '',
+    nameResponsible: '',
+    officeResponsible: '',
     scaleDate: '',
     sector: '',
     shift: '',
@@ -45,8 +45,8 @@ export class ReportComponent {
     {
       id: '',
       registration: '',
-      nameResponsibleCast: '',
-      officeResponsibleCast: '',
+      nameResponsible: '',
+      officeResponsible: '',
       scaleDate: '',
       sector: '',
       shift: '',

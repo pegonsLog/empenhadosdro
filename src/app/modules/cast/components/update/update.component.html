@@ -1,5 +1,5 @@
 <div class="container">
-  <form class="register-form" [formGroup]="formCastRegister">
+  <div class="register-form">
     <mat-toolbar>
       <span>Equipe empenhada - DRO</span>
     </mat-toolbar>
@@ -10,7 +10,7 @@
         type="text"
         matInput
         placeholder="Data"
-        formControlName="castDate"
+        [(ngModel)]="cast.scaleDate"
       />
     </mat-form-field>
     <mat-form-field class="register-full-width">
@@ -20,8 +20,7 @@
         type="text"
         matInput
         placeholder="Matrícula"
-        formControlName="registrationResponsible"
-        readonly
+        [(ngModel)]="cast.registration"
       />
     </mat-form-field>
 
@@ -31,8 +30,7 @@
         type="text"
         matInput
         placeholder="Usuário"
-        formControlName="{}"
-        readonly
+        [(ngModel)]="cast.nameResponsible"
       />
     </mat-form-field>
 
@@ -42,8 +40,7 @@
         type="text"
         matInput
         placeholder="Cargo"
-        formControlName="officeResponsible"
-        readonly
+        [(ngModel)]="cast.officeResponsible"
       />
     </mat-form-field>
 
@@ -53,8 +50,7 @@
         type="text"
         matInput
         placeholder="Gerência"
-        formControlName="sectorResponsible"
-        readonly
+        [(ngModel)]="cast.sector"
       />
     </mat-form-field>
 
@@ -64,21 +60,20 @@
         type="text"
         matInput
         placeholder="Turno"
-        formControlName="shiftResponsible"
-        readonly
+        [(ngModel)]="cast.shift"
       />
     </mat-form-field>
 
     <mat-form-field class="register-full-width">
       <mat-label>Agentes sem restrição</mat-label>
-      <input type="number" matInput formControlName="withoutRestriction" />
+      <input type="number" matInput [(ngModel)]="cast.withoutRestriction" />
     </mat-form-field>
 
     <mat-form-field class="register-full-width">
       <mat-label>Agentes com restrição</mat-label>
-      <input type="number" matInput formControlName="withRestriction" />
+      <input type="number" matInput [(ngModel)]="cast.withRestriction" />
     </mat-form-field>
-  </form>
+  </div>
 </div>
 
 <div class="buttons">

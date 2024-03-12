@@ -49,8 +49,8 @@ export class RegisterComponent {
   public cast: Cast = {
     id: '',
     registration: '',
-    nameResponsibleCast: '',
-    officeResponsibleCast: '',
+    nameResponsible: '',
+    officeResponsible: '',
     scaleDate: '',
     sector: '',
     shift: '',
@@ -62,8 +62,8 @@ export class RegisterComponent {
     {
       id: '',
       registration: '',
-      nameResponsibleCast: '',
-      officeResponsibleCast: '',
+      nameResponsible: '',
+      officeResponsible: '',
       scaleDate: '',
       sector: '',
       shift: '',
@@ -146,8 +146,8 @@ export class RegisterComponent {
     const cast: Cast = {
       scaleDate: this.formCastRegister.getRawValue().castDate,
       registration: this.formCastRegister.getRawValue().registrationResponsible,
-      nameResponsibleCast: this.formCastRegister.getRawValue().nameResponsible,
-      officeResponsibleCast:
+      nameResponsible: this.formCastRegister.getRawValue().nameResponsible,
+      officeResponsible:
         this.formCastRegister.getRawValue().officeResponsible,
       sector: this.formCastRegister.getRawValue().sectorResponsible,
       shift: this.formCastRegister.getRawValue().shiftResponsible,

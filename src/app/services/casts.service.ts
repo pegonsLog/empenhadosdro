@@ -23,8 +23,8 @@ export class CastsService {
   public cast: Cast = {
     id: '',
     registration: '',
-    nameResponsibleCast: '',
-    officeResponsibleCast: '',
+    nameResponsible: '',
+    officeResponsible: '',
     scaleDate: '',
     sector: '',
     shift: '',
@@ -49,10 +49,11 @@ export class CastsService {
   }
   async addCast(cast: Cast) {
 
-    const docRef = await addDoc(collection(this.db, 'casts'), {
-      registration: cast.registration,
-      nameResponsible: cast.nameResponsibleCast,
+    await addDoc(collection(this.db, 'casts'), {
       scaleDate: cast.scaleDate,
+      registration: cast.registration,
+      nameResponsible: cast.nameResponsible,
+      officeResponsible: cast.officeResponsible,
       sector: cast.sector,
       shift: cast.shift,
       withRestriction: cast.withRestriction,
@@ -68,20 +69,20 @@ export class CastsService {
     const docSnap = await getDoc(docRef);
     const cast = docSnap.data() as Cast;
 
-    if(docSnap.exists()){
+    if (docSnap.exists()) {
       this.cast.id = docRef.id,
-      this.cast.scaleDate = cast.scaleDate,
-      this.cast.registration = cast.registration,
-      this.cast.nameResponsibleCast = cast.nameResponsibleCast,
-      this.cast.officeResponsibleCast = cast.officeResponsibleCast,
-      this.cast.sector = cast.sector,
-      this.cast.shift = cast.shift,
-      this.cast.withoutRestriction = cast.withoutRestriction,
-      this.cast.withRestriction = cast.withRestriction
+        this.cast.scaleDate = cast.scaleDate,
+        this.cast.registration = cast.registration,
+        this.cast.nameResponsible = cast.nameResponsible,
+        this.cast.officeResponsible = cast.officeResponsible,
+        this.cast.sector = cast.sector,
+        this.cast.shift = cast.shift,
+        this.cast.withoutRestriction = cast.withoutRestriction,
+        this.cast.withRestriction = cast.withRestriction
 
     }
 
     return this.cast;
 
-}
+  }
 }
