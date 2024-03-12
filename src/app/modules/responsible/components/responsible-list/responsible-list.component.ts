@@ -23,7 +23,7 @@ export class ResponsibleListComponent {
       sector: '',
       shift: '',
       password: '',
-      role: ''
+      role: '',
     },
   ];
 
@@ -35,7 +35,7 @@ export class ResponsibleListComponent {
     sector: '',
     shift: '',
     password: '',
-    role: ''
+    role: '',
   };
 
   displayedColumns: string[] = [
@@ -45,7 +45,7 @@ export class ResponsibleListComponent {
     'sector',
     'shift',
     'actions',
-    'id'
+    'id',
   ];
 
   constructor(
@@ -70,44 +70,29 @@ export class ResponsibleListComponent {
   }
 
   goToAdd() {
-    this.router.navigate(['responsible-form'])}
+    this.router.navigate(['responsible-form']);
+  }
 
   goToUpdate(id: string) {
-
-    this.responsiblesService.updateResponsible(id).then((data: Responsible) => {
-      this.responsible = data;
+    this.responsiblesService.oneResponsible(id).then((data: Responsible) => {
+      this.router.navigate(['responsible-update'], {
+        queryParams: {
+          id: data.id,
+        },
+      });
     });
+  }
 
-
-
-    // this.router.navigate(['responsible-form'], {
-    //   queryParams: {
-    //     id: this.responsible.id,
-    //     resgistration: this.responsible.registration,
-    //     name: this.responsible.nameResponsible,
-    //     office: this.responsible.office,
-    //     sector: this.responsible.sector,
-    //     shift: this.responsible.shift,
-    //     password: this.responsible.password,
-    //     role: this.responsible.role,
-    //     idType: this.responsible.id
-    //   },
-    // });
+  goToRemove(id: string) {
+    this.responsiblesService.removeResponsible(id).then(() => console.log('Removido'));
   }
 
   backToHome() {
-    this.clear();
     this.router.navigate(['home'], {
       queryParams: {
         role: this.responsible.role,
         nameResponsible: this.responsible.nameResponsible,
       },
     });
-  }
-
-  clear() {
-    while (this.responsibles.length) {
-      this.responsibles.pop();
-    }
   }
 }

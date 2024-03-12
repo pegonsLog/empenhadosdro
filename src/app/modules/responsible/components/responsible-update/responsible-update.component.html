@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="responsible-form">
+    <mat-toolbar>
+      <span>ALTERAÇÃO DE RESPONSÁVEIS</span>
+    </mat-toolbar>
+
+    <mat-form-field class="responsible-full-width">
+      <mat-label>Mat. do responsável</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Matrícula"
+        [(ngModel)]="responsible.registration"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="responsible-full-width">
+      <mat-label>Nome do responsável</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Nome do responsável"
+        [(ngModel)]="responsible.nameResponsible"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="responsible-full-width">
+      <mat-label>Cargo</mat-label>
+      <mat-select [(ngModel)]="responsible.office">
+        @for (office of offices; track office) {
+        <mat-option [value]="office">{{ office }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="responsible-full-width">
+      <mat-label>Gerência</mat-label>
+      <mat-select [(ngModel)]="responsible.sector">
+        @for (sector of sectors; track sector) {
+        <mat-option [value]="sector">{{ sector }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="responsible-full-width">
+      <mat-label>Turno</mat-label>
+      <mat-select [(ngModel)]="responsible.shift">
+        @for (shift of shifts; track shift) {
+        <mat-option [value]="shift">{{ shift }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="responsible-full-width">
+      <mat-label>Senha do responsável</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Senha"
+        [(ngModel)]="responsible.password"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="responsible-full-width">
+      <mat-label>Perfil</mat-label>
+      <mat-select [(ngModel)]="responsible.role">
+        @for (role of roles; track role) {
+        <mat-option [value]="role">{{ role }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="buttons">
+  <button class="buttonCustom" (click)="updateResponsible(responsible.id)" mat-button style="color: white;">
+    Salvar
+  </button>
+  <button class="buttonCustom" (click)="backToHome()" mat-button style="color: white;">Voltar</button>
+</div>

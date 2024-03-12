@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Cast } from '../../../../interfaces/cast';
 import { Responsible } from '../../../../interfaces/responsible';
 import { CastsService } from '../../../../services/casts.service';
-import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 import { LocalStorageService } from '../../../../services/local.storage.service';
+import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 
 @Component({
   selector: 'app-report',
@@ -70,7 +70,6 @@ export class ReportComponent {
   constructor(
     private router: Router,
     private castsService: CastsService,
-    private activatedRoute: ActivatedRoute,
     private localStorageService: LocalStorageService
   ) {
     this.dateReport = this.localStorageService.getItem('castDateReport');
@@ -103,7 +102,7 @@ export class ReportComponent {
   }
 
   goToUpdate(id: string) {
-    this.castsService.updateCast(id).then((data: Cast) => {
+    this.castsService.oneCast(id).then((data: Cast) => {
       this.router.navigate(['update-cast'], {
         queryParams: {
           id: data.id,
@@ -112,14 +111,11 @@ export class ReportComponent {
     });
   }
 
-  backToHome() {
-    this.clear();
-    this.router.navigate(['home']);
+  goToRemove(id: string) {
+    this.castsService.removeCast(id).then(() => console.log('Removido'));
   }
 
-  clear() {
-    while (this.casts.length) {
-      this.casts.pop();
-    }
+  backToHome() {
+    this.router.navigate(['home']);
   }
 }

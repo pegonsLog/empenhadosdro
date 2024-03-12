@@ -6,6 +6,7 @@ import { LoginComponent } from './modules/login/login.component';
 import { ResponsibleFormComponent } from './modules/responsible/components/responsible-form/responsible-form.component';
 import { ResponsibleListComponent } from './modules/responsible/components/responsible-list/responsible-list.component';
 import { UpdateComponent } from './modules/cast/components/update/update.component';
+import { ResponsibleUpdateComponent } from './modules/responsible/components/responsible-update/responsible-update.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,10 @@ export const routes: Routes = [
   {
     path: 'responsible-form',
     component: ResponsibleFormComponent,
+  },
+  {
+    path: 'responsible-update',
+    component: ResponsibleUpdateComponent,
   },
   {
     path: 'home',

@@ -67,13 +67,13 @@
         <th style="padding-left: 30px;" mat-header-cell *matHeaderCellDef>
           <strong>AÇÕES</strong>
         </th>
-        <td style="padding-left: 18px;" mat-cell *matCellDef="let cast">
+        <td style="padding-left: 18px;" mat-cell *matCellDef="let responsible">
           <div style="display: flex; justify-content: center;">
 
-            <button (click)="goToUpdate(cast.id)" style="padding: 0px; border: none; background: none; text-align: center; cursor: pointer;">
+            <button (click)="goToUpdate(responsible.id)" style="padding: 0px; border: none; background: none; text-align: center; cursor: pointer;">
               <span class="material-symbols-outlined span-width"> edit </span>
             </button>
-            <button style="padding: 0px; border: none; background: none; text-align: center; cursor: pointer;">
+            <button (click)="goToRemove(responsible.id)"  style="padding: 0px; border: none; background: none; text-align: center; cursor: pointer;">
               <span style="padding: 0px" class="material-symbols-outlined span-width"> delete </span>
             </button>
           </div>
