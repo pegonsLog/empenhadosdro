@@ -39,7 +39,7 @@ export class ResponsiblesService {
 
   constructor() {}
 
-  async listResponsibles() {
+  async listResponsibles()  {
     const q = query(collection(this.db, 'responsibles'));
 
     const querySnapshot = await getDocs(q);
@@ -86,7 +86,7 @@ export class ResponsiblesService {
   }
 
   async addResponsible(responsible: Responsible) {
-    const docRef = await addDoc(collection(this.db, 'responsibles'), {
+    await addDoc(collection(this.db, 'responsibles'), {
       registration: responsible.registration,
       nameResponsible: responsible.nameResponsible,
       office: responsible.office,
@@ -116,7 +116,7 @@ export class ResponsiblesService {
     return this.responsible;
   }
 
-  async updateResponsible(responsible: Responsible) {
+  async updateResponsible(responsible: Responsible){
     const docRef = doc(this.db, 'responsibles', responsible.id);
     await updateDoc(docRef, {
       registration: responsible.registration,

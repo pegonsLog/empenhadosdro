@@ -1,7 +1,7 @@
 <div class="container">
   <div class="register-form">
     <mat-toolbar>
-      <span>Equipe empenhada - DRO</span>
+      <span>Alteração Equipe empenhada - DRO</span>
     </mat-toolbar>
 
     <mat-form-field class="register-full-width">
@@ -21,6 +21,7 @@
         matInput
         placeholder="Matrícula"
         [(ngModel)]="cast.registration"
+        readonly="true"
       />
     </mat-form-field>
 
@@ -31,6 +32,7 @@
         matInput
         placeholder="Usuário"
         [(ngModel)]="cast.nameResponsible"
+        readonly="true"
       />
     </mat-form-field>
 
@@ -41,6 +43,7 @@
         matInput
         placeholder="Cargo"
         [(ngModel)]="cast.officeResponsible"
+        readonly="true"
       />
     </mat-form-field>
 
@@ -51,6 +54,7 @@
         matInput
         placeholder="Gerência"
         [(ngModel)]="cast.sector"
+        readonly="true"
       />
     </mat-form-field>
 
@@ -61,6 +65,7 @@
         matInput
         placeholder="Turno"
         [(ngModel)]="cast.shift"
+        readonly="true"
       />
     </mat-form-field>
 

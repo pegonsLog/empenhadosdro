@@ -63,6 +63,16 @@
           {{ responsible.shift }}
         </td>
       </ng-container>
+
+      <!-- Role -->
+      <ng-container matColumnDef="role">
+        <th style="padding-right: 2px" mat-header-cell *matHeaderCellDef>
+          <strong>PERFIL</strong>
+        </th>
+        <td style="padding-right: 2px" mat-cell *matCellDef="let responsible">
+          {{ responsible.role }}
+        </td>
+      </ng-container>
       <ng-container matColumnDef="actions">
         <th style="padding-left: 30px;" mat-header-cell *matHeaderCellDef>
           <strong>AÇÕES</strong>

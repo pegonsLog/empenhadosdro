@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Cast } from '../../../../interfaces/cast';
 import { Responsible } from '../../../../interfaces/responsible';
@@ -14,6 +14,7 @@ import { CastsService } from '../../../../services/casts.service';
 import { LocalStorageService } from '../../../../services/local.storage.service';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register',
@@ -89,9 +90,8 @@ export class RegisterComponent {
     private router: Router,
     private fb: FormBuilder,
     private responsiblesService: ResponsiblesService,
-    private activatedRoute: ActivatedRoute,
     private castsService: CastsService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
   ) {
     this.responsible.registration =
       this.localStorageService.getItem('registration');
@@ -138,7 +138,6 @@ export class RegisterComponent {
   }
 
   public report() {
-    this.clear();
     this.router.navigate(['home']);
   }
 
@@ -147,8 +146,7 @@ export class RegisterComponent {
       scaleDate: this.formCastRegister.getRawValue().castDate,
       registration: this.formCastRegister.getRawValue().registrationResponsible,
       nameResponsible: this.formCastRegister.getRawValue().nameResponsible,
-      officeResponsible:
-        this.formCastRegister.getRawValue().officeResponsible,
+      officeResponsible: this.formCastRegister.getRawValue().officeResponsible,
       sector: this.formCastRegister.getRawValue().sectorResponsible,
       shift: this.formCastRegister.getRawValue().shiftResponsible,
       withoutRestriction:
@@ -158,19 +156,10 @@ export class RegisterComponent {
     };
 
     this.castsService.addCast(cast).then(() => '');
+    this.router.navigate(['report']);
   }
 
   backToHome() {
-    this.clear();
     this.router.navigate(['home']);
-  }
-
-  clear() {
-    while (this.casts.length) {
-      this.casts.pop();
-    }
-    while (this.responsibles.length) {
-      this.responsibles.pop();
-    }
   }
 }

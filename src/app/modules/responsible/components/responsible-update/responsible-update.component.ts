@@ -101,7 +101,7 @@ export class ResponsibleUpdateComponent {
 
     this.responsiblesService
       .updateResponsible(responsibleUpdate)
-      .then(() => this.router.navigate(['home']));
+      .then(() => this.router.navigate(['responsible-list']));
   }
 
   backToHome() {

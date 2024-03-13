@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
 import { Responsible } from '../../../../interfaces/responsible';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Observable, from } from 'rxjs';
 
 @Component({
   selector: 'app-responsible-list',
@@ -12,7 +13,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './responsible-list.component.html',
   styleUrl: './responsible-list.component.scss',
 })
-export class ResponsibleListComponent {
+export class ResponsibleListComponent implements OnInit {
   public existData: boolean = false;
   responsibles: Responsible[] = [
     {
@@ -44,6 +45,7 @@ export class ResponsibleListComponent {
     'office',
     'sector',
     'shift',
+    'role',
     'actions',
     'id',
   ];
@@ -56,7 +58,9 @@ export class ResponsibleListComponent {
     this.responsible.nameResponsible =
       this.activatedRoute.snapshot.queryParams['nameResponsible'];
     this.responsible.role = this.activatedRoute.snapshot.queryParams['role'];
-
+  }
+  
+  ngOnInit(): void {
     this.responsiblesService
       .listResponsibles()
       .then((responsibles: Responsible[]) => {
@@ -64,7 +68,8 @@ export class ResponsibleListComponent {
           this.responsibles = responsibles.sort((a, b) =>
             a.nameResponsible.localeCompare(b.nameResponsible)
           );
-          (this.existData = true), (this.responsibles = responsibles);
+          this.existData = true;
+          this.responsibles = responsibles;
         }
       });
   }
@@ -84,7 +89,9 @@ export class ResponsibleListComponent {
   }
 
   goToRemove(id: string) {
-    this.responsiblesService.removeResponsible(id).then(() => console.log('Removido'));
+    this.responsiblesService
+      .removeResponsible(id)
+      .then(() => console.log('Removido'));
   }
 
   backToHome() {

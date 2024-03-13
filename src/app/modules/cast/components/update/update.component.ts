@@ -99,6 +99,6 @@ export class UpdateComponent {
 
     this.castsService
       .updateCast(castUpdate)
-      .then(() => this.router.navigate(['home']));
+      .then(() => this.router.navigate(['report']));
   }
 }

@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Cast } from '../../../../interfaces/cast';
 import { Responsible } from '../../../../interfaces/responsible';
 import { CastsService } from '../../../../services/casts.service';
 import { LocalStorageService } from '../../../../services/local.storage.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
+import { ConfirmationDialogComponent } from '../../../../shared/dialogs/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-report',
@@ -14,9 +17,11 @@ import { AngularMaterialModule } from '../../../../shared/angular-material/angul
   templateUrl: './report.component.html',
   styleUrl: './report.component.scss',
 })
-export class ReportComponent {
+export class ReportComponent implements OnInit {
   public existData: boolean = false;
   public typeForm: boolean = true;
+
+  public subscription: Subscription = new Subscription();
 
   public responsible: Responsible = {
     id: '',
@@ -67,23 +72,31 @@ export class ReportComponent {
   public dateReport: string = '';
   public shift: string = '';
 
+
   constructor(
     private router: Router,
     private castsService: CastsService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    public dialog: MatDialog,
   ) {
+
     this.dateReport = this.localStorageService.getItem('castDateReport');
     this.shift = this.localStorageService.getItem('shift');
+
+  }
+
+  ngOnInit(): void {
 
     this.castsService
       .listCasts(this.dateReport, this.shift)
       .then((casts: Cast[]) => {
-        if (casts) {
+        if (casts.length) {
           this.casts = casts.sort((a, b) => a.sector.localeCompare(b.sector));
           this.existData = true;
-          this.casts = casts;
         }
       });
+
+
   }
 
   getTotalCostCom() {
@@ -113,7 +126,14 @@ export class ReportComponent {
   }
 
   goToRemove(id: string) {
-    this.castsService.removeCast(id).then(() => console.log('Removido'));
+    const dialogReference = this.dialog.open(ConfirmationDialogComponent);
+    this.subscription = dialogReference
+      .afterClosed()
+      .subscribe((result: any) => {
+        if (result) {
+          this.castsService.removeCast(id).then(() => console.log('Removido'));
+        }
+      });
   }
 
   backToHome() {
