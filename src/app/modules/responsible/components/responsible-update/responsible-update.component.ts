@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import {
-  FormGroup,
   FormBuilder,
-  Validators,
   FormsModule,
-  ReactiveFormsModule,
+  ReactiveFormsModule
 } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Responsible } from '../../../../interfaces/responsible';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
@@ -79,13 +77,14 @@ export class ResponsibleUpdateComponent {
           this.responsibles = responsibles.sort((a, b) =>
             a.nameResponsible.localeCompare(b.nameResponsible)
           );
-          (this.existData = true), (this.responsibles = responsibles);
+          this.existData = true;
+          this.responsibles = responsibles;
         }
       });
 
-      this.id = this.activatedRoute.snapshot.queryParams['id'];
+    this.id = this.activatedRoute.snapshot.queryParams['id'];
 
-      this.responsiblesService.oneResponsible(this.id).then((responsible: Responsible) => (this.responsible = responsible));
+    this.responsiblesService.oneResponsible(this.id).then((responsible: Responsible) => (this.responsible = responsible));
   }
 
   public updateResponsible(id: string) {

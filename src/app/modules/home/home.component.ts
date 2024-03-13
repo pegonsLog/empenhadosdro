@@ -61,7 +61,6 @@ export class HomeComponent {
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private responsibleService: ResponsiblesService,
     private localStorageService: LocalStorageService
@@ -91,6 +90,7 @@ export class HomeComponent {
     .then(() => {
       if(this.listCastReportForm.valid){
         this.localStorageService.setItem('castDateReport', castDateReport);
+        this.localStorageService.setItem('shift', shiftReport);
       this.router.navigate(['report'])}
     });
   }

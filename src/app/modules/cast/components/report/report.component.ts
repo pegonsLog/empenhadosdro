@@ -80,7 +80,8 @@ export class ReportComponent {
       .then((casts: Cast[]) => {
         if (casts) {
           this.casts = casts.sort((a, b) => a.sector.localeCompare(b.sector));
-          (this.existData = true), (this.casts = casts);
+          this.existData = true;
+          this.casts = casts;
         }
       });
   }
