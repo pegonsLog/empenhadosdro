@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -16,7 +16,7 @@ import { AngularMaterialModule } from '../../../../shared/angular-material/angul
   templateUrl: './responsible-update.component.html',
   styleUrl: './responsible-update.component.scss',
 })
-export class ResponsibleUpdateComponent {
+export class ResponsibleUpdateComponent implements OnDestroy {
   public existData: boolean = false;
   public id: string = '';
   responsibles: Responsible[] = [
@@ -106,5 +106,11 @@ export class ResponsibleUpdateComponent {
 
   backToHome() {
     this.router.navigate(['home']);
+  }
+
+  ngOnDestroy(): void {
+    while(this.responsibles.length){
+      this.responsibles.pop();
+    }
   }
 }

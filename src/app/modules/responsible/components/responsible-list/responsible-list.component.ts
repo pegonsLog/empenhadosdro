@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
 import { Responsible } from '../../../../interfaces/responsible';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
@@ -13,7 +13,7 @@ import { Observable, from } from 'rxjs';
   templateUrl: './responsible-list.component.html',
   styleUrl: './responsible-list.component.scss',
 })
-export class ResponsibleListComponent implements OnInit {
+export class ResponsibleListComponent implements OnInit, OnDestroy {
   public existData: boolean = false;
   responsibles: Responsible[] = [
     {
@@ -59,7 +59,7 @@ export class ResponsibleListComponent implements OnInit {
       this.activatedRoute.snapshot.queryParams['nameResponsible'];
     this.responsible.role = this.activatedRoute.snapshot.queryParams['role'];
   }
-  
+
   ngOnInit(): void {
     this.responsiblesService
       .listResponsibles()
@@ -91,7 +91,7 @@ export class ResponsibleListComponent implements OnInit {
   goToRemove(id: string) {
     this.responsiblesService
       .removeResponsible(id)
-      .then(() => console.log('Removido'));
+      .then(() => this.router.navigate(['home']));
   }
 
   backToHome() {
@@ -101,5 +101,11 @@ export class ResponsibleListComponent implements OnInit {
         nameResponsible: this.responsible.nameResponsible,
       },
     });
+  }
+
+  ngOnDestroy(): void {
+    while(this.responsibles.length){
+      this.responsibles.pop();
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Responsible } from '../../../../interfaces/responsible';
@@ -18,7 +18,7 @@ import {
   templateUrl: './responsible-form.component.html',
   styleUrl: './responsible-form.component.scss',
 })
-export class ResponsibleFormComponent {
+export class ResponsibleFormComponent implements OnDestroy {
   public formResponsible: FormGroup;
   public existData: boolean = false;
   responsibles: Responsible[] = [
@@ -93,16 +93,16 @@ export class ResponsibleFormComponent {
     };
 
     this.responsiblesService.addResponsible(responsible).then(() => {
-      this.formResponsible.reset(), this.backToHome()
+      this.formResponsible.reset(), this.router.navigate(['responsible-list'])
     });
   }
 
   backToHome() {
-    this.clear();
     this.router.navigate(['home'])}
 
-  clear() {
-    while (this.responsibles.length) {
+
+  ngOnDestroy(): void {
+    while(this.responsibles.length){
       this.responsibles.pop();
     }
   }

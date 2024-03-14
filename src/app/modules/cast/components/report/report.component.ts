@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -17,9 +17,10 @@ import { ConfirmationDialogComponent } from '../../../../shared/dialogs/confirma
   templateUrl: './report.component.html',
   styleUrl: './report.component.scss',
 })
-export class ReportComponent implements OnInit {
+export class ReportComponent implements OnDestroy {
   public existData: boolean = false;
   public typeForm: boolean = true;
+  public isQuery: boolean = false
 
   public subscription: Subscription = new Subscription();
 
@@ -71,32 +72,30 @@ export class ReportComponent implements OnInit {
 
   public dateReport: string = '';
   public shift: string = '';
+  public role: string = '';
 
+  dataCast: Cast[] = [];
 
   constructor(
     private router: Router,
     private castsService: CastsService,
     private localStorageService: LocalStorageService,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {
-
     this.dateReport = this.localStorageService.getItem('castDateReport');
     this.shift = this.localStorageService.getItem('shift');
+   this.role = this.localStorageService.getItem('role');
 
-  }
-
-  ngOnInit(): void {
+   if(this.role === 'query'){
+    this.isQuery = true;
+        }
 
     this.castsService
       .listCasts(this.dateReport, this.shift)
       .then((casts: Cast[]) => {
-        if (casts.length) {
-          this.casts = casts.sort((a, b) => a.sector.localeCompare(b.sector));
-          this.existData = true;
-        }
+        this.casts = casts.sort((a, b) => a.sector.localeCompare(b.sector));
+        this.existData = true;
       });
-
-
   }
 
   getTotalCostCom() {
@@ -131,12 +130,19 @@ export class ReportComponent implements OnInit {
       .afterClosed()
       .subscribe((result: any) => {
         if (result) {
-          this.castsService.removeCast(id).then(() => console.log('Removido'));
+          this.castsService.removeCast(id).then(() =>  this.router.navigate(['home']));
         }
       });
   }
 
   backToHome() {
     this.router.navigate(['home']);
+  }
+
+  ngOnDestroy(): void {
+    while(this.casts.length){
+      this.casts.pop();
+    }
+    this.subscription.unsubscribe();
   }
 }

@@ -6,15 +6,30 @@
   <div *ngIf="existData; else loading">
     <table mat-table [dataSource]="casts">
       <ng-container matColumnDef="id">
-        <th style="padding-right: 10px" mat-header-cell *matHeaderCellDef hidden="true">
+        <th
+          style="padding-right: 10px"
+          mat-header-cell
+          *matHeaderCellDef
+          hidden="true"
+        >
           <strong>Id</strong>
         </th>
 
-        <td style="padding-right: 10px" mat-cell *matCellDef="let cast" hidden="true">
+        <td
+          style="padding-right: 10px"
+          mat-cell
+          *matCellDef="let cast"
+          hidden="true"
+        >
           <strong>{{ cast.id }}</strong>
         </td>
-        <td style="padding-right: 10px" mat-footer-cell *matFooterCellDef hidden="true">
-     ID
+        <td
+          style="padding-right: 10px"
+          mat-footer-cell
+          *matFooterCellDef
+          hidden="true"
+        >
+          ID
         </td>
       </ng-container>
       <ng-container matColumnDef="gar">
@@ -32,13 +47,13 @@
 
       <!-- Sem restrições -->
       <ng-container matColumnDef="semRestricoes">
-        <th style="padding-right: 5px;" mat-header-cell *matHeaderCellDef>
+        <th style="padding-right: 5px" mat-header-cell *matHeaderCellDef>
           <strong>S/REST.</strong>
         </th>
-        <td style="padding-right: 5px;" mat-cell *matCellDef="let cast">
+        <td style="padding-right: 5px" mat-cell *matCellDef="let cast">
           {{ cast.withoutRestriction }}
         </td>
-        <td style="padding-right: 5px;" mat-footer-cell *matFooterCellDef>
+        <td style="padding-right: 5px" mat-footer-cell *matFooterCellDef>
           {{ getTotalCostSem() }}
         </td>
       </ng-container>
@@ -70,42 +85,73 @@
         </td>
       </ng-container>
       <ng-container matColumnDef="actions">
-        <th style="padding-left: 30px;" mat-header-cell *matHeaderCellDef>
+        <th
+          style="padding-left: 30px"
+          mat-header-cell
+          *matHeaderCellDef
+          [hidden]="isQuery"
+        >
           <strong>AÇÕES</strong>
         </th>
-        <td style="padding-left: 20px;" mat-cell *matCellDef="let cast">
-          <div style="display: flex; justify-content: center;">
-          <button (click)="goToUpdate(cast.id)" style="padding: 0px; border: none; background: none; text-align: center; cursor: pointer;">
-          <span class="material-symbols-outlined">
-            edit
-            </span>
-          </button>
-          <button (click)="goToRemove(cast.id)"  style="padding: 0px; border: none; background: none; text-align: center; cursor: pointer;">
-            <span class="material-symbols-outlined">
-              delete
-            </span>
-          </button>
+        <td
+          style="padding-left: 20px"
+          mat-cell
+          *matCellDef="let cast"
+          [hidden]="isQuery"
+        >
+          <div style="display: flex; justify-content: center">
+            <button
+              (click)="goToUpdate(cast.id)"
+              style="
+                padding: 0px;
+                border: none;
+                background: none;
+                text-align: center;
+                cursor: pointer;
+              "
+              [hidden]="isQuery"
+            >
+              <span class="material-symbols-outlined"> edit </span>
+            </button>
+            <button
+              (click)="goToRemove(cast.id)"
+              style="
+                padding: 0px;
+                border: none;
+                background: none;
+                text-align: center;
+                cursor: pointer;
+              "
+            >
+              <span class="material-symbols-outlined"> delete </span>
+            </button>
           </div>
         </td>
-        <td style="padding-right: 5px" mat-footer-cell *matFooterCellDef>
--
+        <td
+          style="padding-right: 5px"
+          mat-footer-cell
+          *matFooterCellDef
+          [hidden]="isQuery"
+        >
+          -
         </td>
       </ng-container>
 
       <tr
-        style="background-color: rgb(38, 163, 221); color: white;"
+        style="background-color: rgb(38, 163, 221); color: white"
         mat-header-row
         *matHeaderRowDef="displayedColumns"
       ></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       <tr
-        style="background-color: rgb(38, 163, 221); color: white; height: 30px;"
+        style="background-color: rgb(38, 163, 221); color: white; height: 30px"
         mat-footer-row
         *matFooterRowDef="displayedColumns"
       ></tr>
     </table>
   </div>
 </div>
+
 <div class="buttons-div">
   <div class="buttons">
     <button (click)="goToAdd()" id="buttonCustom" mat-button>Adicionar</button>

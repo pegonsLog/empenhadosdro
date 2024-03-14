@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -14,7 +14,6 @@ import { CastsService } from '../../../../services/casts.service';
 import { LocalStorageService } from '../../../../services/local.storage.service';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register',
@@ -29,7 +28,7 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
   public formCastRegister: FormGroup;
   public maskDate = 'd0/M0/0000';
   public existData: boolean = false;
@@ -126,16 +125,7 @@ export class RegisterComponent {
           (this.existData = true), (this.responsibles = responsibles);
         }
       });
-
-    this.castsService
-      .listCasts(this.dateReport, this.responsible.shift)
-      .then((casts: Cast[]) => {
-        if (casts) {
-          this.casts = casts.sort((a, b) => a.sector.localeCompare(b.sector));
-          (this.existData = true), (this.casts = casts);
-        }
-      });
-  }
+    }
 
   public report() {
     this.router.navigate(['home']);
@@ -161,5 +151,11 @@ export class RegisterComponent {
 
   backToHome() {
     this.router.navigate(['home']);
+  }
+
+  ngOnDestroy(): void {
+    while(this.responsibles.length){
+      this.responsibles.pop();
+    }
   }
 }
