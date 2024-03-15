@@ -1,10 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
 import { Responsible } from '../../../../interfaces/responsible';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Observable, from } from 'rxjs';
+import { Observable, Subscription, from } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../../../shared/dialogs/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-responsible-list',
@@ -15,6 +23,9 @@ import { Observable, from } from 'rxjs';
 })
 export class ResponsibleListComponent implements OnInit, OnDestroy {
   public existData: boolean = false;
+
+  public subscription: Subscription = new Subscription();
+
   responsibles: Responsible[] = [
     {
       id: '',
@@ -53,7 +64,8 @@ export class ResponsibleListComponent implements OnInit, OnDestroy {
   constructor(
     private responsiblesService: ResponsiblesService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog
   ) {
     this.responsible.nameResponsible =
       this.activatedRoute.snapshot.queryParams['nameResponsible'];
@@ -89,9 +101,15 @@ export class ResponsibleListComponent implements OnInit, OnDestroy {
   }
 
   goToRemove(id: string) {
-    this.responsiblesService
-      .removeResponsible(id)
-      .then(() => this.router.navigate(['home']));
+    const dialogReference = this.dialog.open(ConfirmationDialogComponent);
+    this.subscription = dialogReference
+      .afterClosed()
+      .subscribe((result: any) => {
+        if (result) {
+          this.responsiblesService.removeResponsible(id);
+          location.reload();
+        }
+      });
   }
 
   backToHome() {
@@ -104,8 +122,9 @@ export class ResponsibleListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    while(this.responsibles.length){
+    while (this.responsibles.length) {
       this.responsibles.pop();
     }
+    this.subscription.unsubscribe();
   }
 }

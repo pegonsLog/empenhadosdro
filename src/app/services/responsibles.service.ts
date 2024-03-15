@@ -131,5 +131,12 @@ export class ResponsiblesService {
 
   async removeResponsible(id: string){
     await deleteDoc(doc(this.db, "responsibles", id));
+    const q = query(collection(this.db, 'responsibles'));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      if (doc) {
+        this.responsible = doc.data() as Responsible;
+      }
+    });
   }
 }
