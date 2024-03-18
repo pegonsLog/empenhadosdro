@@ -7,6 +7,7 @@ import { ResponsibleFormComponent } from './modules/responsible/components/respo
 import { ResponsibleListComponent } from './modules/responsible/components/responsible-list/responsible-list.component';
 import { UpdateComponent } from './modules/cast/components/update/update.component';
 import { ResponsibleUpdateComponent } from './modules/responsible/components/responsible-update/responsible-update.component';
+import { authGuard } from './services/auth.guard';
 
 export const routes: Routes = [
   {
@@ -14,11 +15,11 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent
   },
   {
     path: 'register',
-    component: RegisterComponent,
+    component: RegisterComponent
   },
   {
     path: 'update-cast',
@@ -43,5 +44,6 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate:[authGuard]
   },
 ];

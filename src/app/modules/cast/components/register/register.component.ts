@@ -92,6 +92,7 @@ export class RegisterComponent implements OnDestroy {
     private castsService: CastsService,
     private localStorageService: LocalStorageService,
   ) {
+
     this.responsible.registration =
       this.localStorageService.getItem('registration');
     this.responsible.nameResponsible =

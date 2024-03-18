@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { provideNgxMask } from 'ngx-mask';
 import { Cast } from '../../interfaces/cast';
 import { Responsible } from '../../interfaces/responsible';
@@ -124,6 +124,8 @@ export class HomeComponent {
     this.localStorageService.removeItem('shift');
     this.localStorageService.removeItem('role');
     this.localStorageService.removeItem('dateReport');
-    this.router.navigate(['']);
+    this.localStorageService.removeItem('angular17token');
+
+    this.router.navigate(['/login']);
   }
 }
