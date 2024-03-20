@@ -30,16 +30,7 @@ export class LoginComponent implements OnDestroy {
   private nameResponsible: string = 'nameResponsible';
   private role: string = 'role';
 
-  public responsible: Responsible = {
-    registration: '',
-    nameResponsible: '',
-    office: '',
-    sector: '',
-    shift: '',
-    password: '',
-    role: '',
-    id: '',
-  };
+  public responsible!: Responsible;
 
   constructor(
     private router: Router,
@@ -47,9 +38,22 @@ export class LoginComponent implements OnDestroy {
     private localStorageService: LocalStorageService
   ) {
 
+
   }
 
   async onSubmit() {
+
+    this.responsible = {
+      registration: '',
+      nameResponsible: '',
+      office: '',
+      sector: '',
+      shift: '',
+      password: '',
+      role: '',
+      id: '',
+    };
+
     await this.loginService
       .loginResponsible(
         this.registrationField,
@@ -61,7 +65,7 @@ export class LoginComponent implements OnDestroy {
 
         if (responsible) {
           alert('Login foi realizado com sucesso!');
-          localStorage.setItem('angular17token', '123456');
+          localStorage.setItem('angular17token', responsible.id);
           this.localStorageService.setItem(
             'registration',
             this.responsible.registration

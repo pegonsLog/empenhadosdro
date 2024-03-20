@@ -7,6 +7,8 @@ export const authGuard: CanActivateFn = (route, state) => {
 
 
   const localData = localStorage.getItem('angular17token');
+
+  console.log(localData)
   if (localData != null) {
     return true;
   } else {

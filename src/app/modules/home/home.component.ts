@@ -14,6 +14,7 @@ import { Responsible } from '../../interfaces/responsible';
 import { LocalStorageService } from '../../services/local.storage.service';
 import { ResponsiblesService } from '../../services/responsibles.service';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
+import { authGuard } from '../../services/auth.guard';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,6 @@ import { AngularMaterialModule } from '../../shared/angular-material/angular-mat
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-
   public listCastReportForm: FormGroup;
   public listCastRegisterForm: FormGroup;
 
@@ -42,7 +42,7 @@ export class HomeComponent {
     shift: '',
     password: '',
     role: '',
-    id: ''
+    id: '',
   };
 
   public casts: Cast[] = [
@@ -65,20 +65,28 @@ export class HomeComponent {
     private responsibleService: ResponsiblesService,
     private localStorageService: LocalStorageService
   ) {
-    this.responsible.registration = this.localStorageService.getItem('registration');
-    this.responsible.nameResponsible = this.localStorageService.getItem('nameResponsible');
+    this.responsible.registration =
+      this.localStorageService.getItem('registration');
+    this.responsible.nameResponsible =
+      this.localStorageService.getItem('nameResponsible');
     this.responsible.office = this.localStorageService.getItem('office');
     this.responsible.sector = this.localStorageService.getItem('sector');
     this.responsible.shift = this.localStorageService.getItem('shift');
     this.responsible.role = this.localStorageService.getItem('role');
 
     this.listCastReportForm = this.formBuilder.group({
-      castDate: [/*new Date().toLocaleDateString('pt-BR')*/ '26/02/2024', Validators.required],
+      castDate: [
+        /*new Date().toLocaleDateString('pt-BR')*/ '26/02/2024',
+        Validators.required,
+      ],
       shift: ['Manhã', Validators.required],
     });
 
     this.listCastRegisterForm = this.formBuilder.group({
-      registrationResponsible: [this.responsible.registration, Validators.required]
+      registrationResponsible: [
+        this.responsible.registration,
+        Validators.required,
+      ],
     });
   }
 
@@ -86,13 +94,14 @@ export class HomeComponent {
     const castDateReport = this.listCastReportForm.getRawValue().castDate!;
     const shiftReport = this.listCastReportForm.getRawValue().shift!;
     this.responsibleService
-    .responsibleReportCast(castDateReport, shiftReport)
-    .then(() => {
-      if(this.listCastReportForm.valid){
-        this.localStorageService.setItem('castDateReport', castDateReport);
-        this.localStorageService.setItem('shift', shiftReport);
-      this.router.navigate(['report'])}
-    });
+      .responsibleReportCast(castDateReport, shiftReport)
+      .then(() => {
+        if (this.listCastReportForm.valid) {
+          this.localStorageService.setItem('castDateReport', castDateReport);
+          this.localStorageService.setItem('shift', shiftReport);
+          this.router.navigate(['report']);
+        }
+      });
   }
 
   public castRegister() {
@@ -101,8 +110,9 @@ export class HomeComponent {
         this.listCastRegisterForm.getRawValue().registrationResponsible!
       )
       .then((responsible: Responsible) => {
-        if(this.listCastRegisterForm.valid){
-        this.router.navigate(['register'])}
+        if (this.listCastRegisterForm.valid) {
+          this.router.navigate(['register']);
+        }
       });
   }
 
@@ -110,22 +120,12 @@ export class HomeComponent {
     this.router.navigate(['responsible-list'], {
       queryParams: {
         nameResponsible: this.responsible.nameResponsible,
-        role: this.responsible.role
-
+        role: this.responsible.role,
       },
     });
   }
 
-  public close(){
-    this.localStorageService.removeItem('registration');
-    this.localStorageService.removeItem('nameResponsible');
-    this.localStorageService.removeItem('office');
-    this.localStorageService.removeItem('sector');
-    this.localStorageService.removeItem('shift');
-    this.localStorageService.removeItem('role');
-    this.localStorageService.removeItem('dateReport');
-    this.localStorageService.removeItem('angular17token');
-
+  public close() {
     this.router.navigate(['/login']);
   }
 }
