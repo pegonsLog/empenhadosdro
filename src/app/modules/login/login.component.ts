@@ -12,6 +12,7 @@ import { LoginService } from '../../services/login.service';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 import { LocalStorageService } from '../../services/local.storage.service';
 import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
+import { authGuard } from '../../services/auth.guard';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,8 @@ export class LoginComponent implements OnDestroy {
   constructor(
     private router: Router,
     private loginService: LoginService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+
   ) {
 
 
@@ -43,45 +45,50 @@ export class LoginComponent implements OnDestroy {
 
   async onSubmit() {
 
-    this.responsible = {
-      registration: '',
-      nameResponsible: '',
-      office: '',
-      sector: '',
-      shift: '',
-      password: '',
-      role: '',
-      id: '',
-    };
-
-    await this.loginService
-      .loginResponsible(
-        this.registrationField,
-        this.passwordField
-      )
-      .then((responsible: Responsible) => {
-        console.log(responsible);
+    // localStorage.setItem('registration', this.registrationField);
+    // localStorage.setItem('password', this.passwordField);
 
 
-        if (responsible) {
-          alert('Login foi realizado com sucesso!');
-          localStorage.setItem('angular17token', responsible.id);
-          this.localStorageService.setItem(
-            'registration',
-            this.responsible.registration
-          );
-          this.localStorageService.setItem(
-            'nameResponsible',
-            this.responsible.nameResponsible
-          );
-          this.localStorageService.setItem('office', this.responsible.office);
-          this.localStorageService.setItem('sector', this.responsible.sector);
-          this.localStorageService.setItem('shift', this.responsible.shift);
-          this.localStorageService.setItem('role', this.responsible.role);
+
+    // this.responsible = {
+    //   registration: '',
+    //   nameResponsible: '',
+    //   office: '',
+    //   sector: '',
+    //   shift: '',
+    //   password: '',
+    //   role: '',
+    //   id: '',
+    // };
+
+    // await this.loginService
+      // .loginResponsible(
+      //   this.registrationField,
+      //   this.passwordField
+      // )
+      // .then((responsible: Responsible) => {
+      //   console.log(responsible);
+
+
+      //   if (responsible) {
+      //     alert('Login foi realizado com sucesso!');
+      //     localStorage.setItem('angular17token', responsible.id);
+      //     this.localStorageService.setItem(
+      //       'registration',
+      //       this.responsible.registration
+      //     );
+      //     this.localStorageService.setItem(
+      //       'nameResponsible',
+      //       this.responsible.nameResponsible
+      //     );
+      //     this.localStorageService.setItem('office', this.responsible.office);
+      //     this.localStorageService.setItem('sector', this.responsible.sector);
+      //     this.localStorageService.setItem('shift', this.responsible.shift);
+      //     this.localStorageService.setItem('role', this.responsible.role);
           this.router.navigate(['home']);
-        } else {
-          alert('Usuário não cadastrado!');
-        }})
+      //   } else {
+      //     alert('Usuário não cadastrado!');
+      //   }})
       }
 
 
