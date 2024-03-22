@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -30,7 +30,7 @@ import { authGuard } from '../../services/auth.guard';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnDestroy {
   public listCastReportForm: FormGroup;
   public listCastRegisterForm: FormGroup;
 
@@ -88,6 +88,9 @@ export class HomeComponent {
         Validators.required,
       ],
     });
+  }
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
   }
 
   public castReport() {

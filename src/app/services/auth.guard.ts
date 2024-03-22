@@ -10,20 +10,14 @@ export const authGuard: CanActivateFn = (route, state) => {
   const registrationLogin: any = localStorage.getItem('registration');
   const passwordLogin: any = localStorage.getItem('password');
 
-  loginGuard
-    .loginResponsible('564', '1234567')
-    .then((result: any) => {
-      if (result) {
-        console.log('Existe result')
-        console.log(result)
-        return true;
-      }else{
-        console.log('Não Existe result')
-        console.log(result)
-        return false;
-      }
-    });
-    return false ;
+  loginGuard.loginResponsible('564', '1234567').then((result) => {
+
+      console.log('Existe result');
+      console.log(result);
+      return true;
+
+  });
+  return false;
 };
 
 // const localData = localStorage.getItem('angular17token');
