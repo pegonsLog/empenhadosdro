@@ -2,31 +2,24 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { Responsible } from '../interfaces/responsible';
+import { map } from 'rxjs';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
-  const loginGuard = inject(LoginService);
+  // const router = inject(Router);
+  const loginService = inject(LoginService);
 
   const registrationLogin: any = localStorage.getItem('registration');
   const passwordLogin: any = localStorage.getItem('password');
 
-  loginGuard.loginResponsible('564', '1234567').then((result) => {
+  const result = loginService.loginResponsible(registrationLogin, passwordLogin).then();
 
-      console.log('Existe result');
-      console.log(result);
-      return true;
+  if (result) {
+    result.then((data) => console.log(data))
+    return true;
+  }
 
-  });
-  return false;
-};
+  return false
 
-// const localData = localStorage.getItem('angular17token');
+}
 
-// console.log(localData)
-// if (localData != null) {
-//   return true;
-// } else {
-//   router.navigateByUrl('/login')
-//   return false;
-// }
-// };
+

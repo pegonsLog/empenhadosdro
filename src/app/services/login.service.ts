@@ -18,10 +18,13 @@ import { environment } from '../shared/environment/environment.development';
 export class LoginService {
   firebaseConfig = environment.firebase;
 
+  id = '';
+
   public error: any;
 
   private app = initializeApp(this.firebaseConfig);
   private db = getFirestore(this.app);
+  private responsibles: Responsible[] = [];
   responsible: Responsible = {
     registration: '',
     nameResponsible: '',
@@ -37,19 +40,24 @@ export class LoginService {
     const q = query(
       collection(this.db, 'responsibles'),
       where('registration', '==', registration) &&
-        where('password', '==', password)
+      where('password', '==', password)
     );
 
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
       const responsible = doc.data() as Responsible;
-      if (responsible.id == '') {
-        this.oneResponsible(responsible.id).then((result: Responsible) => {
-          console.log(result);
-        });
-      }
+      this.responsibles.push(responsible);
     });
+
+    if (this.id != '') {
+      this.oneResponsible(this.id).then((resp: Responsible) => {
+        return this.responsible;
+
+      });
+    }
+    return this.responsibles;
+
   }
 
   async oneResponsible(id: string) {

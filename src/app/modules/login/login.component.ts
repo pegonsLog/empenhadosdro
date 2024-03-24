@@ -21,7 +21,7 @@ import { authGuard } from '../../services/auth.guard';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent {
   // public loginForm: FormGroup;
 
   public registrationField: string = '564';
@@ -45,15 +45,24 @@ export class LoginComponent implements OnDestroy {
 
   async onSubmit() {
 
-    // localStorage.setItem('registration', this.registrationField);
-    // localStorage.setItem('password', this.passwordField);
+    localStorage.setItem('registration', this.registrationField);
+    localStorage.setItem('password', this.passwordField);
+
+
+    this.router.navigate(['home']);
+    //   } else {
+      //     alert('Usuário não cadastrado!');
+      //   }})
+      }
+
+    }
 
 
 
     // this.responsible = {
-    //   registration: '',
-    //   nameResponsible: '',
-    //   office: '',
+      //   registration: '',
+      //   nameResponsible: '',
+      //   office: '',
     //   sector: '',
     //   shift: '',
     //   password: '',
@@ -67,63 +76,55 @@ export class LoginComponent implements OnDestroy {
       //   this.passwordField
       // )
       // .then((responsible: Responsible) => {
-      //   console.log(responsible);
+        //   console.log(responsible);
 
 
-      //   if (responsible) {
-      //     alert('Login foi realizado com sucesso!');
+        //   if (responsible) {
+          //     alert('Login foi realizado com sucesso!');
       //     localStorage.setItem('angular17token', responsible.id);
       //     this.localStorageService.setItem(
-      //       'registration',
+        //       'registration',
       //       this.responsible.registration
       //     );
       //     this.localStorageService.setItem(
-      //       'nameResponsible',
+        //       'nameResponsible',
       //       this.responsible.nameResponsible
       //     );
       //     this.localStorageService.setItem('office', this.responsible.office);
       //     this.localStorageService.setItem('sector', this.responsible.sector);
       //     this.localStorageService.setItem('shift', this.responsible.shift);
       //     this.localStorageService.setItem('role', this.responsible.role);
-          this.router.navigate(['home']);
-      //   } else {
-      //     alert('Usuário não cadastrado!');
-      //   }})
-      }
 
 
-  //   await this.loginService
-  //     .loginResponsible(
-  //       this.loginForm.getRawValue().registration!,
-  //       this.loginForm.getRawValue().password!
-  //     )
-  //     .then((responsible: Responsible) => (this.responsible = responsible));
 
-  //   if (
-  //     this.responsible.registration ===
-  //       this.loginForm.getRawValue().registration &&
-  //     this.responsible.password === this.loginForm.getRawValue().password
-  //   ) {
-  //     this.localStorageService.setItem(
-  //       'registration',
-  //       this.responsible.registration
-  //     );
-  //     this.localStorageService.setItem(
-  //       'nameResponsible',
-  //       this.responsible.nameResponsible
-  //     );
-  //     this.localStorageService.setItem('office', this.responsible.office);
-  //     this.localStorageService.setItem('sector', this.responsible.sector);
-  //     this.localStorageService.setItem('shift', this.responsible.shift);
-  //     this.localStorageService.setItem('role', this.responsible.role);
+            //   await this.loginService
+            //     .loginResponsible(
+              //       this.loginForm.getRawValue().registration!,
+              //       this.loginForm.getRawValue().password!
+              //     )
+              //     .then((responsible: Responsible) => (this.responsible = responsible));
 
-  //     {
-  //       this.router.navigate(['home']);
-  //     }
-  //   } else {
-  //     alert('Usuário não cadastrado!');
-  //   }
+              //   if (
+                //     this.responsible.registration ===
+        //       this.loginForm.getRawValue().registration &&
+        //     this.responsible.password === this.loginForm.getRawValue().password
+        //   ) {
+          //     this.localStorageService.setItem(
+            //       'registration',
+            //       this.responsible.registration
+            //     );
+            //     this.localStorageService.setItem(
+              //       'nameResponsible',
+              //       this.responsible.nameResponsible
+              //     );
+              //     this.localStorageService.setItem('office', this.responsible.office);
+              //     this.localStorageService.setItem('sector', this.responsible.sector);
+              //     this.localStorageService.setItem('shift', this.responsible.shift);
+              //     this.localStorageService.setItem('role', this.responsible.role);
 
-  ngOnDestroy(): void {}
-}
-
+              //     {
+                //       this.router.navigate(['home']);
+                //     }
+                //   } else {
+                  //     alert('Usuário não cadastrado!');
+        //   }
