@@ -15,6 +15,7 @@ import { LocalStorageService } from '../../services/local.storage.service';
 import { ResponsiblesService } from '../../services/responsibles.service';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 import { authGuard } from '../../services/auth.guard';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,7 @@ import { authGuard } from '../../services/auth.guard';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnDestroy {
+export class HomeComponent{
   public listCastReportForm: FormGroup;
   public listCastRegisterForm: FormGroup;
 
@@ -63,16 +64,15 @@ export class HomeComponent implements OnDestroy {
     private router: Router,
     private formBuilder: FormBuilder,
     private responsibleService: ResponsiblesService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private loginService: LoginService
   ) {
-    this.responsible.registration =
-      this.localStorageService.getItem('registration');
-    this.responsible.nameResponsible =
-      this.localStorageService.getItem('nameResponsible');
-    this.responsible.office = this.localStorageService.getItem('office');
-    this.responsible.sector = this.localStorageService.getItem('sector');
-    this.responsible.shift = this.localStorageService.getItem('shift');
-    this.responsible.role = this.localStorageService.getItem('role');
+    // this.responsible.registration = localStorage.getItem('registration')!;
+    // this.responsible.nameResponsible = localStorage.getItem('nameResponsible')!;
+    // this.responsible.office = localStorage.getItem('office')!;
+    // this.responsible.sector = localStorage.getItem('sector')!;
+    // this.responsible.shift = localStorage.getItem('shift')!;
+    // this.responsible.role = localStorage.getItem('role')!;
 
     this.listCastReportForm = this.formBuilder.group({
       castDate: [
@@ -88,9 +88,6 @@ export class HomeComponent implements OnDestroy {
         Validators.required,
       ],
     });
-  }
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
   }
 
   public castReport() {
@@ -129,6 +126,8 @@ export class HomeComponent implements OnDestroy {
   }
 
   public close() {
-    this.router.navigate(['/login']);
+    this.loginService.loginResponsible('', '').then();
+    this.router.navigate(['/']);
   }
+
 }

@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import {
   collection,
-  doc,
-  getDoc,
   getDocs,
   getFirestore,
   query,
@@ -18,13 +16,10 @@ import { environment } from '../shared/environment/environment.development';
 export class LoginService {
   firebaseConfig = environment.firebase;
 
-  id = '';
-
   public error: any;
 
   private app = initializeApp(this.firebaseConfig);
   private db = getFirestore(this.app);
-  private responsibles: Responsible[] = [];
   responsible: Responsible = {
     registration: '',
     nameResponsible: '',
@@ -36,46 +31,54 @@ export class LoginService {
     id: '',
   };
 
+  constructor() {}
+
   async loginResponsible(registration: string, password: string) {
     const q = query(
       collection(this.db, 'responsibles'),
       where('registration', '==', registration) &&
-      where('password', '==', password)
+        where('password', '==', password)
     );
 
     const querySnapshot = await getDocs(q);
 
-    querySnapshot.forEach((doc) => {
-      const responsible = doc.data() as Responsible;
-      this.responsibles.push(responsible);
+  querySnapshot.forEach((doc) => {
+
+    console.log(doc.id)
+      // if (doc.exists()
+      // ) {
+      //   this.responsible = doc.data() as Responsible;
+      // }
     });
-
-    if (this.id != '') {
-      this.oneResponsible(this.id).then((resp: Responsible) => {
-        return this.responsible;
-
-      });
-    }
-    return this.responsibles;
-
-  }
-
-  async oneResponsible(id: string) {
-    const docRef = doc(this.db, 'responsibles', id);
-    const docSnap = await getDoc(docRef);
-    const responsible = docSnap.data() as Responsible;
-
-    if (docSnap.exists()) {
-      this.responsible.id = docRef.id;
-      this.responsible.registration = responsible.registration;
-      this.responsible.nameResponsible = responsible.nameResponsible;
-      this.responsible.office = responsible.office;
-      this.responsible.sector = responsible.sector;
-      this.responsible.shift = responsible.shift;
-      this.responsible.password = responsible.password;
-      this.responsible.role = responsible.role;
-    }
-
-    return this.responsible;
+    return this.responsible
   }
 }
+
+// async oneResponsible(id: string) {
+//   const docRef = doc(this.db, 'responsibles', id);
+//   const docSnap = await getDoc(docRef);
+//   const responsible = docSnap.data() as Responsible;
+
+//   if (docSnap.exists()) {
+//     this.responsible.id = docRef.id;
+//     this.responsible.registration = responsible.registration;
+//     this.responsible.nameResponsible = responsible.nameResponsible;
+//     this.responsible.office = responsible.office;
+//     this.responsible.sector = responsible.sector;
+//     this.responsible.shift = responsible.shift;
+//     this.responsible.password = responsible.password;
+//     this.responsible.role = responsible.role;
+//   }
+
+//   return this.responsible;
+// }
+
+// localStorage.setItem('registration',  this.responsible.registration);
+// localStorage.setItem('nameResponsible',  this.responsible.nameResponsible);
+// localStorage.setItem('office',  this.responsible.office);
+// localStorage.setItem('sector',  this.responsible.sector);
+// localStorage.setItem('shift',  this.responsible.shift);
+// localStorage.setItem('role',  this.responsible.role);
+
+// localStorage.removeItem('registration');
+// localStorage.removeItem('password')
