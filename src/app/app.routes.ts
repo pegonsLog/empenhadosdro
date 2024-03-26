@@ -8,6 +8,7 @@ import { ResponsibleListComponent } from './modules/responsible/components/respo
 import { UpdateComponent } from './modules/cast/components/update/update.component';
 import { ResponsibleUpdateComponent } from './modules/responsible/components/responsible-update/responsible-update.component';
 import { authGuard } from './services/auth.guard';
+import { canDeactivateGuard } from './services/can-deactivate.guard';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,8 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate:[authGuard]
+    canActivate:[authGuard],
+    canDeactivate:[canDeactivateGuard]
+
   },
 ];

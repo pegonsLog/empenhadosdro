@@ -1,8 +1,9 @@
 import { Component, ElementRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Responsible } from '../../interfaces/responsible';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent {
 
   public responsible: Responsible;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private loginService: LoginService) {
     this.responsible = {
       registration: '',
       nameResponsible: '',
@@ -36,11 +37,13 @@ export class LoginComponent {
     };
   }
 
+  async onSubmit(registration: string, password: string) {
 
-  async onSubmit() {
- 
-    localStorage.setItem('registration', this.registrationField);
-    localStorage.setItem('password', this.passwordField);
-    this.router.navigate(['home']);
+    await this.loginService
+      .loginResponsible(registration, password)
+      .then((responsible: Responsible) => {
+        localStorage.setItem('registration', responsible.registration);
+        this.router.navigate(['home']);
+      });
   }
 }

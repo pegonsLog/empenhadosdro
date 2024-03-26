@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import {
   collection,
+  doc,
+  getDoc,
   getDocs,
   getFirestore,
   query,
@@ -42,36 +44,32 @@ export class LoginService {
 
     const querySnapshot = await getDocs(q);
 
-  querySnapshot.forEach((doc) => {
-
-    console.log(doc.id)
-      // if (doc.exists()
-      // ) {
-      //   this.responsible = doc.data() as Responsible;
-      // }
+    querySnapshot.forEach((doc) => {
+      if (doc.id) this.responsible = doc.data() as Responsible;
     });
-    return this.responsible
+
+    return this.responsible;
+  }
+
+  async oneResponsible(id: string) {
+    const docRef = doc(this.db, 'responsibles', id);
+    const docSnap = await getDoc(docRef);
+    const responsible = docSnap.data() as Responsible;
+
+    if (docSnap.exists()) {
+      this.responsible.id = docRef.id;
+      this.responsible.registration = responsible.registration;
+      this.responsible.nameResponsible = responsible.nameResponsible;
+      this.responsible.office = responsible.office;
+      this.responsible.sector = responsible.sector;
+      this.responsible.shift = responsible.shift;
+      this.responsible.password = responsible.password;
+      this.responsible.role = responsible.role;
+    }
+
+    return this.responsible;
   }
 }
-
-// async oneResponsible(id: string) {
-//   const docRef = doc(this.db, 'responsibles', id);
-//   const docSnap = await getDoc(docRef);
-//   const responsible = docSnap.data() as Responsible;
-
-//   if (docSnap.exists()) {
-//     this.responsible.id = docRef.id;
-//     this.responsible.registration = responsible.registration;
-//     this.responsible.nameResponsible = responsible.nameResponsible;
-//     this.responsible.office = responsible.office;
-//     this.responsible.sector = responsible.sector;
-//     this.responsible.shift = responsible.shift;
-//     this.responsible.password = responsible.password;
-//     this.responsible.role = responsible.role;
-//   }
-
-//   return this.responsible;
-// }
 
 // localStorage.setItem('registration',  this.responsible.registration);
 // localStorage.setItem('nameResponsible',  this.responsible.nameResponsible);

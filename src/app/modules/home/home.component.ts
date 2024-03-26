@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -12,10 +12,9 @@ import { provideNgxMask } from 'ngx-mask';
 import { Cast } from '../../interfaces/cast';
 import { Responsible } from '../../interfaces/responsible';
 import { LocalStorageService } from '../../services/local.storage.service';
+import { LoginService } from '../../services/login.service';
 import { ResponsiblesService } from '../../services/responsibles.service';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
-import { authGuard } from '../../services/auth.guard';
-import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-home',
@@ -34,6 +33,8 @@ import { LoginService } from '../../services/login.service';
 export class HomeComponent{
   public listCastReportForm: FormGroup;
   public listCastRegisterForm: FormGroup;
+
+  public isLogged: boolean = false;
 
   responsible: Responsible = {
     registration: '',
@@ -126,7 +127,7 @@ export class HomeComponent{
   }
 
   public close() {
-    this.loginService.loginResponsible('', '').then();
+    this.isLogged = false
     this.router.navigate(['/']);
   }
 
