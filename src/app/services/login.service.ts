@@ -11,6 +11,7 @@ import {
 } from 'firebase/firestore';
 import { Responsible } from '../interfaces/responsible';
 import { environment } from '../shared/environment/environment.development';
+import { ForwardRefHandling } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
@@ -38,14 +39,18 @@ export class LoginService {
   async loginResponsible(registration: string, password: string) {
     const q = query(
       collection(this.db, 'responsibles'),
-      where('registration', '==', registration) &&
-        where('password', '==', password)
+      where('registration', '==', registration)
     );
 
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
-      if (doc.id) this.responsible = doc.data() as Responsible;
+      if (doc.id) {
+        const responsible = doc.data() as Responsible;
+        if(responsible.password == password && responsible.registration == registration){
+          this.responsible = responsible;
+        }
+      }
     });
 
     return this.responsible;

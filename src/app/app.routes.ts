@@ -1,14 +1,13 @@
 import { Routes } from '@angular/router';
 import { RegisterComponent } from './modules/cast/components/register/register.component';
 import { ReportComponent } from './modules/cast/components/report/report.component';
+import { UpdateComponent } from './modules/cast/components/update/update.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import { ResponsibleFormComponent } from './modules/responsible/components/responsible-form/responsible-form.component';
 import { ResponsibleListComponent } from './modules/responsible/components/responsible-list/responsible-list.component';
-import { UpdateComponent } from './modules/cast/components/update/update.component';
 import { ResponsibleUpdateComponent } from './modules/responsible/components/responsible-update/responsible-update.component';
 import { authGuard } from './services/auth.guard';
-import { canDeactivateGuard } from './services/can-deactivate.guard';
 
 export const routes: Routes = [
   {
@@ -46,7 +45,5 @@ export const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     canActivate:[authGuard],
-    canDeactivate:[canDeactivateGuard]
-
   },
 ];

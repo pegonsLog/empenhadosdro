@@ -12,7 +12,6 @@ import { provideNgxMask } from 'ngx-mask';
 import { Cast } from '../../interfaces/cast';
 import { Responsible } from '../../interfaces/responsible';
 import { LocalStorageService } from '../../services/local.storage.service';
-import { LoginService } from '../../services/login.service';
 import { ResponsiblesService } from '../../services/responsibles.service';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 
@@ -30,7 +29,7 @@ import { AngularMaterialModule } from '../../shared/angular-material/angular-mat
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent{
+export class HomeComponent {
   public listCastReportForm: FormGroup;
   public listCastRegisterForm: FormGroup;
 
@@ -66,14 +65,14 @@ export class HomeComponent{
     private formBuilder: FormBuilder,
     private responsibleService: ResponsiblesService,
     private localStorageService: LocalStorageService,
-    private loginService: LoginService
   ) {
-    // this.responsible.registration = localStorage.getItem('registration')!;
-    // this.responsible.nameResponsible = localStorage.getItem('nameResponsible')!;
-    // this.responsible.office = localStorage.getItem('office')!;
-    // this.responsible.sector = localStorage.getItem('sector')!;
-    // this.responsible.shift = localStorage.getItem('shift')!;
-    // this.responsible.role = localStorage.getItem('role')!;
+    this.responsible.registration = localStorage.getItem('registration')!;
+    this.responsible.nameResponsible = localStorage.getItem('nameResponsible')!;
+    this.responsible.office = localStorage.getItem('office')!;
+    this.responsible.sector = localStorage.getItem('sector')!;
+    this.responsible.shift = localStorage.getItem('shift')!;
+    this.responsible.role = localStorage.getItem('role')!;
+    this.responsible.password = localStorage.getItem('password')!;
 
     this.listCastReportForm = this.formBuilder.group({
       castDate: [
@@ -127,8 +126,8 @@ export class HomeComponent{
   }
 
   public close() {
-    this.isLogged = false
-    this.router.navigate(['/']);
+    this.isLogged = false;
+    localStorage.clear();
+    this.router.navigateByUrl('/login');
   }
-
 }
