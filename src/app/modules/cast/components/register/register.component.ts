@@ -11,7 +11,6 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { Cast } from '../../../../interfaces/cast';
 import { Responsible } from '../../../../interfaces/responsible';
 import { CastsService } from '../../../../services/casts.service';
-import { LocalStorageService } from '../../../../services/local.storage.service';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 
@@ -89,18 +88,14 @@ export class RegisterComponent implements OnDestroy {
     private router: Router,
     private fb: FormBuilder,
     private responsiblesService: ResponsiblesService,
-    private castsService: CastsService,
-    private localStorageService: LocalStorageService,
+    private castsService: CastsService
   ) {
-
-    this.responsible.registration =
-      this.localStorageService.getItem('registration');
-    this.responsible.nameResponsible =
-      this.localStorageService.getItem('nameResponsible');
-    this.responsible.office = this.localStorageService.getItem('office');
-    this.responsible.sector = this.localStorageService.getItem('sector');
-    this.responsible.shift = this.localStorageService.getItem('shift');
-    this.responsible.role = this.localStorageService.getItem('role');
+    this.responsible.registration = localStorage.getItem('registration')!;
+    this.responsible.nameResponsible = localStorage.getItem('nameResponsible')!;
+    this.responsible.office = localStorage.getItem('office')!;
+    this.responsible.sector = localStorage.getItem('sector')!;
+    this.responsible.shift = localStorage.getItem('shift')!;
+    this.responsible.role = localStorage.getItem('role')!;
 
     this.formCastRegister = this.fb.group({
       castDate: ['', Validators.required],
@@ -126,7 +121,7 @@ export class RegisterComponent implements OnDestroy {
           (this.existData = true), (this.responsibles = responsibles);
         }
       });
-    }
+  }
 
   public report() {
     this.router.navigate(['home']);
@@ -155,7 +150,7 @@ export class RegisterComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    while(this.responsibles.length){
+    while (this.responsibles.length) {
       this.responsibles.pop();
     }
   }

@@ -6,7 +6,6 @@ import { NgxMaskDirective } from 'ngx-mask';
 import { Cast } from '../../../../interfaces/cast';
 import { Responsible } from '../../../../interfaces/responsible';
 import { CastsService } from '../../../../services/casts.service';
-import { LocalStorageService } from '../../../../services/local.storage.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 
 @Component({
@@ -64,16 +63,15 @@ export class UpdateComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private castsService: CastsService,
-    private localStorageService: LocalStorageService
   ) {
     this.responsible.registration =
-      this.localStorageService.getItem('registration');
+      localStorage.getItem('registration')!;
     this.responsible.nameResponsible =
-      this.localStorageService.getItem('nameResponsible');
-    this.responsible.office = this.localStorageService.getItem('office');
-    this.responsible.sector = this.localStorageService.getItem('sector');
-    this.responsible.shift = this.localStorageService.getItem('shift');
-    this.responsible.role = this.localStorageService.getItem('role');
+      localStorage.getItem('nameResponsible')!;
+    this.responsible.office = localStorage.getItem('office')!;
+    this.responsible.sector = localStorage.getItem('sector')!;
+    this.responsible.shift = localStorage.getItem('shift')!;
+    this.responsible.role = localStorage.getItem('role')!;
 
     this.id = this.activatedRoute.snapshot.queryParams['id'];
 

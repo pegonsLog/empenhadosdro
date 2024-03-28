@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 import { provideNgxMask } from 'ngx-mask';
 import { Cast } from '../../interfaces/cast';
 import { Responsible } from '../../interfaces/responsible';
-import { LocalStorageService } from '../../services/local.storage.service';
 import { ResponsiblesService } from '../../services/responsibles.service';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 
@@ -64,7 +63,6 @@ export class HomeComponent {
     private router: Router,
     private formBuilder: FormBuilder,
     private responsibleService: ResponsiblesService,
-    private localStorageService: LocalStorageService,
   ) {
     this.responsible.registration = localStorage.getItem('registration')!;
     this.responsible.nameResponsible = localStorage.getItem('nameResponsible')!;
@@ -97,8 +95,8 @@ export class HomeComponent {
       .responsibleReportCast(castDateReport, shiftReport)
       .then(() => {
         if (this.listCastReportForm.valid) {
-          this.localStorageService.setItem('castDateReport', castDateReport);
-          this.localStorageService.setItem('shift', shiftReport);
+          localStorage.setItem('castDateReport', castDateReport);
+          localStorage.setItem('shift', shiftReport);
           this.router.navigate(['report']);
         }
       });
@@ -106,13 +104,9 @@ export class HomeComponent {
 
   public castRegister() {
     this.responsibleService
-      .responsibleRegisterCast(
-        this.listCastRegisterForm.getRawValue().registrationResponsible!
-      )
+      .responsibleRegisterCast(localStorage.getItem('registration')!)
       .then((responsible: Responsible) => {
-        if (this.listCastRegisterForm.valid) {
-          this.router.navigate(['register']);
-        }
+        this.router.navigate(['register']);
       });
   }
 

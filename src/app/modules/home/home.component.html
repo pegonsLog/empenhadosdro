@@ -9,7 +9,7 @@
     <mat-expansion-panel hideToggle class="mat-elevation-z0">
       <mat-expansion-panel-header>
         <mat-panel-description >
-          Consultar equipe do dia
+          Consultar equipe
         </mat-panel-description>
       </mat-expansion-panel-header>
 
@@ -34,26 +34,11 @@
     </mat-expansion-panel>
   </form>
   @if(responsible.role === 'adm' || responsible.role === 'user'){
-  <form [formGroup]="listCastRegisterForm">
-    <mat-expansion-panel hideToggle class="mat-elevation-z0">
-      <mat-expansion-panel-header>
-        <mat-panel-description >
-          Adicionar equipe do dia
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <mat-form-field class="home-full-width">
-        <mat-label>Informe a matrícula</mat-label>
-        <input type="text" matInput placeholder="Matrícula" formControlName="registrationResponsible" readonly="true"/>
-      </mat-form-field>
-
-       <p>
-        <button id="button-white" type="submit" mat-button (click)="castRegister()">
-          Ok
-        </button>
-      </p>
-    </mat-expansion-panel>
-  </form>
+    <p>
+      <button id="buttonCustom" (click)="castRegister()" mat-button>
+        Adicionar equipe
+      </button>
+    </p>
   }
     @if(responsible.role === 'adm'){
       <p>

@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { Cast } from '../../../../interfaces/cast';
 import { Responsible } from '../../../../interfaces/responsible';
 import { CastsService } from '../../../../services/casts.service';
-import { LocalStorageService } from '../../../../services/local.storage.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../../shared/dialogs/confirmation/confirmation.component';
 
@@ -20,7 +19,7 @@ import { ConfirmationDialogComponent } from '../../../../shared/dialogs/confirma
 export class ReportComponent implements OnDestroy {
   public existData: boolean = false;
   public typeForm: boolean = true;
-  public isQuery: boolean = false
+  public isQuery: boolean = false;
 
   public subscription: Subscription = new Subscription();
 
@@ -79,16 +78,15 @@ export class ReportComponent implements OnDestroy {
   constructor(
     private router: Router,
     private castsService: CastsService,
-    private localStorageService: LocalStorageService,
     public dialog: MatDialog
   ) {
-    this.dateReport = this.localStorageService.getItem('castDateReport');
-    this.shift = this.localStorageService.getItem('shift');
-   this.role = this.localStorageService.getItem('role');
+    this.dateReport = localStorage.getItem('castDateReport')!;
+    this.shift = localStorage.getItem('shift')!;
+    this.role = localStorage.getItem('role')!;
 
-   if(this.role === 'query'){
-    this.isQuery = true;
-        }
+    if (this.role === 'query') {
+      this.isQuery = true;
+    }
 
     this.castsService
       .listCasts(this.dateReport, this.shift)
@@ -130,7 +128,9 @@ export class ReportComponent implements OnDestroy {
       .afterClosed()
       .subscribe((result: any) => {
         if (result) {
-          this.castsService.removeCast(id).then(() =>  this.router.navigate(['home']));
+          this.castsService
+            .removeCast(id)
+            .then(() => this.router.navigate(['home']));
         }
       });
   }
@@ -140,7 +140,7 @@ export class ReportComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    while(this.casts.length){
+    while (this.casts.length) {
       this.casts.pop();
     }
     this.subscription.unsubscribe();
