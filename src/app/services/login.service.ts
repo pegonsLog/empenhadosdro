@@ -12,6 +12,7 @@ import {
 import { Responsible } from '../interfaces/responsible';
 import { environment } from '../shared/environment/environment.development';
 import { ForwardRefHandling } from '@angular/compiler';
+import { from, map, pipe } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -47,7 +48,10 @@ export class LoginService {
     querySnapshot.forEach((doc) => {
       if (doc.id) {
         const responsible = doc.data() as Responsible;
-        if(responsible.password == password && responsible.registration == registration){
+        if (
+          responsible.password == password &&
+          responsible.registration == registration
+        ) {
           this.responsible = responsible;
         }
       }

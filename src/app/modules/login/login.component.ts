@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Responsible } from '../../interfaces/responsible';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
@@ -14,37 +14,48 @@ import { state } from '@angular/animations';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
-  // public loginForm: FormGroup;
+export class LoginComponent implements OnInit {
+  public loginForm: FormGroup;
 
   public registrationField: string = '564';
   public passwordField: string = '123456';
+
+  public responsible: Responsible = {
+    registration: '',
+    nameResponsible: '',
+    office: '',
+    sector: '',
+    shift: '',
+    password: '',
+    role: '',
+    id: '',
+  };
 
   // private registration: string = 'registration';
   // private nameResponsible: string = 'nameResponsible';
   // private role: string = 'role';
 
-  public responsible: Responsible;
 
   constructor(
     private router: Router,
     private loginService: LoginService,
+    private fb: FormBuilder
   ) {
-    this.responsible = {
-      registration: '',
-      nameResponsible: '',
-      office: '',
-      sector: '',
-      shift: '',
-      password: '',
-      role: '',
-      id: '',
-    };
+    this.loginForm = this.fb.group({
+      registrationField: ['564', Validators.required],
+      passwordField: ['123456', Validators.required],
+    });
   }
 
-  async onSubmit(registration: string, password: string) {
+  ngOnInit(): void {
+    this.loginService.loginResponsible('','').then((result)=>{result.registration = ''});
+  }
+
+
+
+  async onSubmit() {
     await this.loginService
-      .loginResponsible(registration, password)
+      .loginResponsible(this.loginForm.getRawValue().registrationField, this.loginForm.getRawValue().passwordField)
       .then((responsible: Responsible) => {
         localStorage.setItem('registration', responsible.registration);
         localStorage.setItem('nameResponsible', responsible.nameResponsible);

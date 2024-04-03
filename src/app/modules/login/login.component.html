@@ -1,5 +1,5 @@
-<div id="container" style="padding: 50px 10px 0px 10px;">
-  <div>
+<div id="container" style="padding: 50px 10px 0px 10px">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <p>
       <mat-toolbar>
         <span>Equipe empenhada DRO</span>
@@ -7,17 +7,25 @@
     </p>
     <mat-form-field class="login-full-width">
       <mat-label>Usuário</mat-label>
-      <input type="text" matInput placeholder="Usuário" [(ngModel)]="registrationField"/>
+      <input
+        type="text"
+        matInput
+        placeholder="Usuário"
+        formControlName="registrationField"
+      />
     </mat-form-field>
 
     <mat-form-field class="login-full-width">
       <mat-label>Senha</mat-label>
-      <input type="password" matInput placeholder="Senha" [(ngModel)]="passwordField"/>
+      <input
+        type="password"
+        matInput
+        placeholder="Senha"
+        formControlName="passwordField"
+      />
     </mat-form-field>
     <p>
-      <button id="buttonCustom" (click)="onSubmit(registrationField, passwordField)" mat-button >
-        Entrar
-      </button>
+      <button id="buttonCustom" mat-button type="submit">Entrar</button>
     </p>
-  </div>
+  </form>
 </div>
