@@ -11,8 +11,6 @@ import {
 } from 'firebase/firestore';
 import { Responsible } from '../interfaces/responsible';
 import { environment } from '../shared/environment/environment.development';
-import { ForwardRefHandling } from '@angular/compiler';
-import { from, map, pipe } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
