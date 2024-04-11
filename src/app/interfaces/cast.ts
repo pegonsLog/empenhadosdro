@@ -1,4 +1,4 @@
-export interface Cast {
+export interface ICast {
   id: string,
   registration: string;
   nameResponsible: string;

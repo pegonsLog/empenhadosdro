@@ -9,8 +9,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { provideNgxMask } from 'ngx-mask';
-import { Cast } from '../../interfaces/cast';
-import { Responsible } from '../../interfaces/responsible';
+import { ICast } from '../../interfaces/cast';
+import { IResponsible } from '../../interfaces/responsible';
 import { ResponsiblesService } from '../../services/responsibles.service';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 
@@ -34,7 +34,7 @@ export class HomeComponent {
 
   public isLogged: boolean = false;
 
-  responsible: Responsible = {
+  responsible: IResponsible = {
     registration: '',
     nameResponsible: '',
     office: '',
@@ -45,7 +45,7 @@ export class HomeComponent {
     id: '',
   };
 
-  public casts: Cast[] = [
+  public casts: ICast[] = [
     {
       id: '',
       registration: '',
@@ -105,7 +105,7 @@ export class HomeComponent {
   public castRegister() {
     this.responsibleService
       .responsibleRegisterCast(localStorage.getItem('registration')!)
-      .then((responsible: Responsible) => {
+      .then((responsible: IResponsible) => {
         this.router.navigate(['register']);
       });
   }

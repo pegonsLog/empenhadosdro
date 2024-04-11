@@ -11,7 +11,7 @@ import {
   query,
   updateDoc,
 } from 'firebase/firestore';
-import { Cast } from '../interfaces/cast';
+import { ICast } from '../interfaces/cast';
 import { environment } from '../shared/environment/environment.development';
 
 @Injectable({
@@ -21,8 +21,8 @@ export class CastsService {
   firebaseConfig = environment.firebase;
   private app = initializeApp(this.firebaseConfig);
   private db = getFirestore(this.app);
-  casts: Cast[] = [];
-  public cast: Cast = {
+  casts: ICast[] = [];
+  public cast: ICast = {
     id: '',
     registration: '',
     nameResponsible: '',
@@ -40,7 +40,7 @@ export class CastsService {
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
-      const cast = doc.data() as Cast;
+      const cast = doc.data() as ICast;
       cast.id = doc.id;
       if (cast.scaleDate === castDate && cast.shift === shift) {
         this.casts.push(cast);
@@ -48,7 +48,7 @@ export class CastsService {
     });
     return this.casts;
   }
-  async addCast(cast: Cast) {
+  async addCast(cast: ICast) {
     await addDoc(collection(this.db, 'casts'), {
       scaleDate: cast.scaleDate,
       registration: cast.registration,
@@ -64,7 +64,7 @@ export class CastsService {
   async oneCast(id: string) {
     const docRef = doc(this.db, 'casts', id);
     const docSnap = await getDoc(docRef);
-    const cast = docSnap.data() as Cast;
+    const cast = docSnap.data() as ICast;
 
     if (docSnap.exists()) {
       (this.cast.id = docRef.id),
@@ -81,7 +81,7 @@ export class CastsService {
     return this.cast;
   }
 
-  async updateCast(cast: Cast) {
+  async updateCast(cast: ICast) {
     const docRef = doc(this.db, 'casts', cast.id);
     await updateDoc(docRef, {
       scaleDate: cast.scaleDate,

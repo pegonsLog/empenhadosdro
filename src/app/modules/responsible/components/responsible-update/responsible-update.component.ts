@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Responsible } from '../../../../interfaces/responsible';
+import { IResponsible } from '../../../../interfaces/responsible';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 
@@ -19,7 +19,7 @@ import { AngularMaterialModule } from '../../../../shared/angular-material/angul
 export class ResponsibleUpdateComponent implements OnDestroy {
   public existData: boolean = false;
   public id: string = '';
-  responsibles: Responsible[] = [
+  responsibles: IResponsible[] = [
     {
       registration: '',
       nameResponsible: '',
@@ -32,7 +32,7 @@ export class ResponsibleUpdateComponent implements OnDestroy {
     },
   ];
 
-  responsible: Responsible = {
+  responsible: IResponsible = {
     registration: '',
     nameResponsible: '',
     office: '',
@@ -72,7 +72,7 @@ export class ResponsibleUpdateComponent implements OnDestroy {
   ) {
     this.responsiblesService
       .listResponsibles()
-      .then((responsibles: Responsible[]) => {
+      .then((responsibles: IResponsible[]) => {
         if (responsibles) {
           this.responsibles = responsibles.sort((a, b) =>
             a.nameResponsible.localeCompare(b.nameResponsible)
@@ -84,11 +84,11 @@ export class ResponsibleUpdateComponent implements OnDestroy {
 
     this.id = this.activatedRoute.snapshot.queryParams['id'];
 
-    this.responsiblesService.oneResponsible(this.id).then((responsible: Responsible) => (this.responsible = responsible));
+    this.responsiblesService.oneResponsible(this.id).then((responsible: IResponsible) => (this.responsible = responsible));
   }
 
   public updateResponsible(id: string) {
-    const responsibleUpdate: Responsible = {
+    const responsibleUpdate: IResponsible = {
       id: this.responsible.id,
       registration: this.responsible.registration,
       nameResponsible: this.responsible.nameResponsible,

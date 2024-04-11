@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective } from 'ngx-mask';
-import { Cast } from '../../../../interfaces/cast';
-import { Responsible } from '../../../../interfaces/responsible';
+import { ICast } from '../../../../interfaces/cast';
+import { IResponsible } from '../../../../interfaces/responsible';
 import { CastsService } from '../../../../services/casts.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 
@@ -22,7 +22,7 @@ export class UpdateComponent {
   public dateReport: string = '';
   public id: string = '';
 
-  public responsible: Responsible = {
+  public responsible: IResponsible = {
     id: '',
     registration: '',
     nameResponsible: '',
@@ -33,7 +33,7 @@ export class UpdateComponent {
     role: '',
   };
 
-  public cast: Cast = {
+  public cast: ICast = {
     id: '',
     registration: '',
     nameResponsible: '',
@@ -45,7 +45,7 @@ export class UpdateComponent {
     withRestriction: 0,
   };
 
-  public casts: Cast[] = [
+  public casts: ICast[] = [
     {
       id: '',
       registration: '',
@@ -75,7 +75,7 @@ export class UpdateComponent {
 
     this.id = this.activatedRoute.snapshot.queryParams['id'];
 
-    this.castsService.oneCast(this.id).then((cast: Cast) => (this.cast = cast));
+    this.castsService.oneCast(this.id).then((cast: ICast) => (this.cast = cast));
   }
 
   public report() {
@@ -83,7 +83,7 @@ export class UpdateComponent {
   }
 
   public updateCast(id: string) {
-    const castUpdate: Cast = {
+    const castUpdate: ICast = {
       id: this.cast.id,
       scaleDate: this.cast.scaleDate,
       registration: this.cast.registration,

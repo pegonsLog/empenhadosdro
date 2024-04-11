@@ -12,7 +12,7 @@ import {
   updateDoc,
   where,
 } from 'firebase/firestore';
-import { Responsible } from '../interfaces/responsible';
+import { IResponsible } from '../interfaces/responsible';
 import { environment } from '../shared/environment/environment.development';
 
 @Injectable({
@@ -23,8 +23,8 @@ export class ResponsiblesService {
 
   private app = initializeApp(this.firebaseConfig);
   private db = getFirestore(this.app);
-  responsibles: Responsible[] = [];
-  responsible: Responsible = {
+  responsibles: IResponsible[] = [];
+  responsible: IResponsible = {
     registration: '',
     nameResponsible: '',
     office: '',
@@ -45,7 +45,7 @@ export class ResponsiblesService {
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
-      const responsible = doc.data() as Responsible;
+      const responsible = doc.data() as IResponsible;
       responsible.id = doc.id;
 
       this.responsibles.push(responsible);
@@ -63,7 +63,7 @@ export class ResponsiblesService {
 
     querySnapshot.forEach((doc) => {
       if (doc) {
-        this.responsible = doc.data() as Responsible;
+        this.responsible = doc.data() as IResponsible;
       }
     });
     return this.responsible;
@@ -79,13 +79,13 @@ export class ResponsiblesService {
 
     querySnapshot.forEach((doc) => {
       if (doc) {
-        this.responsible = doc.data() as Responsible;
+        this.responsible = doc.data() as IResponsible;
       }
     });
     return this.responsible;
   }
 
-  async addResponsible(responsible: Responsible) {
+  async addResponsible(responsible: IResponsible) {
     await addDoc(collection(this.db, 'responsibles'), {
       registration: responsible.registration,
       nameResponsible: responsible.nameResponsible,
@@ -100,7 +100,7 @@ export class ResponsiblesService {
   async oneResponsible(id: string) {
     const docRef = doc(this.db, 'responsibles', id);
     const docSnap = await getDoc(docRef);
-    const responsible = docSnap.data() as Responsible;
+    const responsible = docSnap.data() as IResponsible;
 
     if (docSnap.exists()) {
       this.responsible.id = docRef.id;
@@ -116,7 +116,7 @@ export class ResponsiblesService {
     return this.responsible;
   }
 
-  async updateResponsible(responsible: Responsible){
+  async updateResponsible(responsible: IResponsible){
     const docRef = doc(this.db, 'responsibles', responsible.id);
     await updateDoc(docRef, {
       registration: responsible.registration,
@@ -135,7 +135,7 @@ export class ResponsiblesService {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       if (doc) {
-        this.responsible = doc.data() as Responsible;
+        this.responsible = doc.data() as IResponsible;
       }
     });
   }

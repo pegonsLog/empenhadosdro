@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Responsible } from '../../../../interfaces/responsible';
+import { IResponsible } from '../../../../interfaces/responsible';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
 import {
   FormBuilder,
@@ -21,7 +21,7 @@ import {
 export class ResponsibleFormComponent implements OnDestroy {
   public formResponsible: FormGroup;
   public existData: boolean = false;
-  responsibles: Responsible[] = [
+  responsibles: IResponsible[] = [
     {
       registration: '',
       nameResponsible: '',
@@ -34,7 +34,7 @@ export class ResponsibleFormComponent implements OnDestroy {
     },
   ];
 
-  responsible: Responsible = {
+  responsible: IResponsible = {
     registration: '',
     nameResponsible: '',
     office: '',
@@ -59,7 +59,7 @@ export class ResponsibleFormComponent implements OnDestroy {
 
     this.responsiblesService
       .listResponsibles()
-      .then((responsibles: Responsible[]) => {
+      .then((responsibles: IResponsible[]) => {
         if (responsibles) {
           this.responsibles = responsibles.sort((a, b) =>
             a.nameResponsible.localeCompare(b.nameResponsible)
@@ -81,7 +81,7 @@ export class ResponsibleFormComponent implements OnDestroy {
   }
 
   public newResponsible() {
-    const responsible: Responsible = {
+    const responsible: IResponsible = {
       registration: this.formResponsible.getRawValue().registration,
       nameResponsible: this.formResponsible.getRawValue().name,
       office: this.formResponsible.getRawValue().office,

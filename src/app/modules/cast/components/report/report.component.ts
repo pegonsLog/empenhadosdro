@@ -3,8 +3,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Cast } from '../../../../interfaces/cast';
-import { Responsible } from '../../../../interfaces/responsible';
+import { ICast } from '../../../../interfaces/cast';
+import { IResponsible } from '../../../../interfaces/responsible';
 import { CastsService } from '../../../../services/casts.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 import { ConfirmationDialogComponent } from '../../../../shared/dialogs/confirmation/confirmation.component';
@@ -23,7 +23,7 @@ export class ReportComponent implements OnDestroy {
 
   public subscription: Subscription = new Subscription();
 
-  public responsible: Responsible = {
+  public responsible: IResponsible = {
     id: '',
     registration: '',
     nameResponsible: '',
@@ -34,7 +34,7 @@ export class ReportComponent implements OnDestroy {
     role: '',
   };
 
-  public cast: Cast = {
+  public cast: ICast = {
     id: '',
     registration: '',
     nameResponsible: '',
@@ -46,7 +46,7 @@ export class ReportComponent implements OnDestroy {
     withRestriction: 0,
   };
 
-  public casts: Cast[] = [
+  public casts: ICast[] = [
     {
       id: '',
       registration: '',
@@ -73,7 +73,7 @@ export class ReportComponent implements OnDestroy {
   public shift: string = '';
   public role: string = '';
 
-  dataCast: Cast[] = [];
+  dataCast: ICast[] = [];
 
   constructor(
     private router: Router,
@@ -90,7 +90,7 @@ export class ReportComponent implements OnDestroy {
 
     this.castsService
       .listCasts(this.dateReport, this.shift)
-      .then((casts: Cast[]) => {
+      .then((casts: ICast[]) => {
         this.casts = casts.sort((a, b) => a.sector.localeCompare(b.sector));
         this.existData = true;
       });
@@ -113,7 +113,7 @@ export class ReportComponent implements OnDestroy {
   }
 
   goToUpdate(id: string) {
-    this.castsService.oneCast(id).then((data: Cast) => {
+    this.castsService.oneCast(id).then((data: ICast) => {
       this.router.navigate(['update-cast'], {
         queryParams: {
           id: data.id,

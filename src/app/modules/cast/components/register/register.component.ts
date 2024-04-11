@@ -8,8 +8,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-import { Cast } from '../../../../interfaces/cast';
-import { Responsible } from '../../../../interfaces/responsible';
+import { ICast } from '../../../../interfaces/cast';
+import { IResponsible } from '../../../../interfaces/responsible';
 import { CastsService } from '../../../../services/casts.service';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
@@ -34,7 +34,7 @@ export class RegisterComponent implements OnDestroy {
   public registrationResponsible: string = '';
   public dateReport: string = '';
 
-  public responsible: Responsible = {
+  public responsible: IResponsible = {
     id: '',
     registration: '',
     nameResponsible: '',
@@ -45,7 +45,7 @@ export class RegisterComponent implements OnDestroy {
     role: '',
   };
 
-  public cast: Cast = {
+  public cast: ICast = {
     id: '',
     registration: '',
     nameResponsible: '',
@@ -57,7 +57,7 @@ export class RegisterComponent implements OnDestroy {
     withRestriction: 0,
   };
 
-  public casts: Cast[] = [
+  public casts: ICast[] = [
     {
       id: '',
       registration: '',
@@ -71,7 +71,7 @@ export class RegisterComponent implements OnDestroy {
     },
   ];
 
-  responsibles: Responsible[] = [
+  responsibles: IResponsible[] = [
     {
       id: '',
       registration: '',
@@ -113,7 +113,7 @@ export class RegisterComponent implements OnDestroy {
 
     this.responsiblesService
       .listResponsibles()
-      .then((responsibles: Responsible[]) => {
+      .then((responsibles: IResponsible[]) => {
         if (responsibles) {
           this.responsibles = responsibles.sort((a, b) =>
             a.nameResponsible.localeCompare(b.nameResponsible)
@@ -128,7 +128,7 @@ export class RegisterComponent implements OnDestroy {
   }
 
   public newCast() {
-    const cast: Cast = {
+    const cast: ICast = {
       scaleDate: this.formCastRegister.getRawValue().castDate,
       registration: this.formCastRegister.getRawValue().registrationResponsible,
       nameResponsible: this.formCastRegister.getRawValue().nameResponsible,

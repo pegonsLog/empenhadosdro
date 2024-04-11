@@ -9,7 +9,7 @@ import {
   query,
   where,
 } from 'firebase/firestore';
-import { Responsible } from '../interfaces/responsible';
+import { IResponsible } from '../interfaces/responsible';
 import { environment } from '../shared/environment/environment.development';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class LoginService {
 
   private app = initializeApp(this.firebaseConfig);
   private db = getFirestore(this.app);
-  responsible: Responsible = {
+  responsible: IResponsible = {
     registration: '',
     nameResponsible: '',
     office: '',
@@ -45,7 +45,7 @@ export class LoginService {
 
     querySnapshot.forEach((doc) => {
       if (doc.id) {
-        const responsible = doc.data() as Responsible;
+        const responsible = doc.data() as IResponsible;
         if (
           responsible.password == password &&
           responsible.registration == registration
@@ -61,7 +61,7 @@ export class LoginService {
   async oneResponsible(id: string) {
     const docRef = doc(this.db, 'responsibles', id);
     const docSnap = await getDoc(docRef);
-    const responsible = docSnap.data() as Responsible;
+    const responsible = docSnap.data() as IResponsible;
 
     if (docSnap.exists()) {
       this.responsible.id = docRef.id;

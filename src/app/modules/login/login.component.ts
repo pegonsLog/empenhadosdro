@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Responsible } from '../../interfaces/responsible';
+import { IResponsible } from '../../interfaces/responsible';
 import { AngularMaterialModule } from '../../shared/angular-material/angular-material';
 import { LoginService } from '../../services/login.service';
 import { Location } from '@angular/common';
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   public registrationField: string = '564';
   public passwordField: string = '123456';
 
-  public responsible: Responsible = {
+  public responsible: IResponsible = {
     registration: '',
     nameResponsible: '',
     office: '',
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
   async onSubmit() {
     await this.loginService
       .loginResponsible(this.loginForm.getRawValue().registrationField, this.loginForm.getRawValue().passwordField)
-      .then((responsible: Responsible) => {
+      .then((responsible: IResponsible) => {
         localStorage.setItem('registration', responsible.registration);
         localStorage.setItem('nameResponsible', responsible.nameResponsible);
         localStorage.setItem('office', responsible.office);

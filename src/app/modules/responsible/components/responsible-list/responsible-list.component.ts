@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { ResponsiblesService } from '../../../../services/responsibles.service';
-import { Responsible } from '../../../../interfaces/responsible';
+import { IResponsible } from '../../../../interfaces/responsible';
 import { AngularMaterialModule } from '../../../../shared/angular-material/angular-material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -26,7 +26,7 @@ export class ResponsibleListComponent implements OnInit, OnDestroy {
 
   public subscription: Subscription = new Subscription();
 
-  responsibles: Responsible[] = [
+  responsibles: IResponsible[] = [
     {
       id: '',
       registration: '',
@@ -39,7 +39,7 @@ export class ResponsibleListComponent implements OnInit, OnDestroy {
     },
   ];
 
-  responsible: Responsible = {
+  responsible: IResponsible = {
     id: '',
     registration: '',
     nameResponsible: '',
@@ -75,7 +75,7 @@ export class ResponsibleListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.responsiblesService
       .listResponsibles()
-      .then((responsibles: Responsible[]) => {
+      .then((responsibles: IResponsible[]) => {
         if (responsibles) {
           this.responsibles = responsibles.sort((a, b) =>
             a.nameResponsible.localeCompare(b.nameResponsible)
@@ -91,7 +91,7 @@ export class ResponsibleListComponent implements OnInit, OnDestroy {
   }
 
   goToUpdate(id: string) {
-    this.responsiblesService.oneResponsible(id).then((data: Responsible) => {
+    this.responsiblesService.oneResponsible(id).then((data: IResponsible) => {
       this.router.navigate(['responsible-update'], {
         queryParams: {
           id: data.id,
